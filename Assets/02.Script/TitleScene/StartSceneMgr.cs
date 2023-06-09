@@ -10,4 +10,13 @@ public class StartSceneMgr : MonoBehaviour
         print("hi");
         LoadingScene.LoadScene("Campaign_1");
     }
+
+    public void OnExitGameBtnClick()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
