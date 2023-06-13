@@ -39,18 +39,4 @@ public class ButtonUI : UIInteractBase
         print("exit");
         _selectMenu.SetActive(false);
     }
-
-    public void OnClickCampaignBtn()
-    {
-        int stageNumber = int.Parse(gameObject.name.Split(" ")[0]);
-        switch (stageNumber)
-        {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-        }
-    }
 }

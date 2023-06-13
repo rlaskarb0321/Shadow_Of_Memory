@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -16,13 +17,27 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField]
     private GameObject _researchColl;
 
+    [SerializeField]
+    private GameObject _stageMgrObj;
+
+    [SerializeField]
+    private Transform _playerBody;
+
     [Space(9.0f)]
     public int _playerCollectMemoryCount;
 
     [SerializeField]
-    private GameObject _ppiPpiObj;
+    private Transform _groundCollObj;
 
-    private PpiPpi _ppiPpi;
+    [SerializeField]
+    private Text _collectCountTxt;
+
+    //[SerializeField]
+    //private GameObject _ppiPpiObj;
+
+    //private PpiPpi _ppiPpi;
+    private StageMgr _stageMgr;
+    private AnimatorChange _animChange;
     private Rigidbody2D _rbody2D;
     private Animator _animator;
     private CircleCollider2D _researchColl2D;
@@ -30,42 +45,42 @@ public class PlayerCtrl : MonoBehaviour
     private float _h;
     private Vector3 _movDir;
     private bool _isJumpInput;
+    private BoxCollider2D _boxColl;
+    private CircleCollider2D _circleColl;
 
     private readonly int _hashMove = Animator.StringToHash("isMove");
+    private readonly int _hashFall = Animator.StringToHash("isFall");
+    private readonly int _hashisGrounded = Animator.StringToHash("isGrounded");
+    private readonly int _hashisJumpInput = Animator.StringToHash("isJumpInput");
     
 
     private void Awake()
     {
-        _ppiPpi = _ppiPpiObj.GetComponent<PpiPpi>();
+        //_ppiPpi = _ppiPpiObj.GetComponent<PpiPpi>();
+        _animChange = _stageMgrObj.GetComponent<AnimatorChange>();
         _animator = GetComponent<Animator>();
         _rbody2D = GetComponent<Rigidbody2D>();
         _grounded = GetComponentInChildren<Grounded>();
         _researchColl2D = _researchColl.GetComponent<CircleCollider2D>();
+        _stageMgr = _stageMgrObj.GetComponent<StageMgr>();
+        _boxColl = GetComponent<BoxCollider2D>();
+        _circleColl = GetComponent<CircleCollider2D>();
     }
 
     private void Update()
     {
-        _h = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
+        if (!StageMgr._isBlockInput)
         {
-            _isJumpInput = true;
+            ManagePlayerInput();
         }
         else
         {
-            _isJumpInput = false;
+            _h = 0.0f;
         }
 
-        if (Input.GetKey(KeyCode.F))
-        {
-            InteractWithMapEvent();
-        }
-
-        if (Input.GetKeyUp(KeyCode.G))
-        {
-            bool isHoldPpippi = _ppiPpi._isHoldPos;
-            _ppiPpi.TogglePpiPpiPos(!isHoldPpippi);
-        }
+        _collectCountTxt.text = _playerCollectMemoryCount.ToString();
+        _animator.SetBool(_hashisGrounded, _grounded._isGrounded);
+        _animator.SetBool(_hashFall, _rbody2D.velocity.y < -0.05f);
     }
 
     private void FixedUpdate()
@@ -82,8 +97,25 @@ public class PlayerCtrl : MonoBehaviour
 
         if (_isJumpInput && _grounded._isGrounded)
         {
+            _animator.SetBool(_hashisJumpInput, true);
             Jump();
         }
+    }
+
+    // jumplanding 애니메이션 델리게이트
+    public void EscapeJumpState()
+    {
+        _animator.SetBool(_hashisJumpInput, false);
+    }
+
+    public IEnumerator Trapped()
+    {
+        // 사운드 재생
+        // 이펙트 실행
+        // 관련 로직 실행
+        yield return StartCoroutine(_stageMgr.FadeInFadeOut(3.0f, true));
+
+        print("스턴 애니메이션 재생");
     }
 
     public void GetMemoryFragment()
@@ -93,17 +125,77 @@ public class PlayerCtrl : MonoBehaviour
         _playerCollectMemoryCount++;
     }
 
+    public void SwitchPlayerCharacter(int currLevel)
+    {
+        int nextLevel = currLevel + 1;
+
+        _animChange.ChangeAnimator(nextLevel);
+        switch (currLevel)
+        {
+            case 0:
+                Vector2 size_level_2 = new Vector2(0.84f, 1.37f);
+                Vector2 boxOffset_level_2 = Vector2.zero;
+                Vector2 circleOffset_level_2 = new Vector2(0.0f, -0.62f);
+                float radius_level_2 = 0.41f;
+
+                _boxColl.size = size_level_2;
+                _boxColl.offset = boxOffset_level_2;
+                _circleColl.offset = circleOffset_level_2;
+                _circleColl.radius = radius_level_2;
+                _groundCollObj.localPosition = new Vector2(0.0f, -1.008f);
+                break;
+
+            case 1:
+                Vector2 size_level_3 = new Vector2(0.84f, 2.12f);
+                Vector2 boxOffset_level_3 = Vector2.zero;
+                Vector2 circleOffset_level_3 = new Vector2(0.0f, -0.86f);
+                float radius_level_3 = 0.41f;
+
+                _boxColl.size = size_level_3;
+                _boxColl.offset = boxOffset_level_3;
+                _circleColl.offset = circleOffset_level_3;
+                _circleColl.radius = radius_level_3;
+                _groundCollObj.localPosition = new Vector2(0.0f, -1.289f);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void ManagePlayerInput()
+    {
+        _h = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
+        {
+            _isJumpInput = true;
+        }
+        else
+        {
+            _isJumpInput = false;
+        }
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            InteractWithMapEvent();
+        }
+    }
+
     private void Move()
     {
+        float scaleX = _h;
+        transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         _movDir = (_h * Vector2.right).normalized;
         // _rbody2D.MovePosition(_rbody2D.position + (_movDir * _movSpeed * Time.deltaTime));
         // _rbody2D.AddForce(_movDir * _movSpeed * Time.deltaTime, ForceMode2D.Impulse);
-        transform.position += _movDir * _movSpeed * Time.deltaTime;
+        // _rbody2D.MovePosition(_rbody2D.position + _movDir * _movSpeed * Time.deltaTime);
         
+        transform.position += _movDir * _movSpeed * Time.deltaTime;
     }
 
     private void Jump()
     {
+        _rbody2D.velocity = Vector2.zero;
         _rbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 
