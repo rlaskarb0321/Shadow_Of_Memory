@@ -16,7 +16,7 @@ public class Trap : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerCtrl player = collision.gameObject.GetComponent<PlayerCtrl>();
-        StartCoroutine(player.Trapped());
+        // StartCoroutine(player.Trapped());
 
         _sr.enabled = false;
         _boxColl.enabled = false;
