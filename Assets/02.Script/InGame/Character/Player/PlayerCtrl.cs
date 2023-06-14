@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    // SerializeField
     [Range(4.0f, 9.0f)]
     [SerializeField]
     private float _movSpeed;
 
-    [Range(50.0f, 60.0f)]
+    [Range(30.0f, 45.0f)]
     [SerializeField]
     private float _jumpForce;
 
@@ -17,24 +18,14 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField]
     private GameObject _researchColl;
 
-    [SerializeField]
-    private GameObject _stageMgrObj;
-
-    [SerializeField]
-    private Transform _playerBody;
-
     [Space(9.0f)]
     public int _playerCollectMemoryCount;
 
     [SerializeField]
     private Transform _groundCollObj;
 
-    //[SerializeField]
-    //private GameObject _ppiPpiObj;
 
-    //private PpiPpi _ppiPpi;
-    private StageMgr _stageMgr;
-    private AnimatorChange _animChange;
+    // HideInInspector
     private Rigidbody2D _rbody2D;
     private Animator _animator;
     private CircleCollider2D _researchColl2D;
@@ -42,8 +33,6 @@ public class PlayerCtrl : MonoBehaviour
     private float _h;
     private Vector3 _movDir;
     private bool _isJumpInput;
-    private BoxCollider2D _boxColl;
-    private CircleCollider2D _circleColl;
 
     private readonly int _hashMove = Animator.StringToHash("isMove");
     private readonly int _hashFall = Animator.StringToHash("isFall");
@@ -53,15 +42,10 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Awake()
     {
-        //_ppiPpi = _ppiPpiObj.GetComponent<PpiPpi>();
-        _animChange = _stageMgrObj.GetComponent<AnimatorChange>();
         _animator = GetComponent<Animator>();
         _rbody2D = GetComponent<Rigidbody2D>();
         _grounded = GetComponentInChildren<Grounded>();
         _researchColl2D = _researchColl.GetComponent<CircleCollider2D>();
-        _stageMgr = _stageMgrObj.GetComponent<StageMgr>();
-        _boxColl = GetComponent<BoxCollider2D>();
-        _circleColl = GetComponent<CircleCollider2D>();
     }
 
     private void Update()
@@ -91,7 +75,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    // jumplanding 애니메이션 델리게이트
+    // jump landing 애니메이션 델리게이트
     public void EscapeJumpState()
     {
         _animator.SetBool(_hashisJumpInput, false);
@@ -104,43 +88,45 @@ public class PlayerCtrl : MonoBehaviour
         _playerCollectMemoryCount++;
     }
 
-    public void SwitchPlayerCharacter(int currLevel)
-    {
-        int nextLevel = currLevel + 1;
+    #region 캐릭터 애니메이터 변환
+    //public void SwitchPlayerCharacter(int currLevel)
+    //{
+    //    int nextLevel = currLevel + 1;
 
-        _animChange.ChangeAnimator(nextLevel);
-        switch (currLevel)
-        {
-            case 0:
-                Vector2 size_level_2 = new Vector2(0.84f, 1.37f);
-                Vector2 boxOffset_level_2 = Vector2.zero;
-                Vector2 circleOffset_level_2 = new Vector2(0.0f, -0.62f);
-                float radius_level_2 = 0.41f;
+    //    _animChange.ChangeAnimator(nextLevel);
+    //    switch (currLevel)
+    //    {
+    //        case 0:
+    //            Vector2 size_level_2 = new Vector2(0.84f, 1.37f);
+    //            Vector2 boxOffset_level_2 = Vector2.zero;
+    //            Vector2 circleOffset_level_2 = new Vector2(0.0f, -0.62f);
+    //            float radius_level_2 = 0.41f;
 
-                _boxColl.size = size_level_2;
-                _boxColl.offset = boxOffset_level_2;
-                _circleColl.offset = circleOffset_level_2;
-                _circleColl.radius = radius_level_2;
-                _groundCollObj.localPosition = new Vector2(0.0f, -1.008f);
-                break;
+    //            _boxColl.size = size_level_2;
+    //            _boxColl.offset = boxOffset_level_2;
+    //            _circleColl.offset = circleOffset_level_2;
+    //            _circleColl.radius = radius_level_2;
+    //            _groundCollObj.localPosition = new Vector2(0.0f, -1.008f);
+    //            break;
 
-            case 1:
-                Vector2 size_level_3 = new Vector2(0.84f, 2.12f);
-                Vector2 boxOffset_level_3 = Vector2.zero;
-                Vector2 circleOffset_level_3 = new Vector2(0.0f, -0.86f);
-                float radius_level_3 = 0.41f;
+    //        case 1:
+    //            Vector2 size_level_3 = new Vector2(0.84f, 2.12f);
+    //            Vector2 boxOffset_level_3 = Vector2.zero;
+    //            Vector2 circleOffset_level_3 = new Vector2(0.0f, -0.86f);
+    //            float radius_level_3 = 0.41f;
 
-                _boxColl.size = size_level_3;
-                _boxColl.offset = boxOffset_level_3;
-                _circleColl.offset = circleOffset_level_3;
-                _circleColl.radius = radius_level_3;
-                _groundCollObj.localPosition = new Vector2(0.0f, -1.289f);
-                break;
+    //            _boxColl.size = size_level_3;
+    //            _boxColl.offset = boxOffset_level_3;
+    //            _circleColl.offset = circleOffset_level_3;
+    //            _circleColl.radius = radius_level_3;
+    //            _groundCollObj.localPosition = new Vector2(0.0f, -1.289f);
+    //            break;
 
-            default:
-                break;
-        }
-    }
+    //        default:
+    //            break;
+    //    }
+    //}
+    #endregion 캐릭터 애니메이터 변환
 
     private void ManagePlayerInput()
     {
@@ -164,7 +150,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         float scaleX = _h;
         transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+
+        // _movDir = DirectToMove();
         _movDir = (_h * Vector2.right).normalized;
+
         // _rbody2D.MovePosition(_rbody2D.position + (_movDir * _movSpeed * Time.deltaTime));
         // _rbody2D.AddForce(_movDir * _movSpeed * Time.deltaTime, ForceMode2D.Impulse);
         // _rbody2D.MovePosition(_rbody2D.position + _movDir * _movSpeed * Time.deltaTime);
@@ -188,5 +177,12 @@ public class PlayerCtrl : MonoBehaviour
 
         MapEvent mapEvent = coll.GetComponent<MapEvent>();
         mapEvent.Interaction(this);
+    }
+
+    private Vector3 DirectToMove()
+    {
+
+
+        return Vector3.zero;
     }
 }
