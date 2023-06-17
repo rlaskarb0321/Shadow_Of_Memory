@@ -50,7 +50,10 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Update()
     {
-        ManagePlayerInput();
+        if (!ProductionMgr._isPlayProduction)
+        {
+            ManagePlayerInput();
+        }
 
         _animator.SetBool(_hashisGrounded, _grounded._isGrounded);
         _animator.SetBool(_hashFall, _rbody2D.velocity.y < -0.05f);
