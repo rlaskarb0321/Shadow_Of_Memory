@@ -50,11 +50,15 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Update()
     {
-        if (!ProductionMgr._isPlayProduction)
+        if (ProductionMgr._isPlayProduction)
         {
-            ManagePlayerInput();
+            // 영상 재생중엔 점프와 움직이기 불가능
+            _h = 0.0f;
+            _isJumpInput = false;
+            return;
         }
 
+        ManagePlayerInput();
         _animator.SetBool(_hashisGrounded, _grounded._isGrounded);
         _animator.SetBool(_hashFall, _rbody2D.velocity.y < -0.05f);
     }
@@ -175,17 +179,11 @@ public class PlayerCtrl : MonoBehaviour
         Collider2D coll = Physics2D.OverlapCircle(transform.position, _researchColl2D.radius, 1 << LayerMask.NameToLayer("MapEvent"));
         if (coll == null)
         {
+            // 이곳에 상호작용가능한 물체가 없음을 표시
             return;
         }
 
         MapEvent mapEvent = coll.GetComponent<MapEvent>();
         mapEvent.Interaction(this);
-    }
-
-    private Vector3 DirectToMove()
-    {
-
-
-        return Vector3.zero;
     }
 }

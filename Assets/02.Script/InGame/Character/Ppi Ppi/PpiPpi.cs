@@ -31,14 +31,12 @@ public class PpiPpi : MonoBehaviour
     //}
     #endregion ªﬂªﬂ ∞Ì¡§Ω√≈∞±‚
 
-    public int _ppippiTalkLevel;
-    
-
     [SerializeField]
     private Transform _playerObj;
+
     [SerializeField]
     private Transform _ppippiPos;
-    //[Range(0.02f, 0.05f)]
+
     [SerializeField]
     private float _speed;
 
