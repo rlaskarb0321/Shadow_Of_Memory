@@ -21,22 +21,22 @@ public class ButtonUI : UIInteractBase
     public override void OnPointerEnter()
     {
         if (_thisImg != null)
-        {
             _thisImg.sprite = _selectFonts;
-        }
 
         print("enter");
-        _selectMenu.SetActive(true);
+
+        if (_selectMenu != null)
+            _selectMenu.SetActive(true);
     }
 
     public override void OnPointerExit()
     {
         if (_thisImg != null)
-        {
             _thisImg.sprite = _originFonts;
-        }
 
         print("exit");
-        _selectMenu.SetActive(false);
+
+        if (_selectMenu != null)
+            _selectMenu.SetActive(false);
     }
 }

@@ -8,9 +8,15 @@ public class PpippiProduction : MonoBehaviour
     private PlayableDirector _ppippiProduction;
     [SerializeField]
     private GameObject _ppippiStubObj;
+    [SerializeField]
+    private GameObject _dummyPpippi;
+    [SerializeField]
+    private GameObject _realPpippi;
+    [SerializeField]
+    private GameObject[] _vCams;
+
 
     private PpippiStub _stub;
-    private bool _isRun;
 
     private void Awake()
     {
@@ -24,6 +30,17 @@ public class PpippiProduction : MonoBehaviour
             ProductionMgr.StartProduction(_ppippiProduction);
             _stub._isPlayerTriggered = false;
             return;
+        }
+    }
+
+    public void ShiftPpippi()
+    {
+        _dummyPpippi.gameObject.SetActive(false);
+        _realPpippi.gameObject.SetActive(true);
+
+        for (int i = 0; i < _vCams.Length; i++)
+        {
+            _vCams[i].gameObject.SetActive(false);
         }
     }
 }

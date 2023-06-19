@@ -19,7 +19,7 @@ public abstract class MapEvent : MonoBehaviour
     {
         if (collision.CompareTag("MapEventResearch"))
         {
-            print("F 상호작용");
+            // print("F 상호작용");
         }
     }
 
@@ -27,7 +27,7 @@ public abstract class MapEvent : MonoBehaviour
     {
         if (collision.CompareTag("MapEventResearch"))
         {
-            print("상호작용 나감");
+            // print("상호작용 나감");
         }
     }
 }
