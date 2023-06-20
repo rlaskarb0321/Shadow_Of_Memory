@@ -114,9 +114,4 @@ public class CampaignUI : MonoBehaviour
         Application.Quit(); 
 #endif
     }
-
-    public void OnStroyDialogBtnClick()
-    {
-
-    }
 }
