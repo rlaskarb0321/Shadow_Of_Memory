@@ -12,7 +12,7 @@ public class MemoryFragment : MonoBehaviour
 
     private void Update()
     {
-
+        // 가만히있을때
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

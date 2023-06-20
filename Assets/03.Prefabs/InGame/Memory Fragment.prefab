@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 436596920806502161}
   - component: {fileID: 1259485910126523857}
   - component: {fileID: 3613928780267268430}
+  - component: {fileID: 5528334225745864482}
   m_Layer: 0
   m_Name: Memory Fragment
   m_TagString: Untagged
@@ -145,4 +146,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced85e7e5116fcb478cfbcf4b58a429c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fragProduction: {fileID: 0}
+  _fragProduction: {fileID: 5528334225745864482}
+--- !u!320 &5528334225745864482
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613928780267268418}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 4905831494920936058, guid: e98207f5d7a49484eb2b0d6af8654735, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 48573804912586879, guid: e98207f5d7a49484eb2b0d6af8654735, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5709627043417612552, guid: e98207f5d7a49484eb2b0d6af8654735, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2717488428265087764, guid: e98207f5d7a49484eb2b0d6af8654735, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6732447447046711912, guid: e98207f5d7a49484eb2b0d6af8654735, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5047002899590694442, guid: e98207f5d7a49484eb2b0d6af8654735, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
