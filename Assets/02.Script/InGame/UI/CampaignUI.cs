@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CampaignUI : MonoBehaviour
@@ -7,7 +5,6 @@ public class CampaignUI : MonoBehaviour
     [Header("=== Memory Board ===")]
     [SerializeField]
     private GameObject _memoryBoardPanel;
-    public GameObject[] _memoryPieces; 
 
     [Header("=== Pause ===")]
     [SerializeField]
@@ -18,6 +15,8 @@ public class CampaignUI : MonoBehaviour
     [Header("=== Ppippi Conversation ===")]
     [SerializeField]
     private GameObject _ppippiDialog;
+    [SerializeField]
+    private GameObject _ppippi;
 
     private bool _isPausePanelOn;
     private bool _isMBoardOn;
@@ -35,12 +34,16 @@ public class CampaignUI : MonoBehaviour
 
         if (ProductionMgr._isPlayProduction)
         {
-            SetPpippiDialogActive(false);
-            SetMemoryBoardActive(false);
+            if (_isPausePanelOn)
+                SetPpippiDialogActive(false);
+
+            if (_isMBoardOn)
+                SetMemoryBoardActive(false);
+
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && !_isPausePanelOn)
+        if (Input.GetKeyDown(KeyCode.G) && !_isPausePanelOn && !_isMBoardOn)
         {
             SetPpippiDialogActive(!_isPpippiDialogOn);
             return;
@@ -66,7 +69,6 @@ public class CampaignUI : MonoBehaviour
                 return;
             }
 
-
             if (_isPausePanelOn)
                 SetPausePanelActive(false);
             else
@@ -76,10 +78,6 @@ public class CampaignUI : MonoBehaviour
 
     public void SetPausePanelActive(bool value)
     {
-        //_pauseBtn.SetActive(_pausePanel.activeSelf);
-        //_pausePanel.SetActive(!_isPausePanelOn);
-        //_isPausePanelOn = _pausePanel.activeSelf;
-
         if (value == true)
         {
             SetMemoryBoardActive(!value);
@@ -93,15 +91,7 @@ public class CampaignUI : MonoBehaviour
 
     public void SetMemoryBoardActive(bool value)
     {
-        // 연출재생중인데 기억보드패널이 켜져있다면 끔
-        //if (ProductionMgr._isPlayProduction && _memoryBoardPanel.activeSelf)
-        //{
-        //    _memoryBoardPanel.SetActive(false);
-        //    _isMBoardOn = false;
-        //    return;
-        //}
-
-        // 현재 mBoard On/Off 상태의 반전값 대입
+        SetPpippiDialogActive(!value);
         _pauseBtn.SetActive(!value);
         _memoryBoardPanel.SetActive(value);
         _isMBoardOn = value;
@@ -109,6 +99,9 @@ public class CampaignUI : MonoBehaviour
 
     public void SetPpippiDialogActive(bool value)
     {
+        if (!_ppippi.gameObject.activeSelf)
+            return;
+
         _isPpippiDialogOn = value;
         _ppippiDialog.SetActive(value);
     }
@@ -120,5 +113,10 @@ public class CampaignUI : MonoBehaviour
 #else
         Application.Quit(); 
 #endif
+    }
+
+    public void OnStroyDialogBtnClick()
+    {
+
     }
 }

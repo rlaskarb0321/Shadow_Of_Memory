@@ -14,8 +14,9 @@ public class MemoryFragment : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            collision.GetComponent<PlayerCtrl>().GetMemoryFragment();
-            Destroy(gameObject);
+            collision.GetComponent<PlayerMemory>().GetMemoryFragment(_fragNumber);
+            gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
     }
 }

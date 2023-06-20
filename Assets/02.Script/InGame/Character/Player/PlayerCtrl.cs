@@ -6,24 +6,18 @@ using UnityEngine.UI;
 public class PlayerCtrl : MonoBehaviour
 {
     // SerializeField
-    [Range(3.5f, 5.0f)]
-    [SerializeField]
+    [Range(3.5f, 5.0f)] [SerializeField]
     private float _movSpeed;
 
-    [Range(30.0f, 45.0f)]
-    [SerializeField]
+    [Range(30.0f, 45.0f)] [SerializeField]
     private float _jumpForce;
 
-    [Space(9.0f)]
-    [SerializeField]
+    [Space(9.0f)] [SerializeField]
     private GameObject _researchColl;
-
-    [Space(9.0f)]
-    public int _playerCollectMemoryCount;
 
     [SerializeField]
     private Transform _groundCollObj;
-
+    
 
     // HideInInspector
     private Rigidbody2D _rbody2D;
@@ -88,12 +82,7 @@ public class PlayerCtrl : MonoBehaviour
         _animator.SetBool(_hashisJumpInput, false);
     }
 
-    public void GetMemoryFragment()
-    {
-        // 사운드 연출
-
-        _playerCollectMemoryCount++;
-    }
+    
 
     #region 캐릭터 애니메이터 변환
     //public void SwitchPlayerCharacter(int currLevel)
