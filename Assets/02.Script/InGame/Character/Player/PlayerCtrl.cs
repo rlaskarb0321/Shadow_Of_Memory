@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerCtrl : MonoBehaviour
 {
     // SerializeField
-    [Range(4.0f, 9.0f)]
+    [Range(3.5f, 5.0f)]
     [SerializeField]
     private float _movSpeed;
 

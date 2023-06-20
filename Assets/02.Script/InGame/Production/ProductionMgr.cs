@@ -20,6 +20,14 @@ public class ProductionMgr : MonoBehaviour
 
     private void Update()
     {
+        // 개발자 모드
+        if (_isPlayProduction && Input.GetKeyDown(KeyCode.End))
+        {
+            //print("개발자 모드로 연출 정지");
+            _playableDirector.time = _playableDirector.duration - 0.2f;
+            return;
+        }
+
         if (_playableDirector == null)
             return;
 
