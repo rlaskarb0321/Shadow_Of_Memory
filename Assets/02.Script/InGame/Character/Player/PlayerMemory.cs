@@ -20,6 +20,7 @@ public class PlayerMemory : MonoBehaviour
     [SerializeField] private string[] _descriptionContent; // 기억 관련 설명의 내용
 
     [Header("=== Black Cloud Note ===")]
+    [SerializeField] private Image _memoryImage; // 습득한 기억퍼즐의 이미지
     [SerializeField] private GameObject _blackCloudNote; // 검은구름배경의 쪽지
     [SerializeField] private Text _blackCloudTitle; // 쪽지의 제목
     [SerializeField] private Text _blackCloudContext; // 쪽지의 내용
@@ -33,8 +34,11 @@ public class PlayerMemory : MonoBehaviour
         _descriptionText.text = "";
     }
 
-    public void GetMemoryFragment(int index)
+    public void GetMemoryFragment(int index, Sprite memoryImage)
     {
+        _memoryImage.sprite = memoryImage;
+        _memoryImage.SetNativeSize();
+
         // 사운드 연출
 
         // 습득 후 Player쪽 처리

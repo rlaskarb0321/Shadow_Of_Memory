@@ -509,6 +509,10 @@ PrefabInstance:
       value: 2 Fragment
       objectReference: {fileID: 0}
     - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _memoryImg
+      value: 
+      objectReference: {fileID: 21300000, guid: 8b5baffb39291cf498ffc7970a93deb8, type: 3}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
       propertyPath: _fragNumber
       value: 2
       objectReference: {fileID: 0}
@@ -1119,6 +1123,10 @@ PrefabInstance:
       value: 3 Fragment
       objectReference: {fileID: 0}
     - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _memoryImg
+      value: 
+      objectReference: {fileID: 21300000, guid: ab4eb058b11240046996c3a7641bf557, type: 3}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
       propertyPath: _fragNumber
       value: 3
       objectReference: {fileID: 0}
@@ -1727,12 +1735,13 @@ RectTransform:
   m_Children:
   - {fileID: 1175210747}
   - {fileID: 120608720}
+  - {fileID: 1452944201}
   m_Father: {fileID: 681332237}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 217.4331, y: 24.1057}
+  m_AnchoredPosition: {x: 217.4331, y: -8}
   m_SizeDelta: {x: 1327.7227, y: 763.229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &480555381
@@ -2422,6 +2431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 5 Fragment
       objectReference: {fileID: 0}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _memoryImg
+      value: 
+      objectReference: {fileID: 21300000, guid: 552b29303bc641d48b1225fcb87c506b, type: 3}
     - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
       propertyPath: _fragNumber
       value: 5
@@ -7282,6 +7295,82 @@ RectTransform:
   m_AnchoredPosition: {x: -345, y: -123}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1452944200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1452944201}
+  - component: {fileID: 1452944203}
+  - component: {fileID: 1452944202}
+  m_Layer: 5
+  m_Name: Memory Img
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1452944201
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452944200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 480555380}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 294, y: 278}
+  m_SizeDelta: {x: 414.66666, y: 370.66666}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1452944202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452944200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7b838d2a7e3af4844b5b793c8dd61e2f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1452944203
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452944200}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1472120166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7353,6 +7442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1 Fragment
       objectReference: {fileID: 0}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _memoryImg
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b838d2a7e3af4844b5b793c8dd61e2f, type: 3}
     - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
       propertyPath: _fragNumber
       value: 1
@@ -8363,6 +8456,10 @@ PrefabInstance:
       value: 6 Fragment
       objectReference: {fileID: 0}
     - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _memoryImg
+      value: 
+      objectReference: {fileID: 21300000, guid: ea7fd68c27cdf1d46bb27666b7cbf75d, type: 3}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
       propertyPath: _fragNumber
       value: 6
       objectReference: {fileID: 0}
@@ -8629,6 +8726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4 Memory Fragment
       objectReference: {fileID: 0}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _memoryImg
+      value: 
+      objectReference: {fileID: 21300000, guid: 871805623da33eb4f91dd95535262f7e, type: 3}
     - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
       propertyPath: _fragNumber
       value: 4
@@ -8971,6 +9072,7 @@ MonoBehaviour:
     \uC2B5\uB4DD\uD588\uC2B5\uB2C8\uB2E4."
   - "\uC5EC\uC12F\uBC88\uC9F8 \uAE30\uC5B5\\\uC5EC\uC12F\uBC88\uC9F8 \uAE30\uC5B5
     \uC2B5\uB4DD\uD588\uC2B5\uB2C8\uB2E4."
+  _memoryImage: {fileID: 1452944202}
   _blackCloudNote: {fileID: 480555379}
   _blackCloudTitle: {fileID: 1175210748}
   _blackCloudContext: {fileID: 120608721}
