@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class MemoryFragment : MonoBehaviour
 {
-    [SerializeField]
-    private int _fragNumber;
-    //[SerializeField]
-    //private PlayableDirector _fragProduction;
+    [SerializeField] private int _fragNumber;
+    //[SerializeField] private PlayableDirector _fragProduction;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

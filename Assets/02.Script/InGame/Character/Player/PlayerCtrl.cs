@@ -6,19 +6,11 @@ using UnityEngine.UI;
 public class PlayerCtrl : MonoBehaviour
 {
     // SerializeField
-    [Range(3.5f, 5.0f)] [SerializeField]
-    private float _movSpeed;
-
-    [Range(30.0f, 45.0f)] [SerializeField]
-    private float _jumpForce;
-
-    [Space(9.0f)] [SerializeField]
-    private GameObject _researchColl;
-
-    [SerializeField]
-    private Transform _groundCollObj;
+    [Range(3.5f, 5.0f)] [SerializeField] private float _movSpeed; // 움직이는 속도값
+    [Range(30.0f, 45.0f)] [SerializeField] private float _jumpForce; // 점프력
+    [Space(9.0f)] [SerializeField] private GameObject _researchColl; // 주위에 MapEvent 찾는 관련 콜리더
+    [SerializeField] private Transform _groundCollObj; // 땋에 닿음판정 관련 콜리더 판정하는 게임오브젝트
     
-
     // HideInInspector
     private Rigidbody2D _rbody2D;
     private Animator _animator;

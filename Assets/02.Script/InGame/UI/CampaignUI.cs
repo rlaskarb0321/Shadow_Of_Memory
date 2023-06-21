@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class CampaignUI : MonoBehaviour
 {
+    // SerializeField
     [Header("=== Memory Board ===")]
-    [SerializeField]
-    private GameObject _memoryBoardPanel;
+    [SerializeField] private GameObject _memoryBoardPanel;
 
     [Header("=== Pause ===")]
-    [SerializeField]
-    private GameObject _pausePanel;
-    [SerializeField]
-    private GameObject _pauseBtn;
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private GameObject _pauseBtn;
 
     [Header("=== Ppippi Conversation ===")]
-    [SerializeField]
-    private GameObject _ppippiDialog;
-    [SerializeField]
-    private GameObject _ppippi;
+    [SerializeField] private GameObject _ppippiDialog;
+    [SerializeField] private GameObject _ppippi;
 
+    // HideInInspector
     private bool _isPausePanelOn;
     private bool _isMBoardOn;
     private bool _isPpippiDialogOn;

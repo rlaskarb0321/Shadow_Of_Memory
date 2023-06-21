@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class DialogueMgr : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _playerObj;
+    // 대화 내용 관련 엑셀파일 혹은 다른 파일을 받고 여기서 분류하자.
 }

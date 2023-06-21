@@ -92,6 +92,9 @@ public class PlayerMemory : MonoBehaviour
         string title = contextLine[0];
         string context = contextLine[1];
 
+        if (_blackCloudNote.activeSelf)
+            _blackCloudNote.SetActive(false);
+
         _blackCloudNote.SetActive(true);
         _blackCloudTitle.text = title;
         _blackCloudContext.text = context;
