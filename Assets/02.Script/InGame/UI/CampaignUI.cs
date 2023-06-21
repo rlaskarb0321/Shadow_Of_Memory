@@ -34,13 +34,11 @@ public class CampaignUI : MonoBehaviour
 
         if (ProductionMgr._isPlayProduction)
         {
-            if (_isPausePanelOn)
-                SetPpippiDialogActive(false);
+            //if (_isPausePanelOn)
+            //    SetPpippiDialogActive(false);
 
             if (_isMBoardOn)
                 SetMemoryBoardActive(false);
-
-            return;
         }
 
         if (Input.GetKeyDown(KeyCode.G) && !_isPausePanelOn && !_isMBoardOn)
@@ -57,12 +55,6 @@ public class CampaignUI : MonoBehaviour
                 return;
             }
 
-            if (_isPausePanelOn)
-            {
-                SetPausePanelActive(false);
-                return;
-            }
-
             if (_isPpippiDialogOn)
             {
                 SetPpippiDialogActive(false);
@@ -70,9 +62,12 @@ public class CampaignUI : MonoBehaviour
             }
 
             if (_isPausePanelOn)
+            {
                 SetPausePanelActive(false);
-            else
-                SetPausePanelActive(true);
+                return;
+            }
+
+            SetPausePanelActive(true);
         }
     }
 

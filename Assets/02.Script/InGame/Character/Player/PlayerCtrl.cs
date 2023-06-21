@@ -82,8 +82,6 @@ public class PlayerCtrl : MonoBehaviour
         _animator.SetBool(_hashisJumpInput, false);
     }
 
-    
-
     #region 캐릭터 애니메이터 변환
     //public void SwitchPlayerCharacter(int currLevel)
     //{

@@ -6,6 +6,7 @@ public class Portal : MapEvent
 {
     [SerializeField] private GameObject _otherPortal;
     [SerializeField] private float _portalCoolTime;
+    [SerializeField] private int _portalNumber;
 
     [Range(1.0f, 2.5f)] private float _currCoolTime;
 

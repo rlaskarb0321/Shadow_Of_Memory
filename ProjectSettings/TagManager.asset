@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MapEventResearch
   - Awake Selected
+  - Memory Fragment
   layers:
   - Default
   - TransparentFX
