@@ -5,15 +5,26 @@ using UnityEngine.UI;
 
 public class FragDetect : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _collectFragUI;
+    [SerializeField] private GameObject _collectFragUI;
+
+    private Animator _uiAnim;
+    private bool _isEnter;
+
+    private void Awake()
+    {
+        _uiAnim = _collectFragUI.GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Memory Fragment"))
             return;
 
-        print("기억조각 접근");
+        if (_uiAnim == null)
+            return;
+
+        _isEnter = true;
+        _uiAnim.SetBool("isEnter", _isEnter);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -21,6 +32,10 @@ public class FragDetect : MonoBehaviour
         if (!collision.CompareTag("Memory Fragment"))
             return;
 
-        print("기억조각 멀어짐");
+        if (_uiAnim == null)
+            return;
+
+        _isEnter = false;
+        _uiAnim.SetBool("isEnter", _isEnter);
     }
 }

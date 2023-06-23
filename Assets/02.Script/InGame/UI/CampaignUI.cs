@@ -5,6 +5,7 @@ public class CampaignUI : MonoBehaviour
     // SerializeField
     [Header("=== Memory Board ===")]
     [SerializeField] private GameObject _memoryBoardPanel;
+    [SerializeField] private GameObject _collectUI;
 
     [Header("=== Pause ===")]
     [SerializeField] private GameObject _pausePanel;
@@ -105,5 +106,10 @@ public class CampaignUI : MonoBehaviour
 #else
         Application.Quit(); 
 #endif
+    }
+
+    public void SetOffCollectUI()
+    {
+        _collectUI.GetComponent<Animator>().enabled = false;
     }
 }
