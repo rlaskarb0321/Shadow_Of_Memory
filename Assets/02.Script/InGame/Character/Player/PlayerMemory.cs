@@ -77,6 +77,11 @@ public class PlayerMemory : MonoBehaviour
         // 최근 먹은 기억의 인덱스값 갱신, 해당 조각의 인덱스값 먹음처리
         _newMemoryIdx = index;
         _isFragIdxGet[index - 1] = true;
+
+        if (_collectMemoryCount == 6)
+        {
+            print("다 모았다.");
+        }
     }
 
     private void UpdateMemoryBoard(int index)

@@ -8925,7 +8925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56beeee542131774c85a20267146ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movSpeed: 3.5
+  _movSpeed: 3
   _jumpForce: 35
   _researchColl: {fileID: 867413119}
   _groundCollObj: {fileID: 625070252}
