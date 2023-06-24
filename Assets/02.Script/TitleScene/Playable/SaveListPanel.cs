@@ -6,7 +6,7 @@ using System.IO;
 public class SaveListPanel : MonoBehaviour
 {
     [SerializeField] private GameObject _overwriteWarning;
-    [SerializeField] private GameObject _hasNoDataWarning;
+    [HideInInspector] public GameObject _hasNoDataWarning;
 
     // 새게임 버튼 클릭관련 OnClick 이벤트 메서드
     public void OnClickNewGameList(int index)

@@ -45,6 +45,7 @@ public class MainBackGround : MonoBehaviour
 
             case "SaveList":
                 bool isSaveListPanelOn = _saveListPanelObj.activeSelf;
+                _saveListPanel._hasNoDataWarning.SetActive(false);
                 _saveListPanelObj.SetActive(!isSaveListPanelOn);
                 break;
         }
