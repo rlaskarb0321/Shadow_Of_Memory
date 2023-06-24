@@ -13,6 +13,7 @@ public class SaveSystem
             Directory.CreateDirectory(SavePath);
         }
 
+        // Debug.Log(SceneManager.GetActiveScene().name);
         string saveJson = JsonUtility.ToJson(saveData);
         string saveFilePath = SavePath + saveFileName + ".json";
         File.WriteAllText(saveFilePath, saveJson);
@@ -23,11 +24,11 @@ public class SaveSystem
     {
         string saveFilePath = SavePath + saveFileName + ".json";
 
-        if (!File.Exists(saveFilePath))
-        {
-            Debug.LogError("No such saveFile exists");
-            return null;
-        }
+        //if (!File.Exists(saveFilePath))
+        //{
+        //    Debug.LogError("No such saveFile exists");
+        //    return null;
+        //}
 
         string saveFile = File.ReadAllText(saveFilePath);
         SaveData saveData = JsonUtility.FromJson<SaveData>(saveFile);

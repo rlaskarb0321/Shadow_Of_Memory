@@ -1,36 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.IO;
+using System.IO;
 
 public class SaveListPanel : MonoBehaviour
 {
-    private string _pathName;
+    [SerializeField] private GameObject _overwriteWarning;
+    [SerializeField] private GameObject _hasNoDataWarning;
 
-    public void SetPath(string name)
-    {
-        _pathName = name;
-    }
-
-    public void OnSaveListClick(int index)
+    // 새게임 버튼 클릭관련 OnClick 이벤트 메서드
+    public void OnClickNewGameList(int index)
     {
         string fileName = "Save" + index.ToString();
-
-        switch (_pathName)
+        string filePath = SaveSystem.SavePath + fileName + ".json";
+        
+        if (!File.Exists(filePath))
         {
-            case "NewGame":
-                // /saves/Save_0n.json 이라는 파일의 존재에따라 (n = 1, 2, 3)
-                // 저장된 데이터가 있다면 Overwrite, 없다면 Init Save
-
-                SaveSystem.Save(new SaveData(Vector3.zero), fileName);
-                LoadingScene.LoadScene("Campaign");
-                break;
-
-            case "SaveList":
-                // /saves/Save_0n.json 이라는 파일의 존재에따라 (n = 1, 2, 3)
-                // 저장된 데이터가 있다면 Load, 없다면 없다고 경고문띄우기
-                break;
+            SaveData newData = new SaveData(Vector3.zero);
+            SaveSystem.Save(newData, fileName);
+            LoadingScene.LoadScene("Campaign");
         }
+        else
+        {
+            // print("파일이 이미 존재합니다 덮어씌울까요?");
+            _overwriteWarning.SetActive(true);
+            _overwriteWarning.GetComponent<OverwriteWarning>()._index = index;
+            return;
+        }
+    }
 
+    // 저장목록 버튼 클릭관련 OnClick 이벤트 메서드
+    public void OnClickSaveList(int index)
+    {
+        string fileName = "Save" + index.ToString();
+        string filePath = SaveSystem.SavePath + fileName + ".json";
+
+        if (File.Exists(filePath))
+        {
+            SaveData loadData = SaveSystem.Load(fileName);
+            print("데이터 불러오기 성공");
+        }
+        else
+        {
+            bool isNoDataWarnActive = _hasNoDataWarning.activeSelf;
+            if (isNoDataWarnActive)
+            {
+                _hasNoDataWarning.gameObject.SetActive(false);
+                _hasNoDataWarning.gameObject.SetActive(true);
+            }
+            else
+            {
+                _hasNoDataWarning.gameObject.SetActive(true);
+            }
+        }
     }
 }
