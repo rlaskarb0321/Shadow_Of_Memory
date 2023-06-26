@@ -23,13 +23,6 @@ public class SaveSystem
     public static SaveData Load(string saveFileName)
     {
         string saveFilePath = SavePath + saveFileName + ".json";
-
-        //if (!File.Exists(saveFilePath))
-        //{
-        //    Debug.LogError("No such saveFile exists");
-        //    return null;
-        //}
-
         string saveFile = File.ReadAllText(saveFilePath);
         SaveData saveData = JsonUtility.FromJson<SaveData>(saveFile);
         return saveData;

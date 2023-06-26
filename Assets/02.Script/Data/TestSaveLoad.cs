@@ -8,7 +8,8 @@ public class TestSaveLoad : MonoBehaviour
     {
         if (Input.GetKeyDown("s"))
         {
-            SaveData character = new SaveData(Vector3.zero);
+            GameData saveData = new GameData(Vector3.one, new bool[ConstData._MEMORYCOUNT] { true, true, true, true, true, true }, 6);
+            SaveData character = new SaveData(saveData);
 
             SaveSystem.Save(character, "Save1");
         }
