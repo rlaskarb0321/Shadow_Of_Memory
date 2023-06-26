@@ -29,7 +29,7 @@ public class MainBackGround : MonoBehaviour
 
     private void Start()
     {
-        // 저장된 세이브파일이 있는지확인후, 값에따라 SaveListBtn 시각적 활성화/비활성화
+        // 저장된 세이브폴더가 있는지확인후, 값에따라 SaveListBtn 시각적 활성화/비활성화
         _isDataExist = Directory.Exists(Application.persistentDataPath + "/saves/");
         IsSaveDataExist(_isDataExist);
     }

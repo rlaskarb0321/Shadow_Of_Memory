@@ -6,7 +6,8 @@ using System.IO;
 public class SaveListPanel : MonoBehaviour
 {
     [SerializeField] private GameObject _overwriteWarning;
-    [HideInInspector] public GameObject _hasNoDataWarning;
+    public GameObject _hasNoDataWarning;
+    [SerializeField] private GameObject[] _saveList;
 
     // 새게임 버튼 클릭관련 OnClick 이벤트 메서드
     public void OnClickNewGameList(int index)
@@ -37,8 +38,9 @@ public class SaveListPanel : MonoBehaviour
 
         if (File.Exists(filePath))
         {
+            //print("데이터 불러오고 씬 이동");
             SaveData loadData = SaveSystem.Load(fileName);
-            print("데이터 불러오기 성공");
+            LoadingScene.LoadScene("Campaign", loadData);
         }
         else
         {
