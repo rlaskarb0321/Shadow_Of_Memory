@@ -82,10 +82,10 @@ public class MainBackGround : MonoBehaviour
         }
     }
 
-    public void OnCampaignBtnClick()
-    {
-        LoadingScene.LoadScene("Campaign");
-    }
+    //public void OnCampaignBtnClick()
+    //{
+    //    LoadingScene.LoadScene("Campaign");
+    //}
 
     public void OnExitGameBtnClick()
     {

@@ -21,7 +21,7 @@ public class SaveListPanel : MonoBehaviour
         {
             SaveData newData = new SaveData();
             SaveSystem.Save(newData, fileName);
-            LoadingScene.LoadScene("Campaign");
+            LoadingScene.LoadScene("Campaign", index);
         }
         // 있으면 덮어씌움 여부를 묻는 UI 활성화
         else
@@ -44,7 +44,7 @@ public class SaveListPanel : MonoBehaviour
         if (File.Exists(filePath))
         {
             SaveData loadData = SaveSystem.Load(fileName);
-            LoadingScene.LoadScene("Campaign", loadData);
+            LoadingScene.LoadScene("Campaign", index);
         }
         // 없으면 없다는 경고문구 출력
         else

@@ -16,7 +16,7 @@ public class OverwriteWarning : MonoBehaviour
             // 덮어쓰기로 결정하면 초기값으로 데이터 전환
             SaveData newData = new SaveData();
             SaveSystem.Save(newData, fileName);
-            LoadingScene.LoadScene("Campaign");
+            LoadingScene.LoadScene("Campaign", _index);
         }
         // 아니요 초기화 안 할래요
         else

@@ -4,7 +4,10 @@ using System;
 static class ConstData
 {
     public const int _MEMORYCOUNT = 6;
+    public const int _SAVELISTCOUNT = 3;
 }
+
+[Serializable]
 public struct GameData
 {
     public Vector3 _playerPos; // 플레이어의 (x, y) 위치

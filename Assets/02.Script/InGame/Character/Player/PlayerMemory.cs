@@ -7,8 +7,7 @@ public class PlayerMemory : MonoBehaviour
 {
     // SerializeField
     [Header("=== Memory Frament ===")] 
-    [SerializeField]
-    private bool[] _isFragIdxGet; // 인덱스번째의 기억을 얻은 여부를 저장
+    public bool[] _isFragIdxGet; // 인덱스번째의 기억을 얻은 여부를 저장
     public int _newMemoryIdx; // 플레이어가 최근에 획득한 기억조각의 번호, 삐삐와의 스토리대화를 요청하면 최근 획득한 기억조각 번호번째 대화가 출력됨
     public int _collectMemoryCount; // 총 모은 기억의 수
 

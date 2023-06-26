@@ -7,22 +7,20 @@ public class LoadingScene : MonoBehaviour
 {
     public static string _nextScene;
     public Image _loadingFillImg;
-
+    
     private void Start()
     {
         StartCoroutine(LoadSceneCor());
     }
 
     // 매개변수로 불러올 씬 이름을받는다, 로딩씬을 불러오고 로딩씬 해당스크립트의 Start함수로인해 매개변수명과 맞는 씬을 불러온다.
-    public static void LoadScene(string sceneName, SaveData saveData = null)
+    public static void LoadScene(string sceneName, int index = -1)
     {
-        if (saveData != null)
+        if (0 < index && index <= ConstData._SAVELISTCOUNT)
         {
-            // 나 이 데이터로 게임열어줘~ 라고하는거임
+            GameDataPackage.SetData(index);
         }
 
-        // saveData 가 null 이면 초기값으로 게임을 불러온다.
-        // 특별한 조작을 하지않아도 된다 생각함 아직은..
         _nextScene = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }

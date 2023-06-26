@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
 public class SaveData
 {
     /*
@@ -30,6 +29,7 @@ public class SaveData
      */
 
     public GameData _gameData;
+
     public Vector3 _playerPos; // 플레이어의 (x, y) 위치
     public string _nowTime; // 저장할 당시 현재 시간
     public bool[] _isFragIdxGet; // 획득한 기억조각의 인덱스
