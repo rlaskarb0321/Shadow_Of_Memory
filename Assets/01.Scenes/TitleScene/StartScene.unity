@@ -8773,8 +8773,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveListBtn: {fileID: 1377672663}
   _saveListPanelObj: {fileID: 322204272}
+  _isSaveListPanelOn: 0
   _newGameBtn: {fileID: 731901842316321154}
   _newGamePanelObj: {fileID: 1876915619}
+  _isNewGamePanelOn: 0
 --- !u!1 &2124078247
 GameObject:
   m_ObjectHideFlags: 0

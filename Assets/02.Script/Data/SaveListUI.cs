@@ -45,8 +45,8 @@ public class SaveListUI : MonoBehaviour
             string date;
             string time;
 
-            date = loadData._nowTime.Split(" ")[0];
-            time = loadData._nowTime.Split(" ")[1];
+            date = loadData._gameData._nowTime.Split(" ")[0];
+            time = loadData._gameData._nowTime.Split(" ")[1];
 
             _showData.date.text = date;
             _showData.time.text = time;

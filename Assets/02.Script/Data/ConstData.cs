@@ -5,6 +5,13 @@ static class ConstData
 {
     public const int _MEMORYCOUNT = 6;
     public const int _SAVELISTCOUNT = 3;
+    public const int _FIRSTSAVELISTINDEX = 1;
+
+    // 첫 저장 관련 데이터
+    public const float _INITPOSX = -12.017f;
+    public const float _INITPOSY = 0.391f;
+    public const float _INITPOSZ = 0.0f;
+    public const int _INITCOLLECTCOUNT = 0;
 }
 
 [Serializable]

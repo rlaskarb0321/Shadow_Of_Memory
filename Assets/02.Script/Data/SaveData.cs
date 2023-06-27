@@ -30,30 +30,18 @@ public class SaveData
 
     public GameData _gameData;
 
-    public Vector3 _playerPos; // 플레이어의 (x, y) 위치
-    public string _nowTime; // 저장할 당시 현재 시간
-    public bool[] _isFragIdxGet; // 획득한 기억조각의 인덱스
-    public int _currCollectCount; // 현재 모은 조각의 수
-
     public SaveData(GameData gameData)
     {
         // 매개변수가 온다면, 온 값으로 초기화
         _gameData = gameData;
-
-        _playerPos = gameData._playerPos;
-        _nowTime = gameData._nowTime;
-        _isFragIdxGet = gameData._isFragIdxGet;
-        _currCollectCount = gameData._currCollectCount;
     }
 
     public SaveData()
     {
         // 매개변수없이 생성되면 초기값으로 생성
-        _gameData = new GameData(Vector3.zero, new bool[ConstData._MEMORYCOUNT], 0);
-
-        _playerPos = _gameData._playerPos;
-        _nowTime = _gameData._nowTime;
-        _isFragIdxGet = _gameData._isFragIdxGet;
-        _currCollectCount = _gameData._currCollectCount;
+        _gameData = new GameData(
+                new Vector3(ConstData._INITPOSX, ConstData._INITPOSY, ConstData._INITPOSZ), // 첫번째 매개변수
+                new bool[ConstData._MEMORYCOUNT], // 두번째 매개변수
+                ConstData._INITCOLLECTCOUNT); // 세번째 매개변수
     }
 }

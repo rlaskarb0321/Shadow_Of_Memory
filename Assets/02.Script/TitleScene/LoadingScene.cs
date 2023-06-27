@@ -35,6 +35,8 @@ public class LoadingScene : MonoBehaviour
         {
             yield return null;
             timer += Time.deltaTime;
+
+            // 씬의 호출이 얼마나 이루어졌는지
             if (op.progress < 0.9f)
             {
                 _loadingFillImg.fillAmount = Mathf.Lerp(_loadingFillImg.fillAmount, op.progress, timer);
@@ -45,11 +47,12 @@ public class LoadingScene : MonoBehaviour
             }
             else
             {
-                _loadingFillImg.fillAmount = Mathf.Lerp(_loadingFillImg.fillAmount, 1f, timer);
+                _loadingFillImg.fillAmount = Mathf.Lerp(_loadingFillImg.fillAmount, 1.0f, timer);
                 if (_loadingFillImg.fillAmount == 1.0f)
                 {
                     yield return new WaitForSeconds(1.5f);
 
+                    // 씬 활성화되면, 페이드연출을 할 Obj에게 anim을 재생시키고 끝나기 전까지 입장연출을 시작x
                     op.allowSceneActivation = true;
                     yield break;
                 }

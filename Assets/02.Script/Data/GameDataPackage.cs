@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+// 로딩씬에 있는 스크립트
 public class GameDataPackage : MonoBehaviour
 {
     public static GameData _gameData;
@@ -13,7 +14,6 @@ public class GameDataPackage : MonoBehaviour
         string fileName = "Save" + index.ToString();
         string filePath = SaveSystem.SavePath + fileName + ".json";
 
-        // 데이터가 있으면 불러오고 씬 이동
         if (File.Exists(filePath))
         {
             SaveData loadData = SaveSystem.Load(fileName);
