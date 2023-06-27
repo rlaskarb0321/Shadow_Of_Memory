@@ -10,7 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     [Range(30.0f, 45.0f)] [SerializeField] private float _jumpForce; // 점프력
     [Space(9.0f)] [SerializeField] private GameObject _researchColl; // 주위에 MapEvent 찾는 관련 콜리더
     [SerializeField] private Transform _groundCollObj; // 땋에 닿음판정 관련 콜리더 판정하는 게임오브젝트
-    
+
     // HideInInspector
     private Rigidbody2D _rbody2D;
     private Animator _animator;
@@ -117,14 +117,11 @@ public class PlayerCtrl : MonoBehaviour
     private void ManagePlayerInput()
     {
         _h = Input.GetAxisRaw("Horizontal");
+        
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
-        {
             _isJumpInput = true;
-        }
         else
-        {
             _isJumpInput = false;
-        }
 
         if (Input.GetKey(KeyCode.F))
         {

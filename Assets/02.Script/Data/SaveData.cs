@@ -17,11 +17,12 @@ public class SaveData
 3.2 최근얻은 기억파편 인덱스에 대한 대화를 했는지 안했는지
 
 4 플레이어의 성장 단계
-4.1 성장 단계에 따른 콜리더 크기 기타 등등
+4.1 성장 단계에 따른 capsule 2d 콜리더의 size 값
+4.2 성장 단계에 따른 grounded coll 의 transform 과 size
 
 5. 컷신
 5.1 입장 컷신은 초기 생성할때에만 본다. 저장후 불러왔을때 또 볼 필요는 없음 -> bool _isFirstEnter;
-5.2 삐삐 컷신을 보기 전과 후로 나무에 앉은 더미 삐삐 활성화 여부도 데이터에 추가
+5.2 삐삐 컷신을 보기 전과 후로 나무에 앉은 더미 삐삐 활성화 여부도 데이터에 추가 -> bool _isMeetPpippi;
 
 6. 최근 저장 날짜
 6.1 저장했을때 날짜 -> string _nowTime;
@@ -44,6 +45,7 @@ public class SaveData
                 new bool[ConstData._TOTALMEMORYCOUNT],                                      // 매개변수 2 -> 기억조각 인덱스 별 획득 여부
                 ConstData._INITCOLLECTCOUNT,                                                // 매개변수 3 -> 현재 모은 조각 수
                 0,                                                                          // 매개변수 4 -> 새로먹은 조각의 인덱스
+                false,
                 false);                                                                     // 매개변수 5 -> 입장컷신 다 봤는지
     }
 }

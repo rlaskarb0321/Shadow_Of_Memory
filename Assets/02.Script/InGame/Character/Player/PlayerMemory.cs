@@ -17,7 +17,9 @@ public class PlayerMemory : MonoBehaviour
     [SerializeField] private Text _acheiveRateText; // 달성률을 표시하는 텍스트
     [SerializeField] private Text _descriptionText; // 활성화된 기억을 클릭했을때 관련 설명을 표시할 텍스트
     [SerializeField] private string[] _descriptionContent; // 기억 관련 설명의 내용
+    
     public bool _isEntryPlayTimeEnd;
+    public bool _isMeetPpippi;
 
     [Header("=== Black Cloud Note ===")]
     [SerializeField] private Image _memoryImage; // 습득한 기억퍼즐의 이미지
