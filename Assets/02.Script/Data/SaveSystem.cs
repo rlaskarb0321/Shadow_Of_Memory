@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 
 public class SaveSystem
-{
+{   
     public static string SavePath => Application.persistentDataPath + "/saves/";
 
     public static void Save(SaveData saveData, string saveFileName)

@@ -24,14 +24,22 @@ public class InGameSaveLoad : MonoBehaviour
         _playerMemory.transform.position = _data._playerPos;
         _playerMemory._isFragIdxGet = _data._isFragIdxGet;
         _playerMemory._collectMemoryCount = _data._currCollectCount;
+        _playerMemory._newMemoryIdx = _data._newMemoryIdx;
+        _playerMemory._isEntryPlayTimeEnd = _data._isEntryPlayTimeEnd;
     }
 
     void Update()
     {
         if (Input.GetKeyDown("s"))
         {
-            GameData saveData = 
-                new GameData(_playerMemory.transform.position, _playerMemory._isFragIdxGet, _playerMemory._collectMemoryCount);
+            GameData saveData =
+                new GameData(
+                    _playerMemory.transform.position,
+                    _playerMemory._isFragIdxGet,
+                    _playerMemory._collectMemoryCount,
+                    _playerMemory._newMemoryIdx,
+                    _playerMemory._isEntryPlayTimeEnd
+                    );
             SaveData character = new SaveData(saveData);
             _data = saveData; 
 

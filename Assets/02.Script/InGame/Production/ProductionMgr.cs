@@ -16,8 +16,12 @@ public class ProductionMgr : MonoBehaviour
     {
         // 첫 게임 입장시 "페이드아웃 패널"에게 페이드아웃 anim을 부여하고
         // anim 마지막에 StartProduction을 호출하고, 자신을 비활성화한다.
-        _playableDirector = _firstProduction;
-        StartProduction(_playableDirector);
+
+        if (!GameDataPackage._gameData._isEntryPlayTimeEnd)
+        {
+            _playableDirector = _firstProduction;
+            StartProduction(_playableDirector);
+        }
     }
 
     private void Update()

@@ -3711,6 +3711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _keytutoImg: {fileID: 796535732}
+  _player: {fileID: 1773707559}
 --- !u!1 &793636090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7922,6 +7923,8 @@ MonoBehaviour:
     _nowTime: 
     _isFragIdxGet: 
     _currCollectCount: 0
+    _newMemoryIdx: 0
+    _isEntryPlayTimeEnd: 0
 --- !u!1 &1559018884
 GameObject:
   m_ObjectHideFlags: 0
@@ -9170,6 +9173,7 @@ MonoBehaviour:
     \uC2B5\uB4DD\uD588\uC2B5\uB2C8\uB2E4."
   - "\uC5EC\uC12F\uBC88\uC9F8 \uAE30\uC5B5\\\uC5EC\uC12F\uBC88\uC9F8 \uAE30\uC5B5
     \uC2B5\uB4DD\uD588\uC2B5\uB2C8\uB2E4."
+  _isEntryPlayTimeEnd: 0
   _memoryImage: {fileID: 1452944202}
   _blackCloudNote: {fileID: 480555379}
   _blackCloudTitle: {fileID: 1175210748}

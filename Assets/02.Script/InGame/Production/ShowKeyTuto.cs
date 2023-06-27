@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class ShowKeyTuto : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _keytutoImg;
+    [SerializeField] private GameObject _keytutoImg;
+    [SerializeField] private GameObject _player;
+
+    private PlayerMemory _playerMemory;
+
+    private void Awake()
+    {
+        _playerMemory = _player.GetComponent<PlayerMemory>();
+    }
 
     public void ShowKeyTutoImg()
     {
-        print("Key Tuto Img ¶ç¿ì±â");
+        print("Key Tuto Img ¶ç¿ì°í ÀÔÀå¿µ»ó ºÃÀ½ Ã¼Å©");
+        _playerMemory._isEntryPlayTimeEnd = true;
         //_keytutoImg.SetActive(true);
     }
 }
