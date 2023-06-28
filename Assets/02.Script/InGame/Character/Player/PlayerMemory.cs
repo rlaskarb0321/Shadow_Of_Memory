@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class PlayerMemory : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerMemory : MonoBehaviour
     public bool[] _isFragIdxGet; // 인덱스번째의 기억을 얻은 여부를 저장
     public int _newMemoryIdx; // 플레이어가 최근에 획득한 기억조각의 번호, 삐삐와의 스토리대화를 요청하면 최근 획득한 기억조각 번호번째 대화가 출력됨
     public int _collectMemoryCount; // 총 모은 기억의 수
+    public PlayableDirector _endingCutScene; // 기억 조각을 다 모은 후 재생할 컷신
 
     [Header("=== Memory Board ===")] 
     [SerializeField] private GameObject[] _memoryPuzzles; // 기억퍼즐들
@@ -60,6 +62,8 @@ public class PlayerMemory : MonoBehaviour
         UpdateMemoryBoard(index); // 습득 후 MemoryBoard쪽 처리
         ShowBlackCloudNote(index); // 쪽지연출
         _inGameSaveLoad.SaveToServer(this); // 자동 저장
+
+        
     }
 
     // 메모리 보드에있는 퍼즐을 클릭할 때 
@@ -125,5 +129,20 @@ public class PlayerMemory : MonoBehaviour
         _blackCloudNote.SetActive(true);
         _blackCloudTitle.text = title;
         _blackCloudContext.text = context;
+
+        // 다 모았을 경우
+        if (_collectMemoryCount.Equals(ConstData._TOTALMEMORYCOUNT))
+        {
+            StartCoroutine(StartEndingCutScene());
+            return;
+        }
+    }
+
+    private IEnumerator StartEndingCutScene()
+    {
+        yield return new WaitUntil(() => !_blackCloudNote.activeSelf);
+        yield return new WaitForSeconds(1.5f);
+
+        ProductionMgr.StartProduction(_endingCutScene);
     }
 }
