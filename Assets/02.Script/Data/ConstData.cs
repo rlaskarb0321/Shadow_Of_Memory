@@ -50,9 +50,11 @@ public struct GameData
     public int _newMemoryIdx;           // 최근 먹은 기억조각의 인덱스
     public bool _isEntryPlayTimeEnd;    // 게임 입장 첫 연출을 봤는지
     public bool _isMeetPpippi;          // 삐삐와 만났는지
+    public bool[] _memoryPieceActive;   // 메모리 보드의 인덱스 번째의 기억 조각 활성화 여부
 
-    public GameData
-        (Vector3 playerPos, bool[] isFragIdxGet, int currCollectCount, int newMemoryIdx, bool isEntryPlayTimeEnd, bool isMeetPpippi)
+    public GameData(
+        Vector3 playerPos, bool[] isFragIdxGet, int currCollectCount, int newMemoryIdx,
+        bool isEntryPlayTimeEnd, bool isMeetPpippi, bool[] memoryPiecesActive)
     {
         _playerPos = playerPos;
         _nowTime = DateTime.Now.ToString("yy-MM-dd HH:mm");
@@ -61,5 +63,6 @@ public struct GameData
         _newMemoryIdx = newMemoryIdx;
         _isEntryPlayTimeEnd = isEntryPlayTimeEnd;
         _isMeetPpippi = isMeetPpippi;
+        _memoryPieceActive = memoryPiecesActive;
     }
 }

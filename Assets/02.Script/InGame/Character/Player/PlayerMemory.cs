@@ -13,8 +13,8 @@ public class PlayerMemory : MonoBehaviour
 
     [Header("=== Memory Board ===")] 
     [SerializeField] private GameObject[] _memoryPuzzles; // 기억퍼즐들
-    [SerializeField] private Text _currCollectText; // 현재 모은 수
-    [SerializeField] private Text _acheiveRateText; // 달성률을 표시하는 텍스트
+    [HideInInspector] public Text _currCollectText; // 현재 모은 수
+    [HideInInspector] public Text _acheiveRateText; // 달성률을 표시하는 텍스트
     [SerializeField] private Text _descriptionText; // 활성화된 기억을 클릭했을때 관련 설명을 표시할 텍스트
     [SerializeField] private string[] _descriptionContent; // 기억 관련 설명의 내용
     
@@ -32,6 +32,7 @@ public class PlayerMemory : MonoBehaviour
     [HideInInspector] public bool _isMeetPpippi;
     private InGameSaveLoad _inGameSaveLoad;
     private PlayerAnimatorChange _animChange;
+    [HideInInspector] public bool[] _memoryPuzzlesActive;
 
     private void Awake()
     {
@@ -42,8 +43,9 @@ public class PlayerMemory : MonoBehaviour
 
     private void Start()
     {
-        _acheiveRateText.text = "0 %";
         _descriptionText.text = "";
+
+        _memoryPuzzlesActive = new bool[ConstData._TOTALMEMORYCOUNT];
     }
 
     public void GetMemoryFragment(int index, Sprite memoryImage)
@@ -103,9 +105,10 @@ public class PlayerMemory : MonoBehaviour
     {
         // 먹은 기억퍼즐 이미지 활성화
         _memoryPuzzles[index - 1].gameObject.SetActive(true);
+        _memoryPuzzlesActive[index - 1] = true;
 
         // 달성률과 진행도 최신화
-        _acheiveRateText.text = $"{(Mathf.Round((_collectMemoryCount / 6.0f) * 100)) * 0.01f * 100} %";
+        _acheiveRateText.text = string.Format("{0:f2} %", (_collectMemoryCount / 6.0f) * 100.0f);
         _currCollectText.text = _collectMemoryCount.ToString();
     }
 

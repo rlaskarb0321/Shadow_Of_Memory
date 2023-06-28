@@ -42,10 +42,11 @@ public class SaveData
         // 매개변수없이 생성되면 초기값으로 생성
         _gameData = new GameData(
                 new Vector3(ConstData._INITPOSX, ConstData._INITPOSY, ConstData._INITPOSZ), // 매개변수 1 -> 플레이어 위치
-                new bool[ConstData._TOTALMEMORYCOUNT],                                      // 매개변수 2 -> 기억조각 인덱스 별 획득 여부
+                new bool[ConstData._TOTALMEMORYCOUNT],                                      // 매개변수 2 -> 기억조각 인덱스별 획득 여부
                 ConstData._INITCOLLECTCOUNT,                                                // 매개변수 3 -> 현재 모은 조각 수
                 0,                                                                          // 매개변수 4 -> 새로먹은 조각의 인덱스
-                false,
-                false);                                                                     // 매개변수 5 -> 입장컷신 다 봤는지
+                false,                                                                      // 매개변수 5 -> 입장컷신 다 봤는지
+                false,                                                                      // 매개변수 6 -> 삐삐랑 만났는지    
+                new bool[ConstData._TOTALMEMORYCOUNT]);                                     // 매개변수 7 -> 메모리 보드의 인덱스별 활성화 여부
     }
 }

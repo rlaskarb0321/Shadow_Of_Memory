@@ -15,7 +15,7 @@ public class Grounded : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (_rbody2D.velocity.y >= 0.0f)
+        if (_rbody2D.velocity.y > 0.0f)
         {
             return;
         }

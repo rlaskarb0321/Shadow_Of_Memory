@@ -9,7 +9,7 @@ public class PlayerAnimatorChange : MonoBehaviour
 
     private BoxCollider2D _groundColl;
     private CapsuleCollider2D _capsuleColl2D;
-    private Animator _currAnimator;
+    [HideInInspector] public Animator _currAnimator;
     private int _number;
 
     private void Awake()

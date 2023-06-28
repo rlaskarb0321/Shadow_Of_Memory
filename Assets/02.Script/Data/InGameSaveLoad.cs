@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 캠페인 씬에 있는 스크립트
 public class InGameSaveLoad : MonoBehaviour
@@ -9,10 +10,15 @@ public class InGameSaveLoad : MonoBehaviour
     [Header("=== Extract List ===")]
     [SerializeField] private GameObject _player; // 플레이어
     [SerializeField] private GameObject _groundColl; // 플레이어 지면 닿음 관련 판정 콜리더
-    [SerializeField] private GameObject _stubObj; // 삐삐가 앉아있던 그루터기
+
+    [Space(10.0f)] [SerializeField] private GameObject _stubObj; // 삐삐가 앉아있던 그루터기
     [SerializeField] private GameObject _dummyPpippi; // 더미 삐삐
     [SerializeField] private GameObject _realPpippi; // 진짜 삐삐
+
+    [Header("=== Memory Board & Fragment ===")]
     [SerializeField] private GameObject[] _memoryFragment; // 인 게임에 있는 기억 조각들
+    [SerializeField] private GameObject[] _memoryBoardPieces; 
+    [SerializeField] private Text _achieveRate;
 
     [Header("=== Saving Process ===")]
     [SerializeField] private GameObject _savingText;
@@ -21,6 +27,7 @@ public class InGameSaveLoad : MonoBehaviour
     // HideInInspector
     private CapsuleCollider2D _playerColl;
     private BoxCollider2D _groundBoxColl;
+    private PlayerAnimatorChange _animChanger;
     private PlayerMemory _playerMemory;
     private PpippiStub _ppippiStub;
     private WaitForSeconds _ws;
@@ -31,9 +38,13 @@ public class InGameSaveLoad : MonoBehaviour
         _ppippiStub = _stubObj.GetComponent<PpippiStub>();
         _playerColl = _player.GetComponent<CapsuleCollider2D>();
         _groundBoxColl = _groundColl.GetComponent<BoxCollider2D>();
+        _animChanger = _player.GetComponent<PlayerAnimatorChange>();
         _ws = new WaitForSeconds(_showTime);
+    }
 
-        // 여기서 데이터 초기화를 하자
+    private void Start()
+    {
+        // start가 awake보다 호출 속도가 느리므로 여기서 데이터 초기화를 하자
         ApplyDataToGame();
     }
 
@@ -51,6 +62,7 @@ public class InGameSaveLoad : MonoBehaviour
         //}
     }
 
+    // 서버(현재는 로컬 Json에 데이터를 저장함)
     public void SaveToServer(PlayerMemory playerMemory)
     {
         StartCoroutine(ShowSaveText());
@@ -61,14 +73,15 @@ public class InGameSaveLoad : MonoBehaviour
                     playerMemory._collectMemoryCount,
                     playerMemory._newMemoryIdx,
                     playerMemory._isEntryPlayTimeEnd,
-                    playerMemory._isMeetPpippi
+                    playerMemory._isMeetPpippi,
+                    playerMemory._memoryPuzzlesActive
                     );
 
         SaveData character = new SaveData(saveData);
         SaveSystem.Save(character, "Save" + GameDataPackage._index.ToString());
     }
 
-    public void ApplyDataToGame()
+    private void ApplyDataToGame()
     {
         // 인게임 여러 요소들의 값을 데이터에 저장된 값으로 바꾼다.
 
@@ -87,45 +100,30 @@ public class InGameSaveLoad : MonoBehaviour
             _ppippiStub._boxColl.enabled = false;
         }
 
-        // 인게임 기억조각 인덱스를 데이터 값과 동기화
+        // 인게임 기억조각 인덱스와 메모리 보드 수집여부를 데이터 값과 동기화
         for (int i = 0; i < _memoryFragment.Length; i++)                
         {
             bool isActive = GameDataPackage._gameData._isFragIdxGet[i];
             _memoryFragment[i].SetActive(!isActive);
+            _memoryBoardPieces[i].SetActive(isActive);
         }
+
+        // 메모리보드 달성도 갱신
+        _playerMemory._acheiveRateText.text = string.Format("{0:f2} %", (GameDataPackage._gameData._currCollectCount / 6.0f) * 100.0f);
+        _playerMemory._currCollectText.text = GameDataPackage._gameData._currCollectCount.ToString(); // n / 6 으로 갱신
 
         // 먹은 기억 조각 수에따라 플레이어 성장값 변경, 애니메이터 할당
         if (ConstData._COLLECTLEVEL2 <= GameDataPackage._gameData._currCollectCount &&
             GameDataPackage._gameData._currCollectCount < ConstData._COLLECTLEVEL3)
         {
             // 2 레벨 캐릭터
-            _groundColl.transform.localPosition = new Vector3
-                    (ConstData._LEVEL2_GROUND_COLL_TR_X,
-                     ConstData._LEVEL2_GROUND_COLL_TR_Y,
-                     _groundColl.transform.position.z);
-
-            _groundBoxColl.size = new Vector2
-                (ConstData._LEVEL2_GROUND_COLL_SIZE_X,
-                 ConstData._LEVEL2_GROUND_COLL_SIZE_Y);
-
-            _playerColl.offset = Vector2.zero;
-            _playerColl.size = new Vector2(ConstData._LEVEL2_CAPSULE_COLL_SIZE_X, ConstData._LEVEL2_CAPSULE_COLL_SIZE_Y);
+            _animChanger.ChangeAnimator(1);
         }
 
         if (ConstData._COLLECTLEVEL3 <= GameDataPackage._gameData._currCollectCount)
         {
             // 3 레벨 캐릭터
-            _groundColl.transform.localPosition = new Vector3
-                    (ConstData._LEVEL3_GROUND_COLL_TR_X,
-                     ConstData._LEVEL3_GROUND_COLL_TR_Y,
-                     _groundColl.transform.position.z);
-
-            _groundBoxColl.size = new Vector2
-                (ConstData._LEVEL3_GROUND_COLL_SIZE_X,
-                 ConstData._LEVEL3_GROUND_COLL_SIZE_Y);
-
-            _playerColl.offset = Vector2.zero;
-            _playerColl.size = new Vector2(ConstData._LEVEL3_CAPSULE_COLL_SIZE_X, ConstData._LEVEL3_CAPSULE_COLL_SIZE_Y);
+            _animChanger.ChangeAnimator(2);
         }
     }
 
