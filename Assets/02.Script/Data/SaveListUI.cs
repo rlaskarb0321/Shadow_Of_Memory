@@ -44,6 +44,7 @@ public class SaveListUI : MonoBehaviour
             SaveData loadData = JsonUtility.FromJson<SaveData>(saveFile);
             string date;
             string time;
+            int collectCount;
 
             date = loadData._gameData._nowTime.Split(" ")[0];
             time = loadData._gameData._nowTime.Split(" ")[1];
@@ -51,8 +52,23 @@ public class SaveListUI : MonoBehaviour
             _showData.date.text = date;
             _showData.time.text = time;
 
-            _showData.characImg.sprite = _characterLevelImg[0];
+            collectCount = loadData._gameData._currCollectCount;
+            _showData.collectCount.text = $"{collectCount} °³";
+
+            if (collectCount < ConstData._COLLECTLEVEL2)
+            {
+                _showData.characImg.sprite = _characterLevelImg[0];
+            }
+            else if (collectCount < ConstData._COLLECTLEVEL3)
+            {
+                _showData.characImg.sprite = _characterLevelImg[1];
+            }
+            else
+            {
+                _showData.characImg.sprite = _characterLevelImg[2];
+            }
             _showData.characImg.SetNativeSize();
+
         }
     }
 }

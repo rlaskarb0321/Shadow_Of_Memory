@@ -18,6 +18,8 @@ public class InGameSaveLoad : MonoBehaviour
     public GameData _data; // 사실 또 하나의 변수를 낼 필요는없는데 일단 디버깅을 편하게 하기위해 만들었음
 
     // HideInInspector
+    private CapsuleCollider2D _playerColl;
+    private BoxCollider2D _groundBoxColl;
     private PlayerMemory _playerMemory;
     private PpippiStub _ppippiStub;
 
@@ -26,6 +28,8 @@ public class InGameSaveLoad : MonoBehaviour
         _data = GameDataPackage._gameData; 
         _playerMemory = _player.GetComponent<PlayerMemory>();
         _ppippiStub = _stubObj.GetComponent<PpippiStub>();
+        _playerColl = _player.GetComponent<CapsuleCollider2D>();
+        _groundBoxColl = _groundColl.GetComponent<BoxCollider2D>();
 
         // 여기서 데이터 초기화를 하자
         ApplyDataToGame();
@@ -84,17 +88,35 @@ public class InGameSaveLoad : MonoBehaviour
         }
 
         // 먹은 기억 조각 수에따라 플레이어 성장값 변경, 애니메이터 할당
-        if (_data._currCollectCount < ConstData._COLLECTLEVEL2)
-        {
-            // 1 레벨 캐릭터
-        }
-        else if (_data._currCollectCount < ConstData._COLLECTLEVEL3)
+        if (ConstData._COLLECTLEVEL2 <= _data._currCollectCount && _data._currCollectCount < ConstData._COLLECTLEVEL3)
         {
             // 2 레벨 캐릭터
+            _groundColl.transform.localPosition = new Vector3
+                    (ConstData._LEVEL2_GROUND_COLL_TR_X,
+                     ConstData._LEVEL2_GROUND_COLL_TR_Y,
+                     _groundColl.transform.position.z);
+
+            _groundBoxColl.size = new Vector2
+                (ConstData._LEVEL2_GROUND_COLL_SIZE_X,
+                 ConstData._LEVEL2_GROUND_COLL_SIZE_Y);
+
+            _playerColl.offset = Vector2.zero;
+            _playerColl.size = new Vector2(ConstData._LEVEL2_CAPSULE_COLL_SIZE_X, ConstData._LEVEL2_CAPSULE_COLL_SIZE_Y);
         }
-        else
+        if (_data._currCollectCount >= ConstData._COLLECTLEVEL3)
         {
             // 3 레벨 캐릭터
+            _groundColl.transform.localPosition = new Vector3
+                    (ConstData._LEVEL3_GROUND_COLL_TR_X,
+                     ConstData._LEVEL3_GROUND_COLL_TR_Y,
+                     _groundColl.transform.position.z);
+
+            _groundBoxColl.size = new Vector2
+                (ConstData._LEVEL3_GROUND_COLL_SIZE_X,
+                 ConstData._LEVEL3_GROUND_COLL_SIZE_Y);
+
+            _playerColl.offset = Vector2.zero;
+            _playerColl.size = new Vector2(ConstData._LEVEL3_CAPSULE_COLL_SIZE_X, ConstData._LEVEL3_CAPSULE_COLL_SIZE_Y);
         }
     }
 }
