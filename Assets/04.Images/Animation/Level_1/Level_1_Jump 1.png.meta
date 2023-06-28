@@ -125,7 +125,7 @@ TextureImporter:
         width: 1100
         height: 1100
       alignment: 9
-      pivot: {x: 0.5181748, y: 0.49999988}
+      pivot: {x: 0.52796423, y: 0.4627145}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -141,12 +141,12 @@ TextureImporter:
       name: Level_1_Jump 1_1
       rect:
         serializedVersion: 2
-        x: 1100
+        x: 1110
         y: 0
         width: 1100
         height: 1100
       alignment: 9
-      pivot: {x: 0.5181748, y: 0.43941718}
+      pivot: {x: 0.5186429, y: 0.41610748}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,7 +167,7 @@ TextureImporter:
         width: 1100
         height: 1100
       alignment: 9
-      pivot: {x: 0.5242334, y: 0.5726991}
+      pivot: {x: 0.5372858, y: 0.5745713}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,7 +188,7 @@ TextureImporter:
         width: 1100
         height: 1100
       alignment: 9
-      pivot: {x: 0.52423316, y: 0.681748}
+      pivot: {x: 0.5372858, y: 0.67710674}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -209,7 +209,7 @@ TextureImporter:
         width: 1100
         height: 1100
       alignment: 9
-      pivot: {x: 0.524233, y: 0.7847386}
+      pivot: {x: 0.53728604, y: 0.7703208}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,7 +230,7 @@ TextureImporter:
         width: 1100
         height: 1100
       alignment: 9
-      pivot: {x: 0.5279648, y: 0.76099956}
+      pivot: {x: 0.50932175, y: 0.78896356}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,7 +251,7 @@ TextureImporter:
         width: 1100
         height: 1100
       alignment: 9
-      pivot: {x: 0.53728646, y: 0.5932141}
+      pivot: {x: 0.5279648, y: 0.6211783}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

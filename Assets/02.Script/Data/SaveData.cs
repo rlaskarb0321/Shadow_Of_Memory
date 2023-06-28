@@ -17,8 +17,8 @@ public class SaveData
 3.2 최근얻은 기억파편 인덱스에 대한 대화를 했는지 안했는지
 
 4 플레이어의 성장 단계
-4.1 성장 단계에 따른 capsule 2d 콜리더의 size 값
-4.2 성장 단계에 따른 grounded coll 의 transform 과 size
+4.1 성장 단계에 따른 capsule 2d 콜리더의 size 값 -> ok
+4.2 성장 단계에 따른 grounded coll 의 transform 과 size -> ok
 
 5. 컷신
 5.1 입장 컷신은 초기 생성할때에만 본다. 저장후 불러왔을때 또 볼 필요는 없음 -> bool _isFirstEnter;

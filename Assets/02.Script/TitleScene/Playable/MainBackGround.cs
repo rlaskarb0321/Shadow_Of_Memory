@@ -69,7 +69,7 @@ public class MainBackGround : MonoBehaviour
                 //_isNewGamePanelOn = _newGamePanelObj.activeSelf;
                 if (!_isDataExist)
                 {
-                    _newGamePanel.OnClickNewGameList(ConstData._FIRSTSAVELISTINDEX);
+                    _newGamePanel.OnClickNewGameList(ConstData._FIRST_SAVE_LIST_INDEX);
                     break;
                 }
 

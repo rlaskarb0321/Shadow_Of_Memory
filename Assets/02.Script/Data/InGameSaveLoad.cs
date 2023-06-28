@@ -12,7 +12,7 @@ public class InGameSaveLoad : MonoBehaviour
     [SerializeField] private GameObject _stubObj; // 삐삐가 앉아있던 그루터기
     [SerializeField] private GameObject _dummyPpippi; // 더미 삐삐
     [SerializeField] private GameObject _realPpippi; // 진짜 삐삐
-    [SerializeField] private GameObject[] _memoryFragment;
+    [SerializeField] private GameObject[] _memoryFragment; // 인 게임에 있는 기억 조각들
 
     [Header("=== Game Data ===")]
     public GameData _data; // 사실 또 하나의 변수를 낼 필요는없는데 일단 디버깅을 편하게 하기위해 만들었음
@@ -44,9 +44,9 @@ public class InGameSaveLoad : MonoBehaviour
                     _playerMemory._isEntryPlayTimeEnd,
                     _playerMemory._isMeetPpippi
                     );
+
             SaveData character = new SaveData(saveData);
             _data = saveData; 
-
             SaveSystem.Save(character, "Save" + GameDataPackage._index.ToString());
         }
 
@@ -80,10 +80,10 @@ public class InGameSaveLoad : MonoBehaviour
         for (int i = 0; i < _memoryFragment.Length; i++)                
         {
             bool isActive = _data._isFragIdxGet[i];
-            _memoryFragment[i].SetActive(isActive);
+            _memoryFragment[i].SetActive(!isActive);
         }
 
-        // 먹은 기억 조각 수에따라 플레이어 성장값 변경
+        // 먹은 기억 조각 수에따라 플레이어 성장값 변경, 애니메이터 할당
         if (_data._currCollectCount < ConstData._COLLECTLEVEL2)
         {
             // 1 레벨 캐릭터

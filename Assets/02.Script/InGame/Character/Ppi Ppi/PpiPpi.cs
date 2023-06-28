@@ -31,45 +31,32 @@ public class PpiPpi : MonoBehaviour
     //}
     #endregion ªﬂªﬂ ∞Ì¡§Ω√≈∞±‚
 
-    [SerializeField]
-    private Transform _playerObj;
+    // SerializeField
+    [SerializeField] private Transform _playerObj;
+    [SerializeField] private GameObject _ppippiBody;
+    [SerializeField] private GameObject _followObj;
+    [SerializeField] private float _speed;
 
-    [SerializeField]
-    private Transform _ppippiPos;
-
-    [SerializeField]
-    private float _speed;
-
-    private float _characterScaleX;
+    // HideInInspector
+    private float _changeScaleX;
 
     private void Update()
     {
-        _characterScaleX = -_playerObj.localScale.x;
+        FollowObj();
+        ReverseScaleX();
     }
 
-    private void FixedUpdate()
+    private void FollowObj()
     {
-        FollowPlayer();
-    }
-
-    private void FollowPlayer()
-    {
-        Vector2 ppippiRotate;
-        switch (_characterScaleX)
-        {
-            case -1:
-                ppippiRotate = new Vector2(_characterScaleX, transform.localScale.y);
-                transform.localScale = ppippiRotate;
-                break;
-
-            case 1:
-                ppippiRotate = new Vector2(_characterScaleX, transform.localScale.y);
-                transform.localScale = ppippiRotate;
-                break;
-        }
-        Vector2 ppippiPos = new Vector2(_ppippiPos.position.x, _ppippiPos.position.y);
         Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+        transform.position = Vector2.Lerp(myPos, _followObj.transform.position, _speed);
+    }
 
-        transform.position = Vector2.Lerp(myPos, ppippiPos, _speed);
+    private void ReverseScaleX()
+    {
+        _changeScaleX = -_playerObj.localScale.x;
+        Vector2 ppippiRotate = new Vector2(_changeScaleX, transform.localScale.y);
+
+        _ppippiBody.transform.localScale = ppippiRotate;
     }
 }

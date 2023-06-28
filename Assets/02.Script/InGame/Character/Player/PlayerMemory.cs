@@ -18,9 +18,6 @@ public class PlayerMemory : MonoBehaviour
     [SerializeField] private Text _descriptionText; // 활성화된 기억을 클릭했을때 관련 설명을 표시할 텍스트
     [SerializeField] private string[] _descriptionContent; // 기억 관련 설명의 내용
     
-    public bool _isEntryPlayTimeEnd;
-    public bool _isMeetPpippi;
-
     [Header("=== Black Cloud Note ===")]
     [SerializeField] private Image _memoryImage; // 습득한 기억퍼즐의 이미지
     [SerializeField] private GameObject _blackCloudNote; // 검은구름배경의 쪽지
@@ -28,6 +25,15 @@ public class PlayerMemory : MonoBehaviour
     [SerializeField] private Text _blackCloudContext; // 쪽지의 내용
 
     // HideInInspector
+    [HideInInspector] public bool _isEntryPlayTimeEnd;
+    [HideInInspector] public bool _isMeetPpippi;
+    private PlayerAnimatorChange _animChange;
+
+    private void Awake()
+    {
+        _animChange = GetComponent<PlayerAnimatorChange>();
+    }
+
 
     private void Start()
     {
@@ -79,9 +85,15 @@ public class PlayerMemory : MonoBehaviour
         _newMemoryIdx = index;
         _isFragIdxGet[index - 1] = true;
 
-        if (_collectMemoryCount == 6)
+
+        if (_collectMemoryCount == ConstData._COLLECTLEVEL2)
         {
-            print("다 모았다.");
+            _animChange.ChangeAnimator(1);
+        }
+
+        if (_collectMemoryCount == ConstData._COLLECTLEVEL3)
+        {
+            _animChange.ChangeAnimator(2);
         }
     }
 
