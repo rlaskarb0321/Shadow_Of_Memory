@@ -16,7 +16,6 @@ public class BlackCloudNote : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("space Input");
             _animator.SetTrigger(_hashIsInput);
         }
     }

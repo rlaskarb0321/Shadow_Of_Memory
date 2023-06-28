@@ -13,7 +13,11 @@ public class MemoryFragment : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            collision.GetComponent<PlayerMemory>().GetMemoryFragment(_fragNumber, _memoryImg);
+            PlayerMemory player = collision.GetComponent<PlayerMemory>();
+            if (player == null)
+                return;
+
+            player.GetMemoryFragment(_fragNumber, _memoryImg);
             _collectCountUI.GetComponent<Animator>().enabled = true;
             gameObject.SetActive(false);
             //Destroy(gameObject);

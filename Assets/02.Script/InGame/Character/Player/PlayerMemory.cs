@@ -24,14 +24,19 @@ public class PlayerMemory : MonoBehaviour
     [SerializeField] private Text _blackCloudTitle; // 쪽지의 제목
     [SerializeField] private Text _blackCloudContext; // 쪽지의 내용
 
+    [Header("=== Save System ===")]
+    [SerializeField] private GameObject _inGameSaveLoadObj;
+
     // HideInInspector
     [HideInInspector] public bool _isEntryPlayTimeEnd;
     [HideInInspector] public bool _isMeetPpippi;
+    private InGameSaveLoad _inGameSaveLoad;
     private PlayerAnimatorChange _animChange;
 
     private void Awake()
     {
         _animChange = GetComponent<PlayerAnimatorChange>();
+        _inGameSaveLoad = _inGameSaveLoadObj.GetComponent<InGameSaveLoad>();
     }
 
 
@@ -47,15 +52,12 @@ public class PlayerMemory : MonoBehaviour
         _memoryImage.SetNativeSize();
 
         // 사운드 연출
+        // Do somthing
 
-        // 습득 후 Player쪽 처리
-        CountMemoryFragment(index);
-
-        // 습득 후 MemoryBoard쪽 처리
-        UpdateMemoryBoard(index);
-
-        // 쪽지연출
-        ShowBlackCloudNote(index);
+        CountMemoryFragment(index); // 습득 후 Player쪽 처리
+        UpdateMemoryBoard(index); // 습득 후 MemoryBoard쪽 처리
+        ShowBlackCloudNote(index); // 쪽지연출
+        _inGameSaveLoad.SaveToServer(this); // 자동 저장
     }
 
     // 메모리 보드에있는 퍼즐을 클릭할 때 

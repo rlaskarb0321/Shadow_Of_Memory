@@ -9,6 +9,7 @@ public class GameDataPackage : MonoBehaviour
     public static GameData _gameData;
     public static int _index;
 
+    // 인덱스 번째의 세이브 파일을 불러와서 _gameData에 저장시킴
     public static void SetData(int index)
     {
         string fileName = "Save" + index.ToString();
