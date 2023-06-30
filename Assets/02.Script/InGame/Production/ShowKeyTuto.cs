@@ -6,6 +6,7 @@ public class ShowKeyTuto : MonoBehaviour
 {
     [SerializeField] private GameObject _keytutoImg;
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _ppippiQuest;
 
     private PlayerMemory _playerMemory;
 
@@ -16,8 +17,8 @@ public class ShowKeyTuto : MonoBehaviour
 
     public void ShowKeyTutoImg()
     {
-        print("Key Tuto Img 띄우고 입장영상 봤음 체크");
+        _ppippiQuest.SetActive(true);
         _playerMemory._isEntryPlayTimeEnd = true;
-        //_keytutoImg.SetActive(true);
+        _keytutoImg.SetActive(true);
     }
 }

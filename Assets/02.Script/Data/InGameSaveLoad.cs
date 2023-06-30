@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class InGameSaveLoad : MonoBehaviour
 {
     // SeriralizeField
+    [Header("=== Developer Only Save File ===")]
+    [Tooltip("개발자 전용, 캠페인씬에서 시작할 때 플레이어 위치 버그 방지")]
+    public bool _isDeveloper;
+
     [Header("=== Extract List ===")]
     [SerializeField] private GameObject _player; // 플레이어
     [SerializeField] private GameObject _groundColl; // 플레이어 지면 닿음 관련 판정 콜리더
@@ -78,14 +82,25 @@ public class InGameSaveLoad : MonoBehaviour
                     );
 
         SaveData character = new SaveData(saveData);
+        if (_isDeveloper)
+        {
+            SaveSystem.Save(character, "Save4");
+        }
         SaveSystem.Save(character, "Save" + GameDataPackage._index.ToString());
     }
 
     private void ApplyDataToGame()
     {
         // 인게임 여러 요소들의 값을 데이터에 저장된 값으로 바꾼다.
+        if (_isDeveloper)
+        {
+            _playerMemory.transform.position = new Vector3(ConstData._INITPOSX, ConstData._INITPOSY, ConstData._INITPOSZ);
+        }
+        else
+        {
+            _playerMemory.transform.position = GameDataPackage._gameData._playerPos;            // 플레이어의 위치
+        }
 
-        _playerMemory.transform.position = GameDataPackage._gameData._playerPos;            // 플레이어의 위치
         _playerMemory._isFragIdxGet = GameDataPackage._gameData._isFragIdxGet;              // 몇번째 인덱스의 기억조각을 먹었는지 아닌지
         _playerMemory._collectMemoryCount = GameDataPackage._gameData._currCollectCount;    // 현재 모은 기억 조각 개수
         _playerMemory._newMemoryIdx = GameDataPackage._gameData._newMemoryIdx;              // 새로 먹은 기억의 인덱스 값

@@ -33,6 +33,7 @@ public class PpippiProduction : MonoBehaviour
     // 삐삐와의 만남 컷신의 끝 부분에 이벤트 리시버로 호출, 더미삐삐와 진짜삐삐를 바꿔줌
     public void ShiftPpippi()
     {
+        print("삐삐 바꾸기");
         _playerMemory._isMeetPpippi = true;
         _dummyPpippi.gameObject.SetActive(false);
         _realPpippi.gameObject.SetActive(true);

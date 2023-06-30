@@ -17,6 +17,7 @@ public class PlayerMemory : MonoBehaviour
     [HideInInspector] public Text _acheiveRateText; // 달성률을 표시하는 텍스트
     [SerializeField] private Text _descriptionText; // 활성화된 기억을 클릭했을때 관련 설명을 표시할 텍스트
     [SerializeField] private string[] _descriptionContent; // 기억 관련 설명의 내용
+    [SerializeField] private GameObject _endingObj;
 
     [Header("=== Black Cloud Note ===")]
     [SerializeField] private Image _memoryImage; // 습득한 기억퍼즐의 이미지
@@ -28,6 +29,7 @@ public class PlayerMemory : MonoBehaviour
     [SerializeField] private GameObject _inGameSaveLoadObj;
 
     // HideInInspector
+    private Ending _ending;
     [HideInInspector] public bool _isEntryPlayTimeEnd;
     [HideInInspector] public bool _isMeetPpippi;
     private InGameSaveLoad _inGameSaveLoad;
@@ -38,6 +40,7 @@ public class PlayerMemory : MonoBehaviour
     {
         _animChange = GetComponent<PlayerAnimatorChange>();
         _inGameSaveLoad = _inGameSaveLoadObj.GetComponent<InGameSaveLoad>();
+        _ending = _endingObj.GetComponent<Ending>();
     }
 
 
@@ -141,6 +144,6 @@ public class PlayerMemory : MonoBehaviour
         yield return new WaitUntil(() => !_blackCloudNote.activeSelf);
         yield return new WaitForSeconds(0.5f);
 
-
+        _ending.enabled = true;
     }
 }
