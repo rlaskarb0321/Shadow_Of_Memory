@@ -17,8 +17,13 @@ public class MemoryFragment : MonoBehaviour
             if (player == null)
                 return;
 
+            if (_collectCountUI.activeSelf)
+            {
+                _collectCountUI.SetActive(false);
+            }
+            
             player.GetMemoryFragment(_fragNumber, _memoryImg);
-            _collectCountUI.GetComponent<Animator>().enabled = true;
+            _collectCountUI.SetActive(true);
             gameObject.SetActive(false);
             //Destroy(gameObject);
         }
