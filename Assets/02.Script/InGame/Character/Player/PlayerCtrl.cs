@@ -118,7 +118,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         _h = Input.GetAxisRaw("Horizontal");
         
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
             _isJumpInput = true;
         else
             _isJumpInput = false;

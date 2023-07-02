@@ -44,4 +44,14 @@ public class Portal : MapEvent
             yield return null;
         }
     }
+
+    protected override void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+    }
+
+    protected override void OnTriggerStay2D(Collider2D collision)
+    {
+        base.OnTriggerStay2D(collision);
+    }
 }

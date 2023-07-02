@@ -17,17 +17,17 @@ public abstract class MapEvent : MonoBehaviour
 
     protected virtual void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("MapEventResearch"))
+        if (collision.CompareTag("MapEventResearch") && !_interactAlarm.activeSelf)
         {
-            // print("F 상호작용");
+            _interactAlarm.SetActive(true);
         }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("MapEventResearch"))
+        if (collision.CompareTag("MapEventResearch") && _interactAlarm.activeSelf)
         {
-            // print("상호작용 나감");
+            _interactAlarm.SetActive(false);
         }
     }
 }

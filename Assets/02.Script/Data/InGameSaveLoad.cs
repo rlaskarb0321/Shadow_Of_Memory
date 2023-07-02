@@ -94,7 +94,7 @@ public class InGameSaveLoad : MonoBehaviour
         // 인게임 여러 요소들의 값을 데이터에 저장된 값으로 바꾼다.
         if (_isDeveloper)
         {
-            _playerMemory.transform.position = new Vector3(ConstData._INITPOSX, ConstData._INITPOSY, ConstData._INITPOSZ);
+            _playerMemory.transform.position = _playerMemory.transform.position;
         }
         else
         {
