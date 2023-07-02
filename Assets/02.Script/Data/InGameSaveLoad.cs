@@ -150,5 +150,6 @@ public class InGameSaveLoad : MonoBehaviour
         _savingText.SetActive(true);
         yield return _ws;
         _savingText.SetActive(false);
+
     }
 }
