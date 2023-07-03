@@ -32,6 +32,7 @@ public class PpiPpi : MonoBehaviour
     #endregion ªﬂªﬂ ∞Ì¡§Ω√≈∞±‚
 
     // SerializeField
+    [Header("=== Ppippi Follow ===")]
     [SerializeField] private Transform _playerObj;
     [SerializeField] private GameObject _ppippiBody;
     [SerializeField] private GameObject _followObj;

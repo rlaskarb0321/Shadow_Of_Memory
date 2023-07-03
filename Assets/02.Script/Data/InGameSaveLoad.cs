@@ -33,13 +33,11 @@ public class InGameSaveLoad : MonoBehaviour
     private BoxCollider2D _groundBoxColl;
     private PlayerAnimatorChange _animChanger;
     private PlayerMemory _playerMemory;
-    private PpippiStub _ppippiStub;
     private WaitForSeconds _ws;
 
     private void Awake()
     {
         _playerMemory = _player.GetComponent<PlayerMemory>();
-        _ppippiStub = _stubObj.GetComponent<PpippiStub>();
         _playerColl = _player.GetComponent<CapsuleCollider2D>();
         _groundBoxColl = _groundColl.GetComponent<BoxCollider2D>();
         _animChanger = _player.GetComponent<PlayerAnimatorChange>();
@@ -112,7 +110,7 @@ public class InGameSaveLoad : MonoBehaviour
         {
             _dummyPpippi.gameObject.SetActive(false);
             _realPpippi.gameObject.SetActive(true);
-            _ppippiStub._boxColl.enabled = false;
+            _stubObj.GetComponent<BoxCollider2D>().enabled = false;
         }
 
         // 인게임 기억조각 인덱스와 메모리 보드 수집여부를 데이터 값과 동기화

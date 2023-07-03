@@ -32,14 +32,13 @@ public class CampaignUI : MonoBehaviour
 
         if (ProductionMgr._isPlayProduction)
         {
-            //if (_isPausePanelOn)
-            //    SetPpippiDialogActive(false);
-
-            if (_isMBoardOn)
-                SetMemoryBoardActive(false);
+            #region 23.07.03 피드백 후 정리될 코드들
+            //if (_isMBoardOn)
+            //    SetMemoryBoardActive(false);
+            #endregion 23.07.03 피드백 후 정리될 코드들
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && !_isPausePanelOn && !_isMBoardOn)
+        if (Input.GetKeyDown(KeyCode.C) && !_isPausePanelOn && !_isMBoardOn)
         {
             SetPpippiDialogActive(!_isPpippiDialogOn);
             return;
@@ -47,11 +46,13 @@ public class CampaignUI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_isMBoardOn)
-            {
-                SetMemoryBoardActive(false);
-                return;
-            }
+            #region 23.07.03 피드백 후 정리될 코드들
+            //if (_isMBoardOn)
+            //{
+            //    SetMemoryBoardActive(false);
+            //    return;
+            //}
+            #endregion 23.07.03 피드백 후 정리될 코드들
 
             if (_isPpippiDialogOn)
             {
@@ -73,7 +74,7 @@ public class CampaignUI : MonoBehaviour
     {
         if (value == true)
         {
-            SetMemoryBoardActive(!value);
+            //SetMemoryBoardActive(!value);
             SetPpippiDialogActive(!value);
         }
 
@@ -82,18 +83,24 @@ public class CampaignUI : MonoBehaviour
         _isPausePanelOn = value;
     }
 
-    public void SetMemoryBoardActive(bool value)
-    {
-        SetPpippiDialogActive(!value);
-        _pauseBtn.SetActive(!value);
-        _memoryBoardPanel.SetActive(value);
-        _isMBoardOn = value;
-    }
+    #region 23.07.03 피드백 후 정리될 코드들
+    //// (구)삐삐와의 대화 선택지에서 대화 기록 보기 버튼을 눌렀을때
+    //public void SetMemoryBoardActive(bool value)
+    //{
+    //    SetPpippiDialogActive(!value);
+    //    _pauseBtn.SetActive(!value);
+    //    _memoryBoardPanel.SetActive(value);
+    //    _isMBoardOn = value;
+    //}
+    #endregion 23.07.03 피드백 후 정리될 코드들
 
     public void SetPpippiDialogActive(bool value)
     {
         if (!_ppippi.gameObject.activeSelf)
+        {
+            print("삐삐가 없습니다");
             return;
+        }
 
         _isPpippiDialogOn = value;
         _ppippiDialog.SetActive(value);
