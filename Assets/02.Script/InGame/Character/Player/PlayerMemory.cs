@@ -30,8 +30,8 @@ public class PlayerMemory : MonoBehaviour
 
     // HideInInspector
     private Ending _ending;
-    [HideInInspector] public bool _isEntryPlayTimeEnd;
-    [HideInInspector] public bool _isMeetPpippi;
+    public bool _isEntryPlayTimeEnd;
+    public bool _isMeetPpippi;
     private InGameSaveLoad _inGameSaveLoad;
     private PlayerAnimatorChange _animChange;
     [HideInInspector] public bool[] _memoryPuzzlesActive;
@@ -63,27 +63,27 @@ public class PlayerMemory : MonoBehaviour
         UpdateMemoryBoard(index); // 습득 후 MemoryBoard쪽 처리
         ShowBlackCloudNote(index); // 쪽지연출
         _inGameSaveLoad.SaveToServer(this); // 자동 저장
-
-
     }
 
-    // 메모리 보드에있는 퍼즐을 클릭할 때 
-    public void OnClickMemoryPuzzle(int index)
-    {
-        _descriptionText.text = _descriptionContent[index - 1];
-    }
+    #region 23.07.03 피드백 후 정리될 코드들
+    //// 메모리 보드에있는 퍼즐을 클릭할 때 
+    //public void OnClickMemoryPuzzle(int index)
+    //{
+    //    _descriptionText.text = _descriptionContent[index - 1];
+    //}
 
-    // 삐삐와의 상호작용 대화에서 기억관련 선택지를 골랐을 때
-    public void OnClickStoryDialog()
-    {
-        if (_collectMemoryCount == 0)
-        {
-            print("현재 수집한 기억이 없습니다");
-            return;
-        }
+    //// 삐삐와의 상호작용 대화에서 n번째 기억에 관한 이야기 선택지를 골랐을 때
+    //public void OnClickStoryDialog()
+    //{
+    //    if (_collectMemoryCount == 0)
+    //    {
+    //        print("현재 수집한 기억이 없습니다");
+    //        return;
+    //    }
 
-        print(_newMemoryIdx + "번 째 스토리 대화가 출력");
-    }
+    //    print(_newMemoryIdx + "번 째 스토리 대화가 출력");
+    //}
+    #endregion 23.07.03 피드백 후 정리될 코드들
 
     private void CountMemoryFragment(int index)
     {

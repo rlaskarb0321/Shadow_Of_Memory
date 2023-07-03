@@ -4,8 +4,7 @@ using UnityEngine;
 
 public abstract class MapEvent : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _interactAlarm;
+    [SerializeField] protected GameObject _interactAlarm;
 
     public enum MapEventState { Open, Close, }
 

@@ -17,7 +17,7 @@ public class ShowKeyTuto : MonoBehaviour
 
     public void ShowKeyTutoImg()
     {
-        _ppippiQuest.SetActive(true);
+        // _ppippiQuest.SetActive(true);
         _playerMemory._isEntryPlayTimeEnd = true;
         //_keytutoImg.SetActive(true);
     }
