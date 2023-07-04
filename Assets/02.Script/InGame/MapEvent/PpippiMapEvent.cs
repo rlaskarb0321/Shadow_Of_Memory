@@ -6,6 +6,9 @@ using UnityEngine;
 public class PpippiMapEvent : MapEvent
 {
     [SerializeField] private SpriteRenderer _ppippiDummy;
+    [SerializeField] private GameObject _conversationUI;
+
+    [Header("=== Data ===")]
     [SerializeField] private PlayerMemory _player;
     [SerializeField] private InGameSaveLoad _inGameSaveLoad;
 
