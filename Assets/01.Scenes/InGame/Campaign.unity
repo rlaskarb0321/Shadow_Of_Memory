@@ -10156,6 +10156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _context: {fileID: 1288292591}
   _name: {fileID: 1808534073}
+  _waitSeconds: 0.5
 --- !u!1 &1325005372
 GameObject:
   m_ObjectHideFlags: 0

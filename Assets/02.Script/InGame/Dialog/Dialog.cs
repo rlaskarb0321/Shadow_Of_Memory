@@ -17,9 +17,16 @@ public class Dialog : MonoBehaviour
     private List<string> _dictKeys;
     private WaitUntil _waitUntil;
     private WaitForSeconds _ws;
+    private string _newTitle;
+    private Coroutine _runCor = null;
 
     private void OnEnable()
     {
+        if (_runCor != null)
+        {
+            StopCoroutine(ReadDialogTitle(_newTitle));
+            _runCor = StartCoroutine(ReadDialogTitle(_newTitle));
+        }
         ProductionMgr._isPlayProduction = true;
     }
 
@@ -44,14 +51,17 @@ public class Dialog : MonoBehaviour
         _csvDict = _dialogCSV.GroupByTitle(fileName);
         _header = _dialogCSV.ReturnHeader(fileName);
         _dictKeys = _csvDict.Keys.ToList();
+        _newTitle = _dictKeys[0];
 
-        StartCoroutine(ReadDialogTitle(_dictKeys[0]));
+        _runCor = StartCoroutine(ReadDialogTitle(_newTitle));
     }
 
+    // 타이틀을 키 영역, 나머지를 값 영역으로 분리한 Dict의 타이틀값을 매개변수로 받는다.
+    // 해당 매개변수의 데이터들을 파싱하고 ui에 표시까지 해준다.
+    // 아직, 이벤트에 따른 분기점에 관한 내용은 하지않았음
+    // 또한 title 값이 "끝"이면 끝내야함..
     private IEnumerator ReadDialogTitle(string title)
     {
-        // title 값이 끝이면 끝내야함
-
         string context;
         List<string> lines;
         int index;
