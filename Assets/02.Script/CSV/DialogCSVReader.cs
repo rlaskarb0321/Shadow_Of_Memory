@@ -1,13 +1,14 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 
-public class CSVReader
+public class DialogCSVReader
 {
     private char[] trim_char = new char[] { ',', ' ' };
 
-    public Dictionary<string, string> Parsing(string fileName)
+    public Dictionary<string, string> GroupByTitle(string fileName)
     {
         Dictionary<string, string> dict;
         TextAsset textAsset;
@@ -15,11 +16,11 @@ public class CSVReader
         string title;
         StringBuilder sb;
 
-        sb = new StringBuilder();
-        title = "";
         dict = new Dictionary<string, string>();
         textAsset = Resources.Load(fileName) as TextAsset;
         lines = textAsset.text.Split('\n');
+        title = "";
+        sb = new StringBuilder();
 
         // 타이틀 값 다음 줄부터 내용물을 맞는 타이틀끼리 분리시키기
         for (int i = 1; i < lines.Length; i++)
@@ -48,5 +49,18 @@ public class CSVReader
         }
 
         return dict;
+    }
+
+    public List<string> ReturnHeader(string fileName)
+    {
+        TextAsset textAsset;
+        string[] lines;
+        List<string> header;
+
+        textAsset = Resources.Load(fileName) as TextAsset;
+        lines = textAsset.text.Split('\n');
+        header = lines[0].Split(',').ToList();
+
+        return header;
     }
 }

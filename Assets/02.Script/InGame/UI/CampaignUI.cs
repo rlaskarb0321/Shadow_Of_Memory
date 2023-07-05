@@ -118,6 +118,7 @@ public class CampaignUI : MonoBehaviour
     {
         _isDialogOn = isTurnOn;
         _dialog.gameObject.SetActive(isTurnOn);
+
         if (!fileName.Equals(""))
         {
             _dialog.SetDialogFile(fileName);
