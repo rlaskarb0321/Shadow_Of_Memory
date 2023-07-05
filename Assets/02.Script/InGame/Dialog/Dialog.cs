@@ -71,16 +71,28 @@ public class Dialog : MonoBehaviour
     // 대화.csv 파일을 파일의 "타이틀" 헤더값을 기준으로 나눈 dict값을 받아오고, 헤더값 리스트 또한 받아온다.
     public void SetDialogFile(string fileName)
     {
-        if (_fileName.Equals(fileName))
-            return;
+        if (!_fileName.Equals(fileName))
+        {
+            _fileName = fileName;
+            _csvDict = _dialogCSV.GroupByTitle(fileName);
+            _header = _dialogCSV.ReturnHeader(fileName);
+            _lines = _csvDict["시작"].Split("\r").ToList();
+        }
 
-        _fileName = fileName;
-        _csvDict = _dialogCSV.GroupByTitle(fileName);
-        _header = _dialogCSV.ReturnHeader(fileName);
-        _lines = _csvDict["시작"].Split("\r").ToList();
         _index = 0;
-
         ShowDialog();
+
+        //if (_fileName.Equals(fileName))
+        //    return;
+
+        //_fileName = fileName;
+        //_csvDict = _dialogCSV.GroupByTitle(fileName);
+        //_header = _dialogCSV.ReturnHeader(fileName);
+        //_lines = _csvDict["시작"].Split("\r").ToList();
+        //_index = 0;
+
+        //ShowDialog();
+
         #region 23.07.05 대화 코루틴 대체하기
         //_dictKeys = _csvDict.Keys.ToList();
         //_runCor = StartCoroutine(ReadDialogTitle(_newTitle));
