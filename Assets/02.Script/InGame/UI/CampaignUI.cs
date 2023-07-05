@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// 캠페인 씬에 있는 UI들의 Active를 On/Off 하는 스크립트
 public class CampaignUI : MonoBehaviour
 {
     // SerializeField
@@ -11,14 +12,16 @@ public class CampaignUI : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _pauseBtn;
 
-    [Header("=== Ppippi Conversation ===")]
-    [SerializeField] private GameObject _ppippiDialog;
+    [Header("=== Conversation ===")]
+    [SerializeField] private GameObject _ppippiEvent;
     [SerializeField] private GameObject _ppippi;
+    [SerializeField] private Dialog _dialog;
 
     // HideInInspector
     private bool _isPausePanelOn;
     private bool _isMBoardOn;
-    private bool _isPpippiDialogOn;
+    private bool _isPpippiEventOn;
+    [HideInInspector] public bool _isDialogOn; 
 
     private void Update()
     {
@@ -38,12 +41,14 @@ public class CampaignUI : MonoBehaviour
             #endregion 23.07.03 피드백 후 정리될 코드들
         }
 
+        // C키 눌렀을 때, 퍼즈패널이랑 메모리보드가 꺼져있으면 삐삐이벤트 킴
         if (Input.GetKeyDown(KeyCode.C) && !_isPausePanelOn && !_isMBoardOn)
         {
-            SetPpippiDialogActive(!_isPpippiDialogOn);
+            SetPpippiEventActive(!_isPpippiEventOn);
             return;
         }
 
+        // ESC키 눌렀을때 퍼즈패널, 대화창, 삐삐이벤트가 켜져있으면 끄고, 아니라면 퍼즈패널을 열음
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             #region 23.07.03 피드백 후 정리될 코드들
@@ -54,9 +59,9 @@ public class CampaignUI : MonoBehaviour
             //}
             #endregion 23.07.03 피드백 후 정리될 코드들
 
-            if (_isPpippiDialogOn)
+            if (_isPpippiEventOn)
             {
-                SetPpippiDialogActive(false);
+                SetPpippiEventActive(false);
                 return;
             }
 
@@ -66,18 +71,19 @@ public class CampaignUI : MonoBehaviour
                 return;
             }
 
+            if (_isDialogOn)
+            {
+                SetDialogOn(false);
+                return;
+            }
+
             SetPausePanelActive(true);
         }
     }
 
+    // value값에 맞는 퍼즈패널 액티브
     public void SetPausePanelActive(bool value)
     {
-        if (value == true)
-        {
-            //SetMemoryBoardActive(!value);
-            SetPpippiDialogActive(!value);
-        }
-
         _pauseBtn.SetActive(!value);
         _pausePanel.SetActive(value);
         _isPausePanelOn = value;
@@ -94,7 +100,8 @@ public class CampaignUI : MonoBehaviour
     //}
     #endregion 23.07.03 피드백 후 정리될 코드들
 
-    public void SetPpippiDialogActive(bool value)
+    // value값에 맞는 삐삐이벤트 액티브
+    public void SetPpippiEventActive(bool value)
     {
         if (!_ppippi.gameObject.activeSelf)
         {
@@ -102,8 +109,19 @@ public class CampaignUI : MonoBehaviour
             return;
         }
 
-        _isPpippiDialogOn = value;
-        _ppippiDialog.SetActive(value);
+        _isPpippiEventOn = value;
+        _ppippiEvent.SetActive(value);
+    }
+
+    // value값에 맞는 대화창 액티브
+    public void SetDialogOn(bool isTurnOn, string fileName = "")
+    {
+        _isDialogOn = isTurnOn;
+        _dialog.gameObject.SetActive(isTurnOn);
+        if (!fileName.Equals(""))
+        {
+            _dialog.SetDialogFile(fileName);
+        }
     }
 
     public void OnGameExitBtnClick()

@@ -36,6 +36,10 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Update()
     {
+        ManagePlayerInput();
+        _animator.SetBool(_hashisGrounded, _grounded._isGrounded);
+        _animator.SetBool(_hashFall, _rbody2D.velocity.y < -0.05f);
+
         if (ProductionMgr._isPlayProduction)
         {
             // 영상 재생중엔 점프와 움직이기 불가능
@@ -43,10 +47,6 @@ public class PlayerCtrl : MonoBehaviour
             _isJumpInput = false;
             return;
         }
-
-        ManagePlayerInput();
-        _animator.SetBool(_hashisGrounded, _grounded._isGrounded);
-        _animator.SetBool(_hashFall, _rbody2D.velocity.y < -0.05f);
     }
 
     private void FixedUpdate()

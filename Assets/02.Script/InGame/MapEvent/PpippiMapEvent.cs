@@ -6,7 +6,7 @@ using UnityEngine;
 public class PpippiMapEvent : MapEvent
 {
     [SerializeField] private SpriteRenderer _ppippiDummy;
-    [SerializeField] private GameObject _conversationUI;
+    [SerializeField] private CampaignUI _campaignUI;
 
     [Header("=== Data ===")]
     [SerializeField] private PlayerMemory _player;
@@ -14,12 +14,10 @@ public class PpippiMapEvent : MapEvent
 
     public override void Interaction(PlayerCtrl player)
     {
-        // 대화를 한다.
-        // 대화에서 데려가기를 선택하면 값을 바꾸고 서버에 자동저장
+        if (_campaignUI._isDialogOn)
+            return;
 
-        // 데려가기 선택 시
-        //_player._isMeetPpippi = true;
-        //_inGameSaveLoad.SaveToServer(_player);
+        _campaignUI.SetDialogOn(true, "Ppippi Dialog");
     }
 
     protected override void OnTriggerExit2D(Collider2D collision)
