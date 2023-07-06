@@ -17,6 +17,10 @@ public class Dialog : MonoBehaviour
     //[SerializeField] private float _waitSeconds = 0.25f;
     #endregion 23.07.05 대화 코루틴 대체하기
 
+    [Header("=== Answer ===")]
+    [SerializeField] private GameObject _content;
+    [SerializeField] private GameObject _answerPrefab;
+
     private string _fileName = "";
     private Dictionary<string, string> _csvDict; // 타이틀을 키로 값 영역을 분리한 dict
     private DialogCSVReader _dialogCSV;
@@ -199,10 +203,26 @@ public class Dialog : MonoBehaviour
         if (_dialogOption.activeSelf)
             _dialogOption.SetActive(false);
 
+        string[] line = _lines[_index].Split(',');
+        _name.text = line[(int)Header.Speaker];
+
         for (_index = 0; _index < _lines.Count; _index++)
         {
-            string[] line = _lines[_index].Split(',');
-            //print(line[(int)Header.Speaker] + " : " + line[(int)Header.Dialog]);
+            line = _lines[_index].Split(',');
+
+            string answer = line[(int)Header.Dialog];
+            string jump = line[(int)Header.Jump];
+            int temp = _index;
+            Button answerBtn = _content.transform.GetChild(temp).GetComponent<Button>();
+
+            if (!answerBtn.gameObject.activeSelf)
+            {
+                answerBtn.gameObject.SetActive(true);
+            }
+
+            answerBtn.onClick.AddListener(() => JumpToTitle(jump));
+            answerBtn.onClick.AddListener(() => ShowDialog());
+            answerBtn.transform.GetChild(0).GetComponent<Text>().text = answer;
         }
     }
 
