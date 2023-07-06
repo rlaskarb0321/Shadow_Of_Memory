@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class Dialog : MonoBehaviour
 {
-    [SerializeField] private Text _context;
+    [SerializeField] private CampaignUI _campaignUI;
+    [SerializeField] private GameObject _dialogOption;
+    [SerializeField] private GameObject _answerOption;
     [SerializeField] private Text _name;
+
+    [Header("=== dialog ===")]
+    [SerializeField] private Text _context;
     #region 23.07.05 대화 코루틴 대체하기
     //[SerializeField] private float _waitSeconds = 0.25f;
     #endregion 23.07.05 대화 코루틴 대체하기
@@ -19,6 +24,7 @@ public class Dialog : MonoBehaviour
 
     private List<string> _lines;
     private int _index;
+    private string _currTitle;
 
     #region 23.07.05 대화 코루틴 대체하기
     //private List<string> _dictKeys; // 타이틀 값을 의미
@@ -64,7 +70,20 @@ public class Dialog : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
-        ShowDialog();
+        switch (_currTitle)
+        {
+            case "선택지":
+                ShowBifurDialog();
+                break;
+
+            case "끝":
+                EndDialog();
+                break;
+
+            default:
+                ShowDialog();
+                break;
+        }
     }
 
     // gameObject.SetActive(true)가 실행된 후 바로 실행되는 함수
@@ -76,23 +95,10 @@ public class Dialog : MonoBehaviour
             _fileName = fileName;
             _csvDict = _dialogCSV.GroupByTitle(fileName);
             _header = _dialogCSV.ReturnHeader(fileName);
-            _lines = _csvDict["시작"].Split("\r").ToList();
         }
 
-        _index = 0;
+        JumpToTitle("시작");
         ShowDialog();
-
-        //if (_fileName.Equals(fileName))
-        //    return;
-
-        //_fileName = fileName;
-        //_csvDict = _dialogCSV.GroupByTitle(fileName);
-        //_header = _dialogCSV.ReturnHeader(fileName);
-        //_lines = _csvDict["시작"].Split("\r").ToList();
-        //_index = 0;
-
-        //ShowDialog();
-
         #region 23.07.05 대화 코루틴 대체하기
         //_dictKeys = _csvDict.Keys.ToList();
         //_runCor = StartCoroutine(ReadDialogTitle(_newTitle));
@@ -160,6 +166,12 @@ public class Dialog : MonoBehaviour
 
     private void ShowDialog()
     {
+        if (!_dialogOption.activeSelf)
+            _dialogOption.SetActive(true);
+
+        if (_answerOption.activeSelf)
+            _answerOption.SetActive(false);
+
         string[] line = _lines[_index].Split(',');
         string jump = line[(int)Header.Jump];
 
@@ -167,11 +179,38 @@ public class Dialog : MonoBehaviour
         _name.text = line[(int)Header.Speaker];
         _index++;
 
-        // 점프값과 같은 값을 가지는 타이틀로 점프해야 한다는 뜻
         if (!jump.Equals(""))
         {
-            _lines = _csvDict[jump].Split("\r").ToList();
-            _index = 0;
+            JumpToTitle(jump);
         }
+    }
+
+    private void EndDialog()
+    {
+        JumpToTitle("시작");
+        _campaignUI.SetDialogOn(false);
+    }
+
+    private void ShowBifurDialog()
+    {
+        if (!_answerOption.activeSelf)
+            _answerOption.SetActive(true);
+
+        if (_dialogOption.activeSelf)
+            _dialogOption.SetActive(false);
+
+        for (_index = 0; _index < _lines.Count; _index++)
+        {
+            string[] line = _lines[_index].Split(',');
+            //print(line[(int)Header.Speaker] + " : " + line[(int)Header.Dialog]);
+        }
+    }
+
+    // 타이틀 값에 맞는 대화 본문을 가져옴
+    public void JumpToTitle(string title)
+    {
+        _lines = _csvDict[title].TrimEnd('\r').Split("\r").ToList();
+        _currTitle = title.Split(" ")[0];
+        _index = 0;
     }
 }

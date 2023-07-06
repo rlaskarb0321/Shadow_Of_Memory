@@ -113,7 +113,7 @@ public class CampaignUI : MonoBehaviour
         _ppippiEvent.SetActive(value);
     }
 
-    // value값에 맞는 대화창 액티브
+    // isTurnOn값에 맞는 대화창 액티브 & fileName 값이 "" 가 아니면, 대화관련 csv 파일을 전달
     public void SetDialogOn(bool isTurnOn, string fileName = "")
     {
         _isDialogOn = isTurnOn;
