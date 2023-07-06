@@ -168,6 +168,7 @@ public class Dialog : MonoBehaviour
     //}
     #endregion 23.07.05 대화 코루틴 대체하기
 
+    // 대화를 보여주는 함수
     private void ShowDialog()
     {
         if (!_dialogOption.activeSelf)
@@ -189,12 +190,14 @@ public class Dialog : MonoBehaviour
         }
     }
 
+    // 대화가 끝날때 실행되는 함수
     private void EndDialog()
     {
         JumpToTitle("시작");
         _campaignUI.SetDialogOn(false);
     }
 
+    // 선택지 항목 보여주기
     private void ShowBifurDialog()
     {
         if (!_answerOption.activeSelf)
@@ -214,23 +217,34 @@ public class Dialog : MonoBehaviour
             string jump = line[(int)Header.Jump];
             int temp = _index;
             Button answerBtn = _content.transform.GetChild(temp).GetComponent<Button>();
-
             if (!answerBtn.gameObject.activeSelf)
             {
                 answerBtn.gameObject.SetActive(true);
             }
 
+            if (temp.Equals(0))
+                answerBtn.Select();
+            
             answerBtn.onClick.AddListener(() => JumpToTitle(jump));
-            answerBtn.onClick.AddListener(() => ShowDialog());
+            answerBtn.onClick.AddListener(() => IsInput());
+
             answerBtn.transform.GetChild(0).GetComponent<Text>().text = answer;
         }
     }
 
     // 타이틀 값에 맞는 대화 본문을 가져옴
-    public void JumpToTitle(string title)
+    private void JumpToTitle(string title)
     {
         _lines = _csvDict[title].TrimEnd('\r').Split("\r").ToList();
         _currTitle = title.Split(" ")[0];
         _index = 0;
+    }
+
+    private void IsInput()
+    {
+       if (Input.GetMouseButtonUp(0))
+        {
+            ShowDialog();
+        }
     }
 }
