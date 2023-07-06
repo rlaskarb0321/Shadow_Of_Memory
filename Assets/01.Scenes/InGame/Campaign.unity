@@ -5956,7 +5956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720403508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.23592615, y: -0.6058191, z: -10}
+  m_LocalPosition: {x: -7.04824, y: -0.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8993,8 +8993,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactAlarm: {fileID: 1240707807}
-  _ppippiDummy: {fileID: 978994024}
   _campaignUI: {fileID: 681332238}
+  _ppippiDummy: {fileID: 978994024}
+  _realPpippi: {fileID: 759911787}
   _player: {fileID: 1773707569}
   _inGameSaveLoad: {fileID: 1554887862}
 --- !u!1 &1000914346

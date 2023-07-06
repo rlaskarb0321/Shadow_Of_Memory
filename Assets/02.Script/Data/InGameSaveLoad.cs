@@ -83,6 +83,7 @@ public class InGameSaveLoad : MonoBehaviour
         if (_isDeveloper)
         {
             SaveSystem.Save(character, "Save4");
+            return;
         }
         SaveSystem.Save(character, "Save" + GameDataPackage._index.ToString());
     }

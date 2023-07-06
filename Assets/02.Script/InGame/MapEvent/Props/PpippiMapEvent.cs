@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class PpippiMapEvent : DialogEvent
 {
+    [Header("=== ppippi ===")]
     [SerializeField] private SpriteRenderer _ppippiDummy;
-    [SerializeField] private CampaignUI _campaignUI;
+    [SerializeField] private GameObject _realPpippi;
+    //[SerializeField]  CampaignUI _campaignUI;
 
     [Header("=== Data ===")]
     [SerializeField] private PlayerMemory _player;
     [SerializeField] private InGameSaveLoad _inGameSaveLoad;
 
     private string _cult;
+    private int _noCultCount; // 삐삐 데려가기 거절당한 횟수 카운트
 
     public override void Interaction(PlayerCtrl player)
     {
         if (_campaignUI._isDialogOn)
             return;
 
-        // 확장성을 고려한다면, SetDialogOn의 두번째 매개변수에 파일명을 다른걸 넣어주면된다.
-        // 예를들어 삐삐가 여러번 거절당하면 Ppippi Carry에서 Ppippi Angry로 바꿔준다던지
-        // 여러번 거절당함 판단은 이벤트로 관리한다.
         _campaignUI.SetDialogOn(true, "Ppippi Carry", this);
     }
 
@@ -58,11 +58,16 @@ public class PpippiMapEvent : DialogEvent
         switch (_cult)
         {
             case "동의":
-                print(_cult);
+                _realPpippi.SetActive(true);
+                _ppippiDummy.gameObject.SetActive(false);
+                _player._isMeetPpippi = true;
+                _inGameSaveLoad.SaveToServer(_player);
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 break;
 
             case "거부":
                 print(_cult);
+                _noCultCount++;
                 break;
         }
     }
