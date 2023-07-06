@@ -26,7 +26,8 @@ public class Dialog : MonoBehaviour
     private DialogCSVReader _dialogCSV;
     private List<string> _header; // csv파일의 0번째 라인
 
-    private List<string> _lines;
+    private DialogEvent _dialogEvent;
+    private List<string> _lines; // 타이틀을 키값으로 접근해 _csvDict의 값 영역을 가져와 저장할 변수
     private int _index;
     private string _currTitle;
 
@@ -92,8 +93,14 @@ public class Dialog : MonoBehaviour
 
     // gameObject.SetActive(true)가 실행된 후 바로 실행되는 함수
     // 대화.csv 파일을 파일의 "타이틀" 헤더값을 기준으로 나눈 dict값을 받아오고, 헤더값 리스트 또한 받아온다.
-    public void SetDialogFile(string fileName)
+    public void SetDialogFile(string fileName, DialogEvent dialogEvent = null)
     {
+        if (dialogEvent != null)
+        {
+            // 대화 이벤트를 처리할 객체를 전달받음
+            _dialogEvent = dialogEvent;
+        }
+
         if (!_fileName.Equals(fileName))
         {
             _fileName = fileName;
@@ -179,10 +186,16 @@ public class Dialog : MonoBehaviour
 
         string[] line = _lines[_index].Split(',');
         string jump = line[(int)Header.Jump];
+        string dialogEvent = line[(int)Header.Event];
 
         _context.text = line[(int)Header.Dialog];
         _name.text = line[(int)Header.Speaker];
         _index++;
+
+        if (!dialogEvent.Equals(""))
+        {
+            _dialogEvent.DoDialogEvent(dialogEvent);
+        }
 
         if (!jump.Equals(""))
         {
@@ -226,7 +239,7 @@ public class Dialog : MonoBehaviour
                 answerBtn.Select();
             
             answerBtn.onClick.AddListener(() => JumpToTitle(jump));
-            answerBtn.onClick.AddListener(() => IsInput());
+            answerBtn.onClick.AddListener(() => IsClickAnswer());
 
             answerBtn.transform.GetChild(0).GetComponent<Text>().text = answer;
         }
@@ -240,9 +253,9 @@ public class Dialog : MonoBehaviour
         _index = 0;
     }
 
-    private void IsInput()
+    private void IsClickAnswer()
     {
-       if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             ShowDialog();
         }

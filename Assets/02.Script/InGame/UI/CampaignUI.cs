@@ -15,7 +15,7 @@ public class CampaignUI : MonoBehaviour
     [Header("=== Conversation ===")]
     [SerializeField] private GameObject _ppippiEvent;
     [SerializeField] private GameObject _ppippi;
-    [SerializeField] private Dialog _dialog;
+    public Dialog _dialog;
 
     // HideInInspector
     private bool _isPausePanelOn;
@@ -113,15 +113,18 @@ public class CampaignUI : MonoBehaviour
         _ppippiEvent.SetActive(value);
     }
 
-    // isTurnOn값에 맞는 대화창 액티브 & fileName 값이 "" 가 아니면, 대화관련 csv 파일을 전달
-    public void SetDialogOn(bool isTurnOn, string fileName = "")
+    // isTurnOn값에 맞는 대화창 액티브
+    // fileName 값이 "" 가 아니면, 대화관련 csv 파일과 대화 이벤트 처리 담당 객체를 전달
+    public void SetDialogOn(bool isTurnOn, string fileName = "", DialogEvent dialogEvent = null)
     {
+        // 단순 ui 껐다 켰다하는 작업
         _isDialogOn = isTurnOn;
         _dialog.gameObject.SetActive(isTurnOn);
 
+        // 대화파일을 위해 처리하는 작업
         if (!fileName.Equals(""))
         {
-            _dialog.SetDialogFile(fileName);
+            _dialog.SetDialogFile(fileName, dialogEvent);
         }
     }
 
