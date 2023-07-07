@@ -19,4 +19,6 @@ public abstract class DialogEvent : MapEvent
 
     // 대화 이벤트 중 그 외 나머지 작업들 처리할 함수 (함수명 수정 요함)
     public virtual void EtcFunction() { }
+
+    //public dfdfdfd
 }

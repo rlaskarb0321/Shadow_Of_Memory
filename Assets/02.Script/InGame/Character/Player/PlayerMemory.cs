@@ -28,9 +28,6 @@ public class PlayerMemory : MonoBehaviour
     [Header("=== Save System ===")]
     [SerializeField] private GameObject _inGameSaveLoadObj;
 
-    [Header("=== Ppi ppi ===")]
-    [SerializeField] private PpiPpi _ppippi;
-
     // HideInInspector
     private Ending _ending;
     [HideInInspector] public bool _isEntryPlayTimeEnd;
@@ -53,12 +50,13 @@ public class PlayerMemory : MonoBehaviour
 
         _memoryPuzzlesActive = new bool[ConstData._TOTALMEMORYCOUNT];
     }
-
+    
     public void GetMemoryFragment(int index, Sprite memoryImage)
     {
+        PpippiEventData data = new PpippiEventData(string.Format("{0}번째 기억 조각", index), index, "Ppippi Dialog");
+
         _memoryImage.sprite = memoryImage;
         _memoryImage.SetNativeSize();
-        PpippiEvent ppippiEvent = new PpippiEvent(string.Format("{0}번 기억", index), index, "Ppippi Dialog");
 
         // 사운드 연출
         // Do somthing
@@ -66,7 +64,6 @@ public class PlayerMemory : MonoBehaviour
         CountMemoryFragment(index); // 습득 후 Player쪽 처리
         UpdateMemoryBoard(index); // 습득 후 MemoryBoard쪽 처리
         ShowBlackCloudNote(index); // 쪽지연출
-        _ppippi.DiscoverNewEvent(ppippiEvent); // 삐삐의 이벤트 대화쪽 처리
         _inGameSaveLoad.SaveToServer(this); // 자동 저장
     }
 

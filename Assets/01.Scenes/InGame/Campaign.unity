@@ -827,6 +827,10 @@ PrefabInstance:
       propertyPath: _collectCountUI
       value: 
       objectReference: {fileID: 862026261}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _ppippiEventList
+      value: 
+      objectReference: {fileID: 376689823}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
 --- !u!4 &83352697 stripped
@@ -2679,6 +2683,10 @@ PrefabInstance:
       propertyPath: _collectCountUI
       value: 
       objectReference: {fileID: 862026261}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _ppippiEventList
+      value: 
+      objectReference: {fileID: 376689823}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
 --- !u!4 &325537941 stripped
@@ -3102,6 +3110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 376689822}
+  - component: {fileID: 376689823}
   m_Layer: 5
   m_Name: Ppippi Event
   m_TagString: Untagged
@@ -3130,6 +3139,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &376689823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376689821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2244d80c3e87824dbdee6f25934b85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _newEventItem: {fileID: 525766955}
+  _oldEventItem: {fileID: 896190839}
+  _eventListPrefabs: {fileID: 0}
 --- !u!1001 &385113170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3610,7 +3634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &461697651
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4163,7 +4187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 525766956}
   m_Layer: 5
-  m_Name: List Pos
+  m_Name: New Event Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4570,6 +4594,10 @@ PrefabInstance:
       propertyPath: _collectCountUI
       value: 
       objectReference: {fileID: 862026261}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _ppippiEventList
+      value: 
+      objectReference: {fileID: 376689823}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
 --- !u!4 &578477128 stripped
@@ -7347,7 +7375,7 @@ GameObject:
   - component: {fileID: 896190842}
   - component: {fileID: 896190841}
   m_Layer: 5
-  m_Name: Content
+  m_Name: Old Event Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7372,7 +7400,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 136.96411}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &896190841
 MonoBehaviour:
@@ -8575,6 +8603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d5affa596d3984a9529ce01a2ef573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ppippiEventList: {fileID: 0}
   _playerObj: {fileID: 1773707560}
   _ppippiBody: {fileID: 759911787}
   _followObj: {fileID: 70702468}
@@ -12509,6 +12538,10 @@ PrefabInstance:
       propertyPath: _fragProduction
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _ppippiEventList
+      value: 
+      objectReference: {fileID: 376689823}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
 --- !u!4 &1472120167 stripped
@@ -13699,6 +13732,10 @@ PrefabInstance:
       propertyPath: _collectCountUI
       value: 
       objectReference: {fileID: 862026261}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _ppippiEventList
+      value: 
+      objectReference: {fileID: 376689823}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
 --- !u!4 &1648802516 stripped
@@ -14230,6 +14267,10 @@ PrefabInstance:
       propertyPath: _collectCountUI
       value: 
       objectReference: {fileID: 862026261}
+    - target: {fileID: 3613928780267268430, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
+      propertyPath: _ppippiEventList
+      value: 
+      objectReference: {fileID: 376689823}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec84ec7ff7337c49b7a9546b10df79c, type: 3}
 --- !u!4 &1732908072 stripped
@@ -14398,7 +14439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1666168756611978221, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1666168756611978221, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
       propertyPath: m_AnchorMin.x
@@ -14406,7 +14447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1666168756611978221, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1666168756611978221, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
       propertyPath: m_SizeDelta.x
@@ -14446,11 +14487,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1666168756611978221, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 434.63086
       objectReference: {fileID: 0}
     - target: {fileID: 1666168756611978221, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -73.482056
       objectReference: {fileID: 0}
     - target: {fileID: 1666168756611978221, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14464,7 +14505,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1666168756611978217, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
 --- !u!224 &1769125532 stripped
 RectTransform:
@@ -14678,7 +14720,6 @@ MonoBehaviour:
   _blackCloudTitle: {fileID: 1175210748}
   _blackCloudContext: {fileID: 120608721}
   _inGameSaveLoadObj: {fileID: 1554887860}
-  _ppippi: {fileID: 991120541}
   _isEntryPlayTimeEnd: 0
   _isMeetPpippi: 0
   _memoryPuzzlesActive: 

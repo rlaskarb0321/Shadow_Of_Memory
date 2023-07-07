@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PpippiMapEvent : DialogEvent
+public class StubPpippi : DialogEvent
 {
     [Header("=== ppippi ===")]
     [SerializeField] private SpriteRenderer _ppippiDummy;
@@ -35,11 +35,10 @@ public class PpippiMapEvent : DialogEvent
 
     protected override void OnTriggerStay2D(Collider2D collision)
     {
+        base.OnTriggerStay2D(collision);
+
         float ppippiPos = _ppippiDummy.transform.position.x;
         float playerPos = collision.transform.position.x;
-
-        if (collision.CompareTag("MapEventResearch") && !_interactAlarm.activeSelf)
-            _interactAlarm.SetActive(true);
 
         if (ppippiPos - playerPos < 0.0f)
             _ppippiDummy.flipX = true;
@@ -51,6 +50,7 @@ public class PpippiMapEvent : DialogEvent
     {
         _cult = eventContext;
         SelectYesOrNo();
+        //dfdfdfd
     }
 
     public override void SelectYesOrNo()

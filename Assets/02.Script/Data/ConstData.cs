@@ -40,18 +40,17 @@ static class ConstData
     public const float _LEVEL3_GROUND_COLL_SIZE_Y = 0.17f;
 }
 
-[Serializable]
-public struct PpippiEvent
+public struct PpippiEventData
 {
-    public string _eventName;
-    public int _eventIdx;
-    public string _eventDialogFileName;
+    public string _name;
+    public int _idx;
+    public string _fileName;
 
-    public PpippiEvent(string eventName, int eventIdx, string eventDialogFileName)
+    public PpippiEventData(string name, int idx, string fileName)
     {
-        _eventName = eventName;
-        _eventIdx = eventIdx;
-        _eventDialogFileName = eventDialogFileName;
+        _name = name;
+        _idx = idx;
+        _fileName = fileName;
     }
 }
 
