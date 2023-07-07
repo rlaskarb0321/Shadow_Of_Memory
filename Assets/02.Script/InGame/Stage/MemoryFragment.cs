@@ -8,7 +8,7 @@ public class MemoryFragment : MonoBehaviour
     //[SerializeField] private PlayableDirector _fragProduction;
     [SerializeField] private Sprite _memoryImg;
     [SerializeField] private GameObject _collectCountUI;
-    [SerializeField] private PpippiEventList _ppippiEventList;
+    [SerializeField] private PpippiEventMgr _ppippiEventList;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

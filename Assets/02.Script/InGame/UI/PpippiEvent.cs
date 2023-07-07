@@ -9,9 +9,10 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
     [SerializeField] private Text _eventIdx;
 
     public enum eMyParentObj { New, Old, };
-    public eMyParentObj _pObj;
+    private eMyParentObj _pObj;
     private string _fileName;
-    public CampaignUI _campaignUI;
+    private CampaignUI _campaignUI;
+    private PpippiEventMgr _eventMgr;
 
     public void SetEventValue(PpippiEventData data)
     {
@@ -20,16 +21,23 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
         _fileName = data._fileName;
     }
 
-    public void SetParentObj(Transform tr, eMyParentObj pObj, CampaignUI campaignUI)
+    public void SetParentObj(Transform tr, eMyParentObj pObj, CampaignUI campaignUI, PpippiEventMgr eventMgr)
     {
         transform.SetParent(tr);
         transform.localPosition = Vector3.zero;
         _pObj = pObj;
         _campaignUI = campaignUI;
+        _eventMgr = eventMgr;
     }
 
     public void OnClickEventList()
     {
+        if (_pObj.Equals(eMyParentObj.New))
+        {
+            // »õ»æÀÌ Å¬¸¯µÈ°ÍÀÓ
+            _eventMgr._ppippiAlarm.SetActive(false);
+        }
+
         _campaignUI.SetDialogOn(true, _fileName);
         _campaignUI.SetPpippiEventActive(false);
     }
