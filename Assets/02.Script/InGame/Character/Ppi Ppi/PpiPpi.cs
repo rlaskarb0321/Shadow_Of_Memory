@@ -31,9 +31,6 @@ public class PpiPpi : MonoBehaviour
     //}
     #endregion ªﬂªﬂ ∞Ì¡§Ω√≈∞±‚
 
-    [Header("=== Ppippi Event List ===")]
-    [SerializeField] PpippiEventList _ppippiEventList;
-
     // SerializeField
     [Header("=== Ppippi Follow ===")]
     [SerializeField] private Transform _playerObj;

@@ -19,6 +19,9 @@ public class InGameSaveLoad : MonoBehaviour
     [SerializeField] private GameObject _dummyPpippi; // 더미 삐삐
     [SerializeField] private GameObject _realPpippi; // 진짜 삐삐
 
+    [Space(10.0f)] [SerializeField] private GameObject _newEventItem; // 삐삐이벤트의 새롭게 강조되는 이벤트가 들어올 항목
+    [SerializeField] private GameObject _oldEventItem; // 삐삐이벤트의 새로운게 아닌 이벤트가 들어올 항목
+
     [Header("=== Memory Board & Fragment ===")]
     [SerializeField] private GameObject[] _memoryFragment; // 인 게임에 있는 기억 조각들
     [SerializeField] private GameObject[] _memoryBoardPieces; 
