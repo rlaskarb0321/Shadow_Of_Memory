@@ -124,7 +124,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1666168756611978223}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8786609801405579017}
+        m_TargetAssemblyTypeName: PpippiEvent, Assembly-CSharp
+        m_MethodName: OnClickEventList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8786609801405579017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventName: {fileID: 1666168756619176712}
   _eventIdx: {fileID: 1666168757337995325}
+  _pObj: 0
+  _campaignUI: {fileID: 0}
 --- !u!1 &1666168756619176718
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,25 +11,26 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
     public enum eMyParentObj { New, Old, };
     public eMyParentObj _pObj;
     private string _fileName;
-    [HideInInspector] public PpippiEventList _ppippiEventList;
+    public CampaignUI _campaignUI;
 
-    public void SetEventValue(PpippiEventData data, PpippiEventList ppippiEventList)
+    public void SetEventValue(PpippiEventData data)
     {
         _eventName.text = data._name;
         _eventIdx.text = data._idx.ToString();
         _fileName = data._fileName;
-        _ppippiEventList = ppippiEventList;
     }
 
-    public void SetParentObj(Transform tr, eMyParentObj pObj)
+    public void SetParentObj(Transform tr, eMyParentObj pObj, CampaignUI campaignUI)
     {
         transform.SetParent(tr);
         transform.localPosition = Vector3.zero;
         _pObj = pObj;
+        _campaignUI = campaignUI;
     }
 
     public void OnClickEventList()
     {
-
+        _campaignUI.SetDialogOn(true, _fileName);
+        _campaignUI.SetPpippiEventActive(false);
     }
 }

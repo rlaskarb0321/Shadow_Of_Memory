@@ -96,11 +96,13 @@ public class Dialog : MonoBehaviour
     // 대화 시스템을 시작한다.
     public void SetDialogFile(string fileName, DialogEvent dialogEvent = null)
     {
-        if (dialogEvent != null)
-        {
-            // 대화 이벤트를 처리할 객체를 전달받음
-            _dialogEvent = dialogEvent;
-        }
+        //if (dialogEvent != null)
+        //{
+        //    // 대화 이벤트를 처리할 객체를 전달받음
+        //    _dialogEvent = dialogEvent;
+        //}
+
+        _dialogEvent = dialogEvent;
 
         if (!_fileName.Equals(fileName))
         {
@@ -193,7 +195,7 @@ public class Dialog : MonoBehaviour
         _name.text = line[(int)Header.Speaker];
         _index++;
 
-        if (!dialogEvent.Equals(""))
+        if (_dialogEvent != null && !dialogEvent.Equals(""))
         {
             _dialogEvent.DoDialogEvent(dialogEvent);
         }
@@ -207,7 +209,6 @@ public class Dialog : MonoBehaviour
     // 대화가 끝날때 실행되는 함수
     private void EndDialog()
     {
-        JumpToTitle("시작");
         _campaignUI.SetDialogOn(false);
     }
 
@@ -225,20 +226,26 @@ public class Dialog : MonoBehaviour
 
         for (_index = 0; _index < _lines.Count; _index++)
         {
-            line = _lines[_index].Split(',');
+            int temp = _index;
 
+            line = _lines[temp].Split(',');
             string answer = line[(int)Header.Dialog];
             string jump = line[(int)Header.Jump];
-            int temp = _index;
             Button answerBtn = _content.transform.GetChild(temp).GetComponent<Button>();
             if (!answerBtn.gameObject.activeSelf)
             {
                 answerBtn.gameObject.SetActive(true);
             }
+            else
+            {
+                answerBtn.gameObject.SetActive(false);
+                answerBtn.gameObject.SetActive(true);
+            }
 
             if (temp.Equals(0))
                 answerBtn.Select();
-            
+
+            answerBtn.onClick.RemoveAllListeners(); // 이걸 해 줘야 이전 대화.csv의 선택지 점프조건으로 점프를 하지 않는다
             answerBtn.onClick.AddListener(() => JumpToTitle(jump));
             answerBtn.onClick.AddListener(() => IsClickAnswer());
 

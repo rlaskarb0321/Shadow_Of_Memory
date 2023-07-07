@@ -10,12 +10,12 @@ public class PpippiEventList : MonoBehaviour
     [Header("=== Event Item ===")]
     [SerializeField] private GameObject _newEventItem;
     [SerializeField] private GameObject _oldEventItem;
+    [Space(5.0f)] [SerializeField] private CampaignUI _campaignUI;
 
     [Header("=== DropDown ===")]
     public Dropdown _orderDropDown;
 
     [Space(10.0f)] [SerializeField] private GameObject _eventListPrefabs;
-
     private enum eOrderBy { Index, Name, }
 
     public void CreateNewList(PpippiEventData data)
@@ -27,15 +27,15 @@ public class PpippiEventList : MonoBehaviour
         {
             PpippiEvent currNewEvent = _newEventItem.transform.GetChild(0).GetComponent<PpippiEvent>();
 
-            currNewEvent.SetParentObj(_oldEventItem.transform, PpippiEvent.eMyParentObj.Old);
-            eventList.SetEventValue(data, this);
-            eventList.SetParentObj(_newEventItem.transform, PpippiEvent.eMyParentObj.New);
+            currNewEvent.SetParentObj(_oldEventItem.transform, PpippiEvent.eMyParentObj.Old, _campaignUI);
+            eventList.SetEventValue(data);
+            eventList.SetParentObj(_newEventItem.transform, PpippiEvent.eMyParentObj.New, _campaignUI);
         }
         // 강조 Event 항목에 값이 없다면, 새로 들어온 값이 강조 Event로 들어간다.
         else
         {
-            eventList.SetEventValue(data, this);
-            eventList.SetParentObj(_newEventItem.transform, PpippiEvent.eMyParentObj.New);
+            eventList.SetEventValue(data);
+            eventList.SetParentObj(_newEventItem.transform, PpippiEvent.eMyParentObj.New, _campaignUI);
         }
 
         // 옮기면서, 정렬 기준값을 참조하여 재 정렬후 나열한다.
