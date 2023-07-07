@@ -41,6 +41,21 @@ static class ConstData
 }
 
 [Serializable]
+public struct PpippiEvent
+{
+    public string _eventName;
+    public int _eventIdx;
+    public string _eventDialogFileName;
+
+    public PpippiEvent(string eventName, int eventIdx, string eventDialogFileName)
+    {
+        _eventName = eventName;
+        _eventIdx = eventIdx;
+        _eventDialogFileName = eventDialogFileName;
+    }
+}
+
+[Serializable]
 public struct GameData
 {
     public Vector3 _playerPos;          // 플레이어의 (x, y) 위치

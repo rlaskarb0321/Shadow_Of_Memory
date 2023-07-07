@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 // 캠페인 씬에 있는 UI들의 Active를 On/Off 하는 스크립트
 public class CampaignUI : MonoBehaviour
@@ -121,9 +122,9 @@ public class CampaignUI : MonoBehaviour
         _isDialogOn = isTurnOn;
         _dialog.gameObject.SetActive(isTurnOn);
 
-        // 대화파일을 위해 처리하는 작업
         if (!fileName.Equals(""))
         {
+            // 대화를 위한 파일과 대화 이벤트 객체를 전달하고 대화 시스템을 실행한다.
             _dialog.SetDialogFile(fileName, dialogEvent);
         }
     }

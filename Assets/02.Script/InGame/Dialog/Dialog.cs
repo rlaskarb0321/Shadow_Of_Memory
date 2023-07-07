@@ -93,6 +93,7 @@ public class Dialog : MonoBehaviour
 
     // gameObject.SetActive(true)가 실행된 후 바로 실행되는 함수
     // 대화.csv 파일을 파일의 "타이틀" 헤더값을 기준으로 나눈 dict값을 받아오고, 헤더값 리스트 또한 받아온다.
+    // 대화 시스템을 시작한다.
     public void SetDialogFile(string fileName, DialogEvent dialogEvent = null)
     {
         if (dialogEvent != null)

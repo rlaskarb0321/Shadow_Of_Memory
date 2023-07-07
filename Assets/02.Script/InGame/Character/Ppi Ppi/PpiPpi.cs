@@ -31,6 +31,9 @@ public class PpiPpi : MonoBehaviour
     //}
     #endregion 삐삐 고정시키기
 
+    [Header("=== Ppippi Event List ===")]
+    [SerializeField] PpippiEventList _ppippiEventList;
+
     // SerializeField
     [Header("=== Ppippi Follow ===")]
     [SerializeField] private Transform _playerObj;
@@ -59,5 +62,12 @@ public class PpiPpi : MonoBehaviour
         Vector2 ppippiRotate = new Vector2(_changeScaleX, transform.localScale.y);
 
         _ppippiBody.transform.localScale = ppippiRotate;
+    }
+
+    // 플레이어가 새 이벤트를 발견했을때 호출되는 함수
+    // 삐삐의 머리위에 느낌표가 뜨고, 삐삐 이벤트 ui에게 값을 전달한다
+    public void DiscoverNewEvent(PpippiEvent ppippiEvent)
+    {
+        _ppippiEventList.CreateNewList(ppippiEvent);
     }
 }

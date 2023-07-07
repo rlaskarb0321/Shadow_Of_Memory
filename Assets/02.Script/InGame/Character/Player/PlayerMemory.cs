@@ -21,17 +21,20 @@ public class PlayerMemory : MonoBehaviour
 
     [Header("=== Black Cloud Note ===")]
     [SerializeField] private Image _memoryImage; // 습득한 기억퍼즐의 이미지
-    [SerializeField] private GameObject _blackCloudNote; // 검은구름배경의 쪽지
+    [SerializeField] private GameObject _blackCloudNote; // 검은구름배경의 쪽지 
     [SerializeField] private Text _blackCloudTitle; // 쪽지의 제목
     [SerializeField] private Text _blackCloudContext; // 쪽지의 내용
 
     [Header("=== Save System ===")]
     [SerializeField] private GameObject _inGameSaveLoadObj;
 
+    [Header("=== Ppi ppi ===")]
+    [SerializeField] private PpiPpi _ppippi;
+
     // HideInInspector
     private Ending _ending;
-    public bool _isEntryPlayTimeEnd;
-    public bool _isMeetPpippi;
+    [HideInInspector] public bool _isEntryPlayTimeEnd;
+    [HideInInspector] public bool _isMeetPpippi;
     private InGameSaveLoad _inGameSaveLoad;
     private PlayerAnimatorChange _animChange;
     [HideInInspector] public bool[] _memoryPuzzlesActive;
@@ -55,6 +58,7 @@ public class PlayerMemory : MonoBehaviour
     {
         _memoryImage.sprite = memoryImage;
         _memoryImage.SetNativeSize();
+        PpippiEvent ppippiEvent = new PpippiEvent(string.Format("{0}번 기억", index), index, "Ppippi Dialog");
 
         // 사운드 연출
         // Do somthing
@@ -62,6 +66,7 @@ public class PlayerMemory : MonoBehaviour
         CountMemoryFragment(index); // 습득 후 Player쪽 처리
         UpdateMemoryBoard(index); // 습득 후 MemoryBoard쪽 처리
         ShowBlackCloudNote(index); // 쪽지연출
+        _ppippi.DiscoverNewEvent(ppippiEvent); // 삐삐의 이벤트 대화쪽 처리
         _inGameSaveLoad.SaveToServer(this); // 자동 저장
     }
 
