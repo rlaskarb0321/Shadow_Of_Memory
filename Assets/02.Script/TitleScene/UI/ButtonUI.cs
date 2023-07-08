@@ -23,8 +23,6 @@ public class ButtonUI : UIInteractBase
         if (_thisImg != null)
             _thisImg.sprite = _selectFonts;
 
-        print("enter");
-
         if (_selectMenu != null)
             _selectMenu.SetActive(true);
     }
@@ -33,8 +31,6 @@ public class ButtonUI : UIInteractBase
     {
         if (_thisImg != null)
             _thisImg.sprite = _originFonts;
-
-        print("exit");
 
         if (_selectMenu != null)
             _selectMenu.SetActive(false);

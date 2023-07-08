@@ -5528,7 +5528,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720403508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.04824, y: -0.58, z: -10}
+  m_LocalPosition: {x: 0.23592615, y: -0.6058191, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12970,14 +12970,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303253a1edfeb0a4f94f5b98a641beea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDeveloper: 1
+  _isDeveloper: 0
   _player: {fileID: 1773707559}
   _groundColl: {fileID: 625070251}
   _stubObj: {fileID: 998508273}
   _dummyPpippi: {fileID: 978994022}
   _realPpippi: {fileID: 759911787}
-  _newEventItem: {fileID: 0}
-  _oldEventItem: {fileID: 0}
+  _ppippiEventMgr: {fileID: 376689823}
+  _campaignUI: {fileID: 681332238}
+  _eventListOrderDropDown: {fileID: 444284092}
+  _newEventItem: {fileID: 525766955}
+  _oldEventItem: {fileID: 896190839}
+  _currOrderValue: 0
+  _ppippiEventPrefabs: {fileID: 1666168756611978194, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
   _memoryFragment:
   - {fileID: 1178771459}
   - {fileID: 29857776}
@@ -12995,6 +13000,21 @@ MonoBehaviour:
   _achieveRate: {fileID: 1819802657}
   _savingText: {fileID: 337378091}
   _showTime: 3.2
+  _gameData:
+    _playerPos: {x: 0, y: 0, z: 0}
+    _nowTime: 
+    _isFragIdxGet: 
+    _currCollectCount: 0
+    _newMemoryIdx: 0
+    _isEntryPlayTimeEnd: 0
+    _isMeetPpippi: 0
+    _memoryPieceActive: 
+    _newPpippiEvent:
+      _name: 
+      _idx: 0
+      _fileName: 
+      _isWatching: 0
+    _oldPpippiEvents: []
 --- !u!1 &1556415282
 GameObject:
   m_ObjectHideFlags: 0

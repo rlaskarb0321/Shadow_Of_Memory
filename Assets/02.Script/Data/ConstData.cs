@@ -47,35 +47,40 @@ static class ConstData
     public const int _EXTRACASE_TWO = 8;
 }
 
-public struct PpippiEventData
+[Serializable]
+public class ppippiEventData
 {
     public string _name;
     public int _idx;
     public string _fileName;
+    public bool _isWatching;
 
-    public PpippiEventData(string name, int idx, string fileName)
+    public ppippiEventData(string name, int idx, string fileName, bool isWatching = false)
     {
         _name = name;
         _idx = idx;
         _fileName = fileName;
+        _isWatching = isWatching;
     }
 }
 
 [Serializable]
 public struct GameData
 {
-    public Vector3 _playerPos;          // 플레이어의 (x, y) 위치
-    public string _nowTime;             // 저장할 당시 현재 시간
-    public bool[] _isFragIdxGet;        // 획득한 기억조각의 인덱스
-    public int _currCollectCount;       // 현재 모은 조각의 수
-    public int _newMemoryIdx;           // 최근 먹은 기억조각의 인덱스
-    public bool _isEntryPlayTimeEnd;    // 게임 입장 첫 연출을 봤는지
-    public bool _isMeetPpippi;          // 삐삐와 만났는지
-    public bool[] _memoryPieceActive;   // 메모리 보드의 인덱스 번째의 기억 조각 활성화 여부
+    public Vector3 _playerPos;                      // 플레이어의 (x, y) 위치
+    public string _nowTime;                         // 저장할 당시 현재 시간
+    public bool[] _isFragIdxGet;                    // 획득한 기억조각의 인덱스
+    public int _currCollectCount;                   // 현재 모은 조각의 수
+    public int _newMemoryIdx;                       // 최근 먹은 기억조각의 인덱스
+    public bool _isEntryPlayTimeEnd;                // 게임 입장 첫 연출을 봤는지
+    public bool _isMeetPpippi;                      // 삐삐와 만났는지
+    public bool[] _memoryPieceActive;               // 메모리 보드의 인덱스 번째의 기억 조각 활성화 여부
+    public ppippiEventData _newPpippiEvent;             // 새 삐삐 이벤트
+    public ppippiEventData[] _oldPpippiEvents;          // 이전 삐삐 이벤트들
 
-    public GameData(
-        Vector3 playerPos, bool[] isFragIdxGet, int currCollectCount, int newMemoryIdx,
-        bool isEntryPlayTimeEnd, bool isMeetPpippi, bool[] memoryPiecesActive)
+    public GameData(Vector3 playerPos, bool[] isFragIdxGet, int currCollectCount, int newMemoryIdx,
+        bool isEntryPlayTimeEnd, bool isMeetPpippi, bool[] memoryPiecesActive, ppippiEventData newPpippiEvent,
+        ppippiEventData[] oldPpippiEvents)
     {
         _playerPos = playerPos;
         _nowTime = DateTime.Now.ToString("yy-MM-dd HH:mm");
@@ -85,5 +90,7 @@ public struct GameData
         _isEntryPlayTimeEnd = isEntryPlayTimeEnd;
         _isMeetPpippi = isMeetPpippi;
         _memoryPieceActive = memoryPiecesActive;
+        _newPpippiEvent = newPpippiEvent;
+        _oldPpippiEvents = oldPpippiEvents;
     }
 }

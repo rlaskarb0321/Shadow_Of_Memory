@@ -3,30 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß ÇÒ °Í °°À½
 {
     [SerializeField] private Text _eventName;
     [SerializeField] private Text _eventIdx;
     [SerializeField] private Text _isWatchingText;
-
-    private string _fileName;
+    public ppippiEventData _eventData;
 
     public enum eMyParentObj { New, Old, };
-    [HideInInspector] public int _idx;
-    [HideInInspector] public string _name;
-    [HideInInspector] public bool _isWatching;
     private eMyParentObj _pObj; // ÀÌ ½ºÅ©¸³Æ®¸¦ °¡Áö´Â ¸®½ºÆ®ÀÇ new, old ¸¦ ÆÇ´ÜÇÏ±â À§ÇÑ º¯¼ö
     private CampaignUI _campaignUI; // uiÆÐ³ÎÀÇ ¿Â/¿ÀÇÁ °ü¸®¸¦ À§ÇØ °´Ã¼ Àü´Þ¹ÞÀ» º¯¼ö
     private PpippiEventMgr _eventMgr; // ¸®½ºÆ® Á¤·Ä & »ß»ß ¸Ó¸®À§ ¾Ë¶÷ °ü¸®¸¦ À§ÇÑ °´Ã¼ Àü´Þ¹ÞÀ» º¯¼ö
 
-    public void SetEventValue(PpippiEventData data)
+    public void SetEventValue(ppippiEventData data)
     {
-        _fileName = data._fileName;
-        _idx = data._idx;
-        _name = data._name;
+        _eventData = data;
 
-        _eventIdx.text = _idx.ToString();
-        _eventName.text = _name;
+        _eventIdx.text = data._idx.ToString();
+        _eventName.text = data._name;
         _isWatchingText.text = ConstData._isNotWatching;
     }
 
@@ -56,9 +51,9 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
         }
 
         // ´ëÈ­ ui ÄÑÁÖ°í, »ß»ßÀÌº¥Æ® ui ²¨ÁÖ°í
-        _campaignUI.SetDialogOn(true, _fileName);
+        _campaignUI.SetDialogOn(true, _eventData._fileName);
         _campaignUI.SetPpippiEventActive(false);
-        _isWatching = true;
+        _eventData._isWatching = true;
         _isWatchingText.text = ConstData._isWatching;
     }
 }

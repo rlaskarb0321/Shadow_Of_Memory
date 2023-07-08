@@ -19,8 +19,13 @@ public class InGameSaveLoad : MonoBehaviour
     [SerializeField] private GameObject _dummyPpippi; // 더미 삐삐
     [SerializeField] private GameObject _realPpippi; // 진짜 삐삐
 
-    [Space(10.0f)] [SerializeField] private GameObject _newEventItem; // 삐삐이벤트의 새롭게 강조되는 이벤트가 들어올 항목
+    [Space(10.0f)] [SerializeField] private PpippiEventMgr _ppippiEventMgr;
+    [SerializeField] private CampaignUI _campaignUI;
+    [SerializeField] private Dropdown _eventListOrderDropDown;
+    [SerializeField] private GameObject _newEventItem; // 삐삐이벤트의 새롭게 강조되는 이벤트가 들어올 항목
     [SerializeField] private GameObject _oldEventItem; // 삐삐이벤트의 새로운게 아닌 이벤트가 들어올 항목
+    [SerializeField] private int _currOrderValue;
+    [SerializeField] private GameObject _ppippiEventPrefabs; // 조립용 더미 삐삐이벤트리스트 UI
 
     [Header("=== Memory Board & Fragment ===")]
     [SerializeField] private GameObject[] _memoryFragment; // 인 게임에 있는 기억 조각들
@@ -31,9 +36,9 @@ public class InGameSaveLoad : MonoBehaviour
     [SerializeField] private GameObject _savingText;
     [SerializeField] private float _showTime;
 
+    public GameData _gameData;
+
     // HideInInspector
-    private CapsuleCollider2D _playerColl;
-    private BoxCollider2D _groundBoxColl;
     private PlayerAnimatorChange _animChanger;
     private PlayerMemory _playerMemory;
     private WaitForSeconds _ws;
@@ -41,8 +46,6 @@ public class InGameSaveLoad : MonoBehaviour
     private void Awake()
     {
         _playerMemory = _player.GetComponent<PlayerMemory>();
-        _playerColl = _player.GetComponent<CapsuleCollider2D>();
-        _groundBoxColl = _groundColl.GetComponent<BoxCollider2D>();
         _animChanger = _player.GetComponent<PlayerAnimatorChange>();
         _ws = new WaitForSeconds(_showTime);
     }
@@ -60,6 +63,8 @@ public class InGameSaveLoad : MonoBehaviour
             SaveToServer(_playerMemory);
         }
 
+        _gameData = GameDataPackage._gameData;
+
         //if (Input.GetKeyDown("l"))
         //{
         //    SaveData loadData = SaveSystem.Load("Save1");
@@ -70,6 +75,26 @@ public class InGameSaveLoad : MonoBehaviour
     // 서버(현재는 로컬 Json에 데이터를 저장함)
     public void SaveToServer(PlayerMemory playerMemory)
     {
+        // 이 부분 매개변수를 없애고, 전역변수 _player 로 접근해서 값을 초기화 하자
+        // 추후에 다른 변수들도 저장해야할때, 이 스크립트의 전역변수로 접근해서 초기화 하자.
+
+        ppippiEventData newPpippiEvent = null;
+        ppippiEventData[] oldPpippiEvents = null;
+
+        if (_newEventItem.transform.childCount != 0)
+        {
+            newPpippiEvent = _newEventItem.transform.GetChild(0).GetComponent<PpippiEvent>()._eventData;
+        }
+
+        if (_oldEventItem.transform.childCount > 0)
+        {
+            oldPpippiEvents = new ppippiEventData[_oldEventItem.transform.childCount];
+            for (int i = 0; i < _oldEventItem.transform.childCount; i++)
+            {
+                oldPpippiEvents[i] = _oldEventItem.transform.GetChild(i).GetComponent<PpippiEvent>()._eventData;
+            }
+        }
+
         StartCoroutine(ShowSaveText());
         GameData saveData =
                 new GameData(
@@ -79,7 +104,9 @@ public class InGameSaveLoad : MonoBehaviour
                     playerMemory._newMemoryIdx,
                     playerMemory._isEntryPlayTimeEnd,
                     playerMemory._isMeetPpippi,
-                    playerMemory._memoryPuzzlesActive
+                    playerMemory._memoryPuzzlesActive,
+                    newPpippiEvent,
+                    oldPpippiEvents
                     );
 
         SaveData character = new SaveData(saveData);
@@ -142,6 +169,61 @@ public class InGameSaveLoad : MonoBehaviour
             // 3 레벨 캐릭터
             _animChanger.ChangeAnimator(2);
         }
+
+        // 삐삐 이벤트 초기화 해주자
+
+        // 입장컷신보자마자 저장 후 껐을때
+        // print(GameDataPackage._gameData._newPpippiEvent._idx == 0); --> 0
+        // print(GameDataPackage._gameData._oldPpippiEvents.Length); --> 0
+
+        // 몇개 먹고 저장 후 껐을때 아주 잘 적용된다.
+        //print(GameDataPackage._gameData._newPpippiEvent._idx);
+        //print(GameDataPackage._gameData._oldPpippiEvents.Length);
+
+        if (GameDataPackage._gameData._newPpippiEvent._idx != 0)
+        {
+            // 이벤트리스트가 이미 있다는 뜻, 근데 이걸 PpippiEventMgr.cs 의 CreateNewList 로 할 수 있지않을까?
+
+        }
+
+
+        // 얘네 밑에있는 애들은 위에 지금 작성하는게 되면 안 쓸꺼임
+        //for (int i = 0; i < GameDataPackage._gameData._oldPpippiEvents.Length; i++)
+        //{
+
+        //}
+
+        //string saveFilePath = SaveSystem.SavePath + "Save" + GameDataPackage._index.ToString() + ".json";
+        //string saveFile = System.IO.File.ReadAllText(saveFilePath);
+
+        //ppippiEventData newPpippiEvent = null;
+        //ppippiEventData[] oldPpippiEvents = null;
+
+        //if (JsonUtility.FromJson<ppippiEventData>(saveFile)._idx != 0)
+        //{
+        //    newPpippiEvent = JsonUtility.FromJson<ppippiEventData>(saveFile);
+        //    PpippiEvent newEventList = Instantiate(_ppippiEventPrefabs, Vector3.zero, Quaternion.identity).GetComponent<PpippiEvent>();
+
+        //    newEventList.SetEventValue(newPpippiEvent);
+        //    newEventList.SetParentObj(_newEventItem.transform, PpippiEvent.eMyParentObj.New, _campaignUI, _ppippiEventMgr);
+        //}
+        //else
+        //    print("newEvent null");
+
+
+        //if (JsonUtility.FromJson<ppippiEventData[]>(saveFile).Length > 1)
+        //{
+        //    oldPpippiEvents = JsonUtility.FromJson<ppippiEventData[]>(saveFile);
+        //    for (int i = 0; i < oldPpippiEvents.Length; i++)
+        //    {
+        //        PpippiEvent oldEventList = Instantiate(_ppippiEventPrefabs, Vector3.zero, Quaternion.identity).GetComponent<PpippiEvent>();
+
+        //        oldEventList.SetEventValue(oldPpippiEvents[i]);
+        //        oldEventList.SetParentObj(_oldEventItem.transform, PpippiEvent.eMyParentObj.Old, _campaignUI, _ppippiEventMgr);
+        //    }
+        //}
+        //else
+        //    print("oldEvent null");
     }
 
     private IEnumerator ShowSaveText()

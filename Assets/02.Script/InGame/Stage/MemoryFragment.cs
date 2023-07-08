@@ -12,7 +12,7 @@ public class MemoryFragment : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PpippiEventData data = new PpippiEventData(string.Format("{0}번 기억 조각", _fragNumber), _fragNumber, "Ppippi Dialog");
+        ppippiEventData data = new ppippiEventData(string.Format("{0}번 기억 조각", _fragNumber), _fragNumber, "Ppippi Dialog");
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {

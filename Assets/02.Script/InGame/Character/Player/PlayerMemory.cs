@@ -53,7 +53,7 @@ public class PlayerMemory : MonoBehaviour
     
     public void GetMemoryFragment(int index, Sprite memoryImage)
     {
-        PpippiEventData data = new PpippiEventData(string.Format("{0}번째 기억 조각", index), index, "Ppippi Dialog");
+        ppippiEventData data = new ppippiEventData(string.Format("{0}번째 기억 조각", index), index, "Ppippi Dialog");
 
         _memoryImage.sprite = memoryImage;
         _memoryImage.SetNativeSize();
