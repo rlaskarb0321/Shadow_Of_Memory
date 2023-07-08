@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class PpippiEventMgr : MonoBehaviour
 {
     [Header("=== Event Item ===")]
-    [SerializeField] private GameObject _newEventItem;
-    [SerializeField] private GameObject _oldEventItem;
+    public GameObject _newEventItem;
+    public GameObject _oldEventItem;
     public Dropdown _orderDropDown;
     [Space(5.0f)] [SerializeField] private CampaignUI _campaignUI;
 
@@ -17,7 +17,13 @@ public class PpippiEventMgr : MonoBehaviour
     public GameObject _ppippiAlarm;
 
     [Space(10.0f)] [SerializeField] private GameObject _eventListPrefabs;
-    private enum eOrderBy { Index, Name, }
+    private enum eOrderBy { IndexUp, IndexDown, NameUp, NameDown, NotWatching, Watching }
+    public List<PpippiEvent> _ppippiOldEventList;
+
+    private void Start()
+    {
+        _ppippiOldEventList = new List<PpippiEvent>();
+    }
 
     public void CreateNewList(PpippiEventData data)
     {
@@ -50,11 +56,76 @@ public class PpippiEventMgr : MonoBehaviour
 
     public void OrderByDropDownValue()
     {
+        List<PpippiEvent> ppippiEvents = _ppippiOldEventList.ToList();
 
-    }
+        switch ((eOrderBy)_orderDropDown.value)
+        {
+            case eOrderBy.IndexUp:
+                _ppippiOldEventList = _ppippiOldEventList.OrderBy(x => x._idx).ToList();
+                for (int i = 0; i < _ppippiOldEventList.Count; i++)
+                {
+                    for (int j = 0; j < ppippiEvents.Count; j++)
+                    {
+                        if (ppippiEvents[j]._idx.Equals(_ppippiOldEventList[i]._idx))
+                        {
+                            ppippiEvents[j].transform.SetSiblingIndex(i);
+                            break;
+                        }
+                    }
+                }
+                break;
 
-    public void OnClickEventList()
-    { 
+            case eOrderBy.IndexDown:
+                _ppippiOldEventList = _ppippiOldEventList.OrderByDescending(x => x._idx).ToList();
+                for (int i = 0; i < _ppippiOldEventList.Count; i++)
+                {
+                    for (int j = 0; j < ppippiEvents.Count; j++)
+                    {
+                        if (ppippiEvents[j]._idx.Equals(_ppippiOldEventList[i]._idx))
+                        {
+                            ppippiEvents[j].transform.SetSiblingIndex(i);
+                            break;
+                        }
+                    }
+                }
+                break;
+
+            case eOrderBy.NameUp:
+                _ppippiOldEventList = _ppippiOldEventList.OrderBy(x => x._name).ToList();
+                for (int i = 0; i < _ppippiOldEventList.Count; i++)
+                {
+                    for (int j = 0; j < ppippiEvents.Count; j++)
+                    {
+                        if (ppippiEvents[j]._idx.Equals(_ppippiOldEventList[i]._name))
+                        {
+                            ppippiEvents[j].transform.SetSiblingIndex(i);
+                            break;
+                        }
+                    }
+                }
+                break;
+
+            case eOrderBy.NameDown:
+                _ppippiOldEventList = _ppippiOldEventList.OrderByDescending(x => x._name).ToList();
+                for (int i = 0; i < _ppippiOldEventList.Count; i++)
+                {
+                    for (int j = 0; j < ppippiEvents.Count; j++)
+                    {
+                        if (ppippiEvents[j]._idx.Equals(_ppippiOldEventList[i]._name))
+                        {
+                            ppippiEvents[j].transform.SetSiblingIndex(i);
+                            break;
+                        }
+                    }
+                }
+                break;
+
+            case eOrderBy.NotWatching:
+                break;
+
+            case eOrderBy.Watching:
+                break;
+        }
 
     }
 }

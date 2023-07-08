@@ -8,36 +8,52 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
     [SerializeField] private Text _eventName;
     [SerializeField] private Text _eventIdx;
 
-    public enum eMyParentObj { New, Old, };
-    private eMyParentObj _pObj;
     private string _fileName;
-    private CampaignUI _campaignUI;
-    private PpippiEventMgr _eventMgr;
+
+    public enum eMyParentObj { New, Old, };
+    [HideInInspector] public int _idx;
+    [HideInInspector] public string _name;
+    [HideInInspector] public bool _notWatching;
+    private eMyParentObj _pObj; // ÀÌ ½ºÅ©¸³Æ®¸¦ °¡Áö´Â ¸®½ºÆ®ÀÇ new, old ¸¦ ÆÇ´ÜÇÏ±â À§ÇÑ º¯¼ö
+    private CampaignUI _campaignUI; // uiÆÐ³ÎÀÇ ¿Â/¿ÀÇÁ °ü¸®¸¦ À§ÇØ °´Ã¼ Àü´Þ¹ÞÀ» º¯¼ö
+    private PpippiEventMgr _eventMgr; // ¸®½ºÆ® Á¤·Ä & »ß»ß ¸Ó¸®À§ ¾Ë¶÷ °ü¸®¸¦ À§ÇÑ °´Ã¼ Àü´Þ¹ÞÀ» º¯¼ö
 
     public void SetEventValue(PpippiEventData data)
     {
-        _eventName.text = data._name;
-        _eventIdx.text = data._idx.ToString();
         _fileName = data._fileName;
+        _idx = data._idx;
+        _name = data._name;
+
+        _eventIdx.text = _idx.ToString();
+        _eventName.text = _name;
     }
 
-    public void SetParentObj(Transform tr, eMyParentObj pObj, CampaignUI campaignUI, PpippiEventMgr eventMgr)
+    public void SetParentObj(Transform tr, eMyParentObj pObj, CampaignUI campaignUI = null, PpippiEventMgr eventMgr = null)
     {
+        if (campaignUI != null && _campaignUI == null)
+            _campaignUI = campaignUI;
+
+        if (eventMgr != null && _eventMgr == null)
+            _eventMgr = eventMgr;
+
+        if (pObj.Equals(eMyParentObj.Old))
+            _eventMgr._ppippiOldEventList.Add(this);
+
         transform.SetParent(tr);
         transform.localPosition = Vector3.zero;
         _pObj = pObj;
-        _campaignUI = campaignUI;
-        _eventMgr = eventMgr;
     }
 
     public void OnClickEventList()
     {
         if (_pObj.Equals(eMyParentObj.New))
         {
-            // »õ»æÀÌ Å¬¸¯µÈ°ÍÀÓ
+            // »õ»æÀÌ Å¬¸¯µÈ°ÍÀÓ, »ß»ßÀÇ ¾Ë¶÷À» ²¨ ÁÖ°í Á¤·Äµµ ½ÃÄÑ¾ßÇÑ´Ù.
             _eventMgr._ppippiAlarm.SetActive(false);
+            this.SetParentObj(_eventMgr._oldEventItem.transform, eMyParentObj.Old);
         }
 
+        // ´ëÈ­ ui ÄÑÁÖ°í, »ß»ßÀÌº¥Æ® ui ²¨ÁÖ°í
         _campaignUI.SetDialogOn(true, _fileName);
         _campaignUI.SetPpippiEventActive(false);
     }
