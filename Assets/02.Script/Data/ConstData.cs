@@ -39,6 +39,9 @@ static class ConstData
     public const float _LEVEL3_GROUND_COLL_SIZE_X = 1.0f;
     public const float _LEVEL3_GROUND_COLL_SIZE_Y = 0.17f;
 
+    public const string _isWatching = "시청 함";
+    public const string _isNotWatching = "시청 하지 않음";
+
     // 삐삐 이벤트 인덱스 지정, 1~6은 메모리 조각이 차지하고있음
     public const int _EXTRACASE_ONE = 7;
     public const int _EXTRACASE_TWO = 8;

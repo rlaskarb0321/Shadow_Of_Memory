@@ -151,8 +151,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventName: {fileID: 1666168756619176712}
   _eventIdx: {fileID: 1666168757337995325}
-  _pObj: 0
-  _campaignUI: {fileID: 0}
+  _isWatchingText: {fileID: 5692755282364325031}
+  _idx: 0
+  _name: 
+  _isWatching: 0
 --- !u!1 &1666168756619176718
 GameObject:
   m_ObjectHideFlags: 0

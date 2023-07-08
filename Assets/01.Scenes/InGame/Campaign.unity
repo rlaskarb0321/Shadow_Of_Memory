@@ -2048,10 +2048,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2056098737}
   - {fileID: 847167942}
   m_Father: {fileID: 461697651}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3157,6 +3156,7 @@ MonoBehaviour:
   _campaignUI: {fileID: 681332238}
   _ppippiAlarm: {fileID: 1948135991}
   _eventListPrefabs: {fileID: 1666168756611978194, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
+  _ppippiOldEventList: []
 --- !u!1 &390148337
 GameObject:
   m_ObjectHideFlags: 0
@@ -3408,11 +3408,17 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: Index Up
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Index Down
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: Name Up
+      m_Image: {fileID: 0}
+    - m_Text: Name Down
+      m_Image: {fileID: 0}
+    - m_Text: Watching
+      m_Image: {fileID: 0}
+    - m_Text: NotWatching
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3541,6 +3547,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 845403304}
+  - {fileID: 2056098737}
   - {fileID: 688933278}
   - {fileID: 216645888}
   m_Father: {fileID: 376689822}
@@ -5347,7 +5354,7 @@ RectTransform:
   - {fileID: 901466903}
   - {fileID: 525766956}
   m_Father: {fileID: 461697651}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6683,7 +6690,7 @@ RectTransform:
   m_Children:
   - {fileID: 896190840}
   m_Father: {fileID: 216645888}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11403,7 +11410,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: Index Up
 --- !u!222 &1351653828
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16680,12 +16687,12 @@ RectTransform:
   m_Children:
   - {fileID: 1164077630}
   - {fileID: 444284091}
-  m_Father: {fileID: 216645888}
-  m_RootOrder: 0
+  m_Father: {fileID: 461697651}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 268, y: 200}
+  m_AnchoredPosition: {x: 268, y: 47}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2062883812

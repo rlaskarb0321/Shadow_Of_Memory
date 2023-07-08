@@ -7,13 +7,14 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
 {
     [SerializeField] private Text _eventName;
     [SerializeField] private Text _eventIdx;
+    [SerializeField] private Text _isWatchingText;
 
     private string _fileName;
 
     public enum eMyParentObj { New, Old, };
     [HideInInspector] public int _idx;
     [HideInInspector] public string _name;
-    [HideInInspector] public bool _notWatching;
+    [HideInInspector] public bool _isWatching;
     private eMyParentObj _pObj; // ÀÌ ½ºÅ©¸³Æ®¸¦ °¡Áö´Â ¸®½ºÆ®ÀÇ new, old ¸¦ ÆÇ´ÜÇÏ±â À§ÇÑ º¯¼ö
     private CampaignUI _campaignUI; // uiÆÐ³ÎÀÇ ¿Â/¿ÀÇÁ °ü¸®¸¦ À§ÇØ °´Ã¼ Àü´Þ¹ÞÀ» º¯¼ö
     private PpippiEventMgr _eventMgr; // ¸®½ºÆ® Á¤·Ä & »ß»ß ¸Ó¸®À§ ¾Ë¶÷ °ü¸®¸¦ À§ÇÑ °´Ã¼ Àü´Þ¹ÞÀ» º¯¼ö
@@ -26,6 +27,7 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
 
         _eventIdx.text = _idx.ToString();
         _eventName.text = _name;
+        _isWatchingText.text = ConstData._isNotWatching;
     }
 
     public void SetParentObj(Transform tr, eMyParentObj pObj, CampaignUI campaignUI = null, PpippiEventMgr eventMgr = null)
@@ -56,5 +58,7 @@ public class PpippiEvent : MonoBehaviour // ¾ê³×µéµµ DialogEvent °´Ã¼¸¦ ¹Þ¾Æ¾ß Ç
         // ´ëÈ­ ui ÄÑÁÖ°í, »ß»ßÀÌº¥Æ® ui ²¨ÁÖ°í
         _campaignUI.SetDialogOn(true, _fileName);
         _campaignUI.SetPpippiEventActive(false);
+        _isWatching = true;
+        _isWatchingText.text = ConstData._isWatching;
     }
 }
