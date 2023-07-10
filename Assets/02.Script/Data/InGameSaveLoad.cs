@@ -180,10 +180,21 @@ public class InGameSaveLoad : MonoBehaviour
         //print(GameDataPackage._gameData._newPpippiEvent._idx);
         //print(GameDataPackage._gameData._oldPpippiEvents.Length);
 
+        if (GameDataPackage._gameData._oldPpippiEvents.Length >= 1)
+        {
+            for (int i = 0; i < GameDataPackage._gameData._oldPpippiEvents.Length; i++)
+            {
+                ppippiEventData oldEventData = GameDataPackage._gameData._oldPpippiEvents[i];
+                _ppippiEventMgr.CreateNewList(oldEventData);
+            }
+        }
+
         if (GameDataPackage._gameData._newPpippiEvent._idx != 0)
         {
             // 이벤트리스트가 이미 있다는 뜻, 근데 이걸 PpippiEventMgr.cs 의 CreateNewList 로 할 수 있지않을까?
-
+            // GameDataPackage._gameData 여기에서 값을 가져오면 됨
+            ppippiEventData newEventData = GameDataPackage._gameData._newPpippiEvent;
+            _ppippiEventMgr.CreateNewList(newEventData);
         }
 
 

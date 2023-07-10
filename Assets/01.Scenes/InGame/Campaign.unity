@@ -3155,6 +3155,7 @@ MonoBehaviour:
   _orderDropDown: {fileID: 444284092}
   _campaignUI: {fileID: 681332238}
   _ppippiAlarm: {fileID: 1948135991}
+  _ppippi: {fileID: 759911787}
   _eventListPrefabs: {fileID: 1666168756611978194, guid: 3ac0a9df914e1d340af2aa6e22facafd, type: 3}
   _ppippiOldEventList: []
 --- !u!1 &390148337
@@ -5528,7 +5529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720403508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.23592615, y: -0.6058191, z: -10}
+  m_LocalPosition: {x: -7.04824, y: -0.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -13,8 +13,9 @@ public class PpippiEventMgr : MonoBehaviour
     public Dropdown _orderDropDown;
     [Space(5.0f)] [SerializeField] private CampaignUI _campaignUI;
 
-    [Header("=== Ppippi Alarm ===")]
+    [Header("=== Ppippi ===")]
     public GameObject _ppippiAlarm;
+    [SerializeField] private GameObject _ppippi;
 
     [Space(10.0f)] [SerializeField] private GameObject _eventListPrefabs;
     private enum eOrderBy { IndexUp, IndexDown, NameUp, NameDown, Watching, NotWatching }
@@ -27,7 +28,7 @@ public class PpippiEventMgr : MonoBehaviour
 
     public void CreateNewList(ppippiEventData data)
     {
-        if (!_ppippiAlarm.activeSelf)
+        if (_ppippi.activeSelf && !_ppippiAlarm.activeSelf)
         {
             _ppippiAlarm.SetActive(true);
         }
@@ -52,6 +53,7 @@ public class PpippiEventMgr : MonoBehaviour
 
         // 옮기면서, 정렬 기준값을 참조하여 재 정렬후 나열한다.
         OrderByDropDownValue();
+        eventList.gameObject.name = eventList._eventData._name;
     }
 
     public void OrderByDropDownValue()
