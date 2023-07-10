@@ -25,14 +25,6 @@ public class StubPpippi : DialogEvent
         _campaignUI.SetDialogOn(true, "Ppippi Carry", this);
     }
 
-    protected override void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("MapEventResearch") && _interactAlarm.activeSelf)
-        {
-            _interactAlarm.SetActive(false);
-        }
-    }
-
     protected override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
@@ -66,7 +58,6 @@ public class StubPpippi : DialogEvent
                 break;
 
             case "°ÅºÎ":
-                print(_cult);
                 _noCultCount++;
                 break;
         }

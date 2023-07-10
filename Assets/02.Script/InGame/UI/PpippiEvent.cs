@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class PpippiEvent : MonoBehaviour // 얘네들도 DialogEvent 객체를 받아야 할 것 같음
+public class PpippiEvent : MonoBehaviour
 {
     [SerializeField] private Text _eventName;
     [SerializeField] private Text _eventIdx;

@@ -103,6 +103,7 @@ public class Dialog : MonoBehaviour
         //}
 
         _dialogEvent = dialogEvent;
+        // _dialogEvent._isDialog = true;
 
         if (!_fileName.Equals(fileName))
         {
@@ -209,7 +210,8 @@ public class Dialog : MonoBehaviour
     // 대화가 끝날때 실행되는 함수
     private void EndDialog()
     {
-        _campaignUI.SetDialogOn(false);
+        // _dialogEvent._isDialog = false;
+        _campaignUI.SetDialogOn(false, "", _dialogEvent);
     }
 
     // 선택지 항목 보여주기

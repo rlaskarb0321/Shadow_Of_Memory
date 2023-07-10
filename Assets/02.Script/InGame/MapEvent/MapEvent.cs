@@ -9,6 +9,10 @@ public abstract class MapEvent : MonoBehaviour
 
     public enum MapEventState { Open, Close, }
 
+    /// <summary>
+    /// F키를 통해 플레이어와 상호작용이 가능하게 해줌
+    /// </summary>
+    /// <param name="player"></param>
     public virtual void Interaction(PlayerCtrl player) { }
 
     protected virtual void Open() { }

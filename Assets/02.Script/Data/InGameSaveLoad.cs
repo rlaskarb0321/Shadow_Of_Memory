@@ -124,6 +124,8 @@ public class InGameSaveLoad : MonoBehaviour
         if (_isDeveloper)
         {
             _playerMemory.transform.position = _playerMemory.transform.position;
+            _playerMemory._isFragIdxGet = new bool[6];
+            GameDataPackage._gameData._isFragIdxGet = new bool[6];
         }
         else
         {
@@ -171,16 +173,7 @@ public class InGameSaveLoad : MonoBehaviour
         }
 
         // 삐삐 이벤트 초기화 해주자
-
-        // 입장컷신보자마자 저장 후 껐을때
-        // print(GameDataPackage._gameData._newPpippiEvent._idx == 0); --> 0
-        // print(GameDataPackage._gameData._oldPpippiEvents.Length); --> 0
-
-        // 몇개 먹고 저장 후 껐을때 아주 잘 적용된다.
-        //print(GameDataPackage._gameData._newPpippiEvent._idx);
-        //print(GameDataPackage._gameData._oldPpippiEvents.Length);
-
-        if (GameDataPackage._gameData._oldPpippiEvents.Length >= 1)
+        if (GameDataPackage._gameData._oldPpippiEvents != null && GameDataPackage._gameData._oldPpippiEvents.Length >= 1)
         {
             for (int i = 0; i < GameDataPackage._gameData._oldPpippiEvents.Length; i++)
             {
@@ -189,52 +182,13 @@ public class InGameSaveLoad : MonoBehaviour
             }
         }
 
-        if (GameDataPackage._gameData._newPpippiEvent._idx != 0)
+        if (GameDataPackage._gameData._newPpippiEvent != null && GameDataPackage._gameData._newPpippiEvent._idx != 0)
         {
             // 이벤트리스트가 이미 있다는 뜻, 근데 이걸 PpippiEventMgr.cs 의 CreateNewList 로 할 수 있지않을까?
             // GameDataPackage._gameData 여기에서 값을 가져오면 됨
             ppippiEventData newEventData = GameDataPackage._gameData._newPpippiEvent;
             _ppippiEventMgr.CreateNewList(newEventData);
         }
-
-
-        // 얘네 밑에있는 애들은 위에 지금 작성하는게 되면 안 쓸꺼임
-        //for (int i = 0; i < GameDataPackage._gameData._oldPpippiEvents.Length; i++)
-        //{
-
-        //}
-
-        //string saveFilePath = SaveSystem.SavePath + "Save" + GameDataPackage._index.ToString() + ".json";
-        //string saveFile = System.IO.File.ReadAllText(saveFilePath);
-
-        //ppippiEventData newPpippiEvent = null;
-        //ppippiEventData[] oldPpippiEvents = null;
-
-        //if (JsonUtility.FromJson<ppippiEventData>(saveFile)._idx != 0)
-        //{
-        //    newPpippiEvent = JsonUtility.FromJson<ppippiEventData>(saveFile);
-        //    PpippiEvent newEventList = Instantiate(_ppippiEventPrefabs, Vector3.zero, Quaternion.identity).GetComponent<PpippiEvent>();
-
-        //    newEventList.SetEventValue(newPpippiEvent);
-        //    newEventList.SetParentObj(_newEventItem.transform, PpippiEvent.eMyParentObj.New, _campaignUI, _ppippiEventMgr);
-        //}
-        //else
-        //    print("newEvent null");
-
-
-        //if (JsonUtility.FromJson<ppippiEventData[]>(saveFile).Length > 1)
-        //{
-        //    oldPpippiEvents = JsonUtility.FromJson<ppippiEventData[]>(saveFile);
-        //    for (int i = 0; i < oldPpippiEvents.Length; i++)
-        //    {
-        //        PpippiEvent oldEventList = Instantiate(_ppippiEventPrefabs, Vector3.zero, Quaternion.identity).GetComponent<PpippiEvent>();
-
-        //        oldEventList.SetEventValue(oldPpippiEvents[i]);
-        //        oldEventList.SetParentObj(_oldEventItem.transform, PpippiEvent.eMyParentObj.Old, _campaignUI, _ppippiEventMgr);
-        //    }
-        //}
-        //else
-        //    print("oldEvent null");
     }
 
     private IEnumerator ShowSaveText()

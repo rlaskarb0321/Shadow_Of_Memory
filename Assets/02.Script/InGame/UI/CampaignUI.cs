@@ -19,10 +19,11 @@ public class CampaignUI : MonoBehaviour
     public Dialog _dialog;
 
     // HideInInspector
+    private DialogEvent _dialogEvent;
     private bool _isPausePanelOn;
     private bool _isMBoardOn;
     private bool _isPpippiEventOn;
-    [HideInInspector] public bool _isDialogOn; 
+    [HideInInspector] public bool _isDialogOn; // 대화가 시작되고 끝이났는지 판단하는 요소이기도 함
 
     private void Update()
     {
@@ -74,7 +75,7 @@ public class CampaignUI : MonoBehaviour
 
             if (_isDialogOn)
             {
-                SetDialogOn(false);
+                SetDialogOn(false, "", _dialogEvent);
                 return;
             }
 
@@ -119,6 +120,8 @@ public class CampaignUI : MonoBehaviour
     public void SetDialogOn(bool isTurnOn, string fileName = "", DialogEvent dialogEvent = null)
     {
         // 단순 ui 껐다 켰다하는 작업
+        _dialogEvent = dialogEvent;
+        _dialogEvent._isDialog = isTurnOn;
         _isDialogOn = isTurnOn;
         _dialog.gameObject.SetActive(isTurnOn);
 

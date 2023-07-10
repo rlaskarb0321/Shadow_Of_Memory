@@ -7,8 +7,12 @@ using UnityEngine;
 public abstract class DialogEvent : MapEvent
 {
     public CampaignUI _campaignUI;
+    public bool _isDialog; // 대화가 시작된 후, 대화가 끝났는지 아닌지 판단하기 위한 변수
 
-    // 상속받은 객체마다 다른 이벤트 처리 방식을 위해, 아래에 있는 메서드들을 객체마다 다양하게 조합하여 사용한다.
+    /// <summary>
+    /// 상속받은 객체마다 다른 이벤트 처리 방식을 위해, 다양한 기능들을 객체마다 다르게 조합하여 사용한다. 
+    /// </summary>
+    /// <param name="eventContext"></param>
     public abstract void DoDialogEvent(string eventContext);
 
     // 대화 이벤트 중 Y/N 관련 처리 함수

@@ -6,7 +6,7 @@ public class PpippiStub : MonoBehaviour
 {
     [HideInInspector]
     public bool _isPlayerTriggered;
-
+    
     [HideInInspector] public BoxCollider2D _boxColl;
 
     private void Awake()

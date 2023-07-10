@@ -43,8 +43,17 @@ static class ConstData
     public const string _isNotWatching = "시청 하지 않음";
 
     // 삐삐 이벤트 인덱스 지정, 1~6은 메모리 조각이 차지하고있음
-    public const int _EXTRACASE_ONE = 7;
-    public const int _EXTRACASE_TWO = 8;
+    // Little Girl
+    public const string _LITTLEGIRL_EVENT_NAME = "또 다른 잠식된 자 - 1";
+    public const int _LITTLEGIRL_EVENT_IDX = 7;
+
+    // Tall Boy
+    public const string _TALLBOY_EVENT_NAME = "또 다른 잠식된 자 - 2";
+    public const int _TALLBOY_EVENT_IDX = 8;
+
+    // Extra example
+    public const string _EXTRACASE_EVENT_NAME = "이벤트 명 입력";
+    public const int _EXTRACASE_EVENT_IDX = 9;
 }
 
 [Serializable]
@@ -75,8 +84,8 @@ public struct GameData
     public bool _isEntryPlayTimeEnd;                // 게임 입장 첫 연출을 봤는지
     public bool _isMeetPpippi;                      // 삐삐와 만났는지
     public bool[] _memoryPieceActive;               // 메모리 보드의 인덱스 번째의 기억 조각 활성화 여부
-    public ppippiEventData _newPpippiEvent;             // 새 삐삐 이벤트
-    public ppippiEventData[] _oldPpippiEvents;          // 이전 삐삐 이벤트들
+    public ppippiEventData _newPpippiEvent;         // 새 삐삐 이벤트
+    public ppippiEventData[] _oldPpippiEvents;      // 이전 삐삐 이벤트들
 
     public GameData(Vector3 playerPos, bool[] isFragIdxGet, int currCollectCount, int newMemoryIdx,
         bool isEntryPlayTimeEnd, bool isMeetPpippi, bool[] memoryPiecesActive, ppippiEventData newPpippiEvent,
