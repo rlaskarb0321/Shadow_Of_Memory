@@ -6,7 +6,6 @@ using UnityEngine;
 public class StubPpippi : DialogEvent
 {
     [Header("=== ppippi ===")]
-    [SerializeField] private SpriteRenderer _ppippiDummy;
     [SerializeField] private GameObject _realPpippi;
     //[SerializeField]  CampaignUI _campaignUI;
 
@@ -29,13 +28,10 @@ public class StubPpippi : DialogEvent
     {
         base.OnTriggerStay2D(collision);
 
-        float ppippiPos = _ppippiDummy.transform.position.x;
+        float ppippiPos = _sr.transform.position.x;
         float playerPos = collision.transform.position.x;
 
-        if (ppippiPos - playerPos < 0.0f)
-            _ppippiDummy.flipX = true;
-        else if (ppippiPos - playerPos > 0.0f)
-            _ppippiDummy.flipX = false;
+        FlipSprite(ppippiPos, playerPos);
     }
 
     public override void DoDialogEvent(string eventContext)
@@ -51,7 +47,7 @@ public class StubPpippi : DialogEvent
         {
             case "µ¿ÀÇ":
                 _realPpippi.SetActive(true);
-                _ppippiDummy.gameObject.SetActive(false);
+                _sr.gameObject.SetActive(false);
                 _player._isMeetPpippi = true;
                 _inGameSaveLoad.SaveToServer(_player);
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;

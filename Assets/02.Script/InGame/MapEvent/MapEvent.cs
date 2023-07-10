@@ -6,6 +6,7 @@ public abstract class MapEvent : MonoBehaviour
 {
     [Header("=== Interactive ===")]
     [SerializeField] protected GameObject _interactAlarm;
+    protected bool _isFirstMeet;
 
     public enum MapEventState { Open, Close, }
 

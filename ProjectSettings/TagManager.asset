@@ -9,6 +9,7 @@ TagManager:
   - Memory Fragment
   - NewGame
   - SaveList
+  - FallenOne Clamp
   layers:
   - Default
   - TransparentFX

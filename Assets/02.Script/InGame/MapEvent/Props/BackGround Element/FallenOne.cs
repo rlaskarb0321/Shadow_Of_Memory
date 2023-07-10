@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LittleGirlFallenOne : DialogEvent
+public class FallenOne : DialogEvent
 {
     [Space(10.0f)][SerializeField] private PpippiEventMgr _ppippiEventMgr;
 
     [Header("=== Fallen One ===")]
     [SerializeField] private float _movSpeed;
 
+    private Vector2 _movDir;
     private Animator _animator;
     private Rigidbody2D _rbody2D;
     private readonly int _hashIsTalk = Animator.StringToHash("isTalk");
@@ -17,6 +18,23 @@ public class LittleGirlFallenOne : DialogEvent
     {
         _rbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (ProductionMgr._isPlayProduction)
+            return;
+
+        _movDir = new Vector2(_sr.flipX ? -1.0f : 1.0f, 0.0f);
+        transform.Translate(_movDir * _movSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("FallenOne Clamp"))
+        {
+            _sr.flipX = !_sr.flipX;
+        }
     }
 
     protected override void OnTriggerStay2D(Collider2D collision)
@@ -35,19 +53,17 @@ public class LittleGirlFallenOne : DialogEvent
         if (_campaignUI._isDialogOn)
             return;
 
-        //Vector3 originScale = transform.localScale;
-        //if (transform.position.x - player.transform.position.x > 0.0f)
-        //{
-        //    Vector3 changeScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        //    originScale = changeScale;
-        //}
-        //transform.localScale = originScale;
+        FlipSprite(transform.position.x, player.transform.position.x);
+        ppippiEventData data = new ppippiEventData(ConstData._LITTLEGIRL_EVENT_NAME, ConstData._LITTLEGIRL_EVENT_IDX, "Ppippi Dialog");
 
-            _animator.SetBool(_hashIsTalk, true);
-        ppippiEventData data = 
-            new ppippiEventData(ConstData._LITTLEGIRL_EVENT_NAME, ConstData._LITTLEGIRL_EVENT_IDX, "Ppippi Dialog");
+        _animator.SetBool(_hashIsTalk, true);
         _campaignUI.SetDialogOn(true, "Ppippi Dialog", this);
-        _ppippiEventMgr.CreateNewList(data);
+
+        if (!_isFirstMeet)
+        {
+            _ppippiEventMgr.CreateNewList(data);
+            _isFirstMeet = true;
+        }
     }
 
     public override void DoDialogEvent(string eventContext)
