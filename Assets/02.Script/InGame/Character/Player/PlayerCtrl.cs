@@ -68,51 +68,13 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+
     // jump landing 애니메이션 델리게이트
     public void EscapeJumpState()
     {
         _animator.SetBool(_hashisJumpInput, false);
+        print("여기에 이펙트 설치");
     }
-
-    #region 캐릭터 애니메이터 변환
-    //public void SwitchPlayerCharacter(int currLevel)
-    //{
-    //    int nextLevel = currLevel + 1;
-
-    //    _animChange.ChangeAnimator(nextLevel);
-    //    switch (currLevel)
-    //    {
-    //        case 0:
-    //            Vector2 size_level_2 = new Vector2(0.84f, 1.37f);
-    //            Vector2 boxOffset_level_2 = Vector2.zero;
-    //            Vector2 circleOffset_level_2 = new Vector2(0.0f, -0.62f);
-    //            float radius_level_2 = 0.41f;
-
-    //            _boxColl.size = size_level_2;
-    //            _boxColl.offset = boxOffset_level_2;
-    //            _circleColl.offset = circleOffset_level_2;
-    //            _circleColl.radius = radius_level_2;
-    //            _groundCollObj.localPosition = new Vector2(0.0f, -1.008f);
-    //            break;
-
-    //        case 1:
-    //            Vector2 size_level_3 = new Vector2(0.84f, 2.12f);
-    //            Vector2 boxOffset_level_3 = Vector2.zero;
-    //            Vector2 circleOffset_level_3 = new Vector2(0.0f, -0.86f);
-    //            float radius_level_3 = 0.41f;
-
-    //            _boxColl.size = size_level_3;
-    //            _boxColl.offset = boxOffset_level_3;
-    //            _circleColl.offset = circleOffset_level_3;
-    //            _circleColl.radius = radius_level_3;
-    //            _groundCollObj.localPosition = new Vector2(0.0f, -1.289f);
-    //            break;
-
-    //        default:
-    //            break;
-    //    }
-    //}
-    #endregion 캐릭터 애니메이터 변환
 
     private void ManagePlayerInput()
     {
@@ -134,13 +96,7 @@ public class PlayerCtrl : MonoBehaviour
         float scaleX = _h;
         transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
 
-        // _movDir = DirectToMove();
         _movDir = (_h * Vector2.right).normalized;
-
-        // _rbody2D.MovePosition(_rbody2D.position + (_movDir * _movSpeed * Time.deltaTime));
-        // _rbody2D.AddForce(_movDir * _movSpeed * Time.deltaTime, ForceMode2D.Impulse);
-        // _rbody2D.MovePosition(_rbody2D.position + _movDir * _movSpeed * Time.deltaTime);
-        
         transform.position += _movDir * _movSpeed * Time.deltaTime;
     }
 
