@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallenOne : DialogEvent
+public abstract class FallenOne : DialogEvent
 {
-    [Space(10.0f)][SerializeField] private PpippiEventMgr _ppippiEventMgr;
-
     [Header("=== Fallen One ===")]
-    [SerializeField] private float _movSpeed;
+    [SerializeField] protected PpippiEventMgr _ppippiEventMgr;
+    [SerializeField] protected float _movSpeed;
 
-    private Vector2 _movDir;
-    private Animator _animator;
-    private Rigidbody2D _rbody2D;
-    private readonly int _hashIsTalk = Animator.StringToHash("isTalk");
+    protected Vector2 _movDir;
+    protected Animator _animator;
+    protected Rigidbody2D _rbody2D;
+    protected readonly int _hashIsTalk = Animator.StringToHash("isTalk");
 
-    private void Awake()
+    protected void Awake()
     {
         _rbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    protected void Update()
     {
         if (ProductionMgr._isPlayProduction)
             return;
+
+        if (!_isDialog && _animator.GetBool(_hashIsTalk).Equals(true))
+        {
+            _animator.SetBool(_hashIsTalk, false);
+        }
 
         _movDir = new Vector2(_sr.flipX ? -1.0f : 1.0f, 0.0f);
         transform.Translate(_movDir * _movSpeed * Time.deltaTime);
@@ -46,28 +50,5 @@ public class FallenOne : DialogEvent
         }
 
         base.OnTriggerStay2D(collision);
-    }
-
-    public override void Interaction(PlayerCtrl player)
-    {
-        if (_campaignUI._isDialogOn)
-            return;
-
-        FlipSprite(transform.position.x, player.transform.position.x);
-        ppippiEventData data = new ppippiEventData(ConstData._LITTLEGIRL_EVENT_NAME, ConstData._LITTLEGIRL_EVENT_IDX, "Ppippi Dialog");
-
-        _animator.SetBool(_hashIsTalk, true);
-        _campaignUI.SetDialogOn(true, "Ppippi Dialog", this);
-
-        if (!_isFirstMeet)
-        {
-            _ppippiEventMgr.CreateNewList(data);
-            _isFirstMeet = true;
-        }
-    }
-
-    public override void DoDialogEvent(string eventContext)
-    {
-        // 또 다른 잠식된 자와 대화를 하면 발생시킬 이벤트들
     }
 }

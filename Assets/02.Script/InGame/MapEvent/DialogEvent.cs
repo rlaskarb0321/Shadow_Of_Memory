@@ -8,6 +8,7 @@ public abstract class DialogEvent : MapEvent
 {
     protected enum eDefaultLookDir { Left, Right, }
 
+    [Header("=== Dialog Event ===")]
     public CampaignUI _campaignUI;
     public bool _isDialog; // 대화가 시작된 후, 대화가 끝났는지 아닌지 판단하기 위한 변수
     [SerializeField] protected SpriteRenderer _sr;

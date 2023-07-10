@@ -120,11 +120,14 @@ public class CampaignUI : MonoBehaviour
     public void SetDialogOn(bool isTurnOn, string fileName = "", DialogEvent dialogEvent = null)
     {
         // 단순 ui 껐다 켰다하는 작업
-        _dialogEvent = dialogEvent;
-        _dialogEvent._isDialog = isTurnOn;
-        _isDialogOn = isTurnOn;
-        _dialog.gameObject.SetActive(isTurnOn);
+        if (dialogEvent != null)
+        {
+            _dialogEvent = dialogEvent;
+            _dialogEvent._isDialog = isTurnOn; 
+            _isDialogOn = isTurnOn;
+        }
 
+        _dialog.gameObject.SetActive(isTurnOn);
         if (!fileName.Equals(""))
         {
             // 대화를 위한 파일과 대화 이벤트 객체를 전달하고 대화 시스템을 실행한다.
