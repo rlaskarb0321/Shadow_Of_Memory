@@ -36,7 +36,7 @@ public class InGameSaveLoad : MonoBehaviour
     [SerializeField] private GameObject _savingText;
     [SerializeField] private float _showTime;
 
-    public GameData _gameData;
+    public GameData _gameData; // 디버그용
 
     // HideInInspector
     private PlayerAnimatorChange _animChanger;

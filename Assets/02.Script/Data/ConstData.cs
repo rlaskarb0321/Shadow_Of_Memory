@@ -22,6 +22,7 @@ static class ConstData
     public const float _LEVEL1_GROUND_COLL_TR_Y = -0.987f;
     public const float _LEVEL1_GROUND_COLL_SIZE_X = 1.0f;
     public const float _LEVEL1_GROUND_COLL_SIZE_Y = 0.17f;
+    public const float _LEVEL1_FOOT_POS = -0.64f;
 
     // 플레이어 레벨2 관련 콜라이더 값
     public const float _LEVEL2_CAPSULE_COLL_SIZE_X = 1.1f;
@@ -30,6 +31,7 @@ static class ConstData
     public const float _LEVEL2_GROUND_COLL_TR_Y = -0.987f;
     public const float _LEVEL2_GROUND_COLL_SIZE_X = 1.0f;
     public const float _LEVEL2_GROUND_COLL_SIZE_Y = 0.17f;
+    public const float _LEVEL2_FOOT_POS = -0.722f;
 
     // 플레이어 레벨3 관련 콜라이더 값
     public const float _LEVEL3_CAPSULE_COLL_SIZE_X = 1.1f;
@@ -38,6 +40,7 @@ static class ConstData
     public const float _LEVEL3_GROUND_COLL_TR_Y = -1.269f;
     public const float _LEVEL3_GROUND_COLL_SIZE_X = 1.0f;
     public const float _LEVEL3_GROUND_COLL_SIZE_Y = 0.17f;
+    public const float _LEVEL3_FOOT_POS = -1.105f;
 
     public const string _isWatching = "시청 함";
     public const string _isNotWatching = "시청 하지 않음";

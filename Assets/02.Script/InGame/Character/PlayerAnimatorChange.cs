@@ -6,6 +6,7 @@ public class PlayerAnimatorChange : MonoBehaviour
 {
     public RuntimeAnimatorController[] _anims;
     [SerializeField] private GameObject _groundCollObj;
+    [SerializeField] private GameObject _footPos;
 
     private BoxCollider2D _groundColl;
     private CapsuleCollider2D _capsuleColl2D;
@@ -37,6 +38,7 @@ public class PlayerAnimatorChange : MonoBehaviour
 
                 _capsuleColl2D.offset = Vector2.zero;
                 _capsuleColl2D.size = new Vector2(ConstData._LEVEL2_CAPSULE_COLL_SIZE_X, ConstData._LEVEL2_CAPSULE_COLL_SIZE_Y);
+                _footPos.transform.localPosition = new Vector2(0.0f, ConstData._LEVEL2_FOOT_POS);
                 break;
 
             // Level3
@@ -52,6 +54,7 @@ public class PlayerAnimatorChange : MonoBehaviour
 
                 _capsuleColl2D.offset = Vector2.zero;
                 _capsuleColl2D.size = new Vector2(ConstData._LEVEL3_CAPSULE_COLL_SIZE_X, ConstData._LEVEL3_CAPSULE_COLL_SIZE_Y);
+                _footPos.transform.localPosition = new Vector2(0.0f, ConstData._LEVEL3_FOOT_POS);
                 break;
         }
     }
