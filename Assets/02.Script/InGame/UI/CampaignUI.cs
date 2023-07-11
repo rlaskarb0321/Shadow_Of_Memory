@@ -12,6 +12,7 @@ public class CampaignUI : MonoBehaviour
     [Header("=== Pause ===")]
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _pauseBtn;
+    [SerializeField] private AudioClip _pausePanelOnSound;
 
     [Header("=== Conversation ===")]
     [SerializeField] private GameObject _ppippiEvent;
@@ -19,11 +20,17 @@ public class CampaignUI : MonoBehaviour
     public Dialog _dialog;
 
     // HideInInspector
+    private AudioSource _audio;
     private DialogEvent _dialogEvent;
     private bool _isPausePanelOn;
     private bool _isMBoardOn;
     private bool _isPpippiEventOn;
     [HideInInspector] public bool _isDialogOn; // 대화가 시작되고 끝이났는지 판단하는 요소이기도 함
+
+    private void Awake()
+    {
+        _audio = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -86,6 +93,11 @@ public class CampaignUI : MonoBehaviour
     // value값에 맞는 퍼즈패널 액티브
     public void SetPausePanelActive(bool value)
     {
+        if (value == true && _pausePanelOnSound != null)
+        {
+            print("sound");
+            _audio.PlayOneShot(_pausePanelOnSound);
+        }
         _pauseBtn.SetActive(!value);
         _pausePanel.SetActive(value);
         _isPausePanelOn = value;

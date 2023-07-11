@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Dialog : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Dialog : MonoBehaviour
 
     [Header("=== dialog ===")]
     [SerializeField] private Text _context;
+    [SerializeField] private AudioClip _chatSelectChageSound;
     #region 23.07.05 대화 코루틴 대체하기
     //[SerializeField] private float _waitSeconds = 0.25f;
     #endregion 23.07.05 대화 코루틴 대체하기
@@ -30,6 +32,7 @@ public class Dialog : MonoBehaviour
     private List<string> _lines; // 타이틀을 키값으로 접근해 _csvDict의 값 영역을 가져와 저장할 변수
     private int _index;
     private string _currTitle;
+    private AudioSource _audio;
 
     #region 23.07.05 대화 코루틴 대체하기
     //private List<string> _dictKeys; // 타이틀 값을 의미
@@ -61,6 +64,7 @@ public class Dialog : MonoBehaviour
     private void Awake()
     {
         _dialogCSV = new DialogCSVReader();
+        _audio = GetComponent<AudioSource>();
         #region 23.07.05 대화 코루틴 대체하기
         //_waitUntil = new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         //_ws = new WaitForSeconds(_waitSeconds);
@@ -69,6 +73,11 @@ public class Dialog : MonoBehaviour
 
     private void Update()
     {
+        if (_answerOption.activeSelf && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
+        {
+            OnChangeAnswerSelect();
+        }
+
         if (_lines == null)
             return;
 
@@ -268,6 +277,14 @@ public class Dialog : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             ShowDialog();
+        }
+    }
+
+    private void OnChangeAnswerSelect()
+    {
+        if (_chatSelectChageSound != null)
+        {
+            _audio.PlayOneShot(_chatSelectChageSound, 0.8f);
         }
     }
 }
