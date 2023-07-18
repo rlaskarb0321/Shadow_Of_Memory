@@ -16,30 +16,30 @@ static class ConstData
     public const int _INITCOLLECTCOUNT = 0;
 
     // 플레이어 레벨1 관련 콜라이더 값
-    public const float _LEVEL1_CAPSULE_COLL_SIZE_X = 1.1f;
-    public const float _LEVEL1_CAPSULE_COLL_SIZE_Y = 1.4f;
+    public const float _LEVEL1_CAPSULE_COLL_SIZE_X = 0.69f;
+    public const float _LEVEL1_CAPSULE_COLL_SIZE_Y = 1.3f;
     public const float _LEVEL1_GROUND_COLL_TR_X = 0.0f;
-    public const float _LEVEL1_GROUND_COLL_TR_Y = -0.987f;
-    public const float _LEVEL1_GROUND_COLL_SIZE_X = 1.0f;
-    public const float _LEVEL1_GROUND_COLL_SIZE_Y = 0.17f;
+    public const float _LEVEL1_GROUND_COLL_TR_Y = -0.71f;
+    public const float _LEVEL1_GROUND_COLL_SIZE_X = 0.58f;
+    public const float _LEVEL1_GROUND_COLL_SIZE_Y = 0.11f;
     public const float _LEVEL1_FOOT_POS = -0.64f;
 
     // 플레이어 레벨2 관련 콜라이더 값
-    public const float _LEVEL2_CAPSULE_COLL_SIZE_X = 1.1f;
+    public const float _LEVEL2_CAPSULE_COLL_SIZE_X = 0.69f;
     public const float _LEVEL2_CAPSULE_COLL_SIZE_Y = 1.59f;
     public const float _LEVEL2_GROUND_COLL_TR_X = 0.0f;
-    public const float _LEVEL2_GROUND_COLL_TR_Y = -0.987f;
-    public const float _LEVEL2_GROUND_COLL_SIZE_X = 1.0f;
-    public const float _LEVEL2_GROUND_COLL_SIZE_Y = 0.17f;
+    public const float _LEVEL2_GROUND_COLL_TR_Y = -0.845f;
+    public const float _LEVEL2_GROUND_COLL_SIZE_X = 0.58f;
+    public const float _LEVEL2_GROUND_COLL_SIZE_Y = 0.11f;
     public const float _LEVEL2_FOOT_POS = -0.722f;
 
     // 플레이어 레벨3 관련 콜라이더 값
-    public const float _LEVEL3_CAPSULE_COLL_SIZE_X = 1.1f;
+    public const float _LEVEL3_CAPSULE_COLL_SIZE_X = 0.75f;
     public const float _LEVEL3_CAPSULE_COLL_SIZE_Y = 2.17f;
     public const float _LEVEL3_GROUND_COLL_TR_X = 0.0f;
-    public const float _LEVEL3_GROUND_COLL_TR_Y = -1.269f;
-    public const float _LEVEL3_GROUND_COLL_SIZE_X = 1.0f;
-    public const float _LEVEL3_GROUND_COLL_SIZE_Y = 0.17f;
+    public const float _LEVEL3_GROUND_COLL_TR_Y = -1.18f;
+    public const float _LEVEL3_GROUND_COLL_SIZE_X = 0.58f;
+    public const float _LEVEL3_GROUND_COLL_SIZE_Y = 0.11f;
     public const float _LEVEL3_FOOT_POS = -1.105f;
 
     public const string _isWatching = "시청 함";

@@ -109,7 +109,7 @@ public class MainBackGround : MonoBehaviour
         bool isInteractable;
 
         if (value == false)
-            color.a = 0.5f;
+            color.a = 0.35f;
         else
             color.a = 1.0f;
 

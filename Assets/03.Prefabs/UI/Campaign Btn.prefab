@@ -329,7 +329,7 @@ MonoBehaviour:
   _selectMenu: {fileID: 731901843047961388}
   _selectFonts: {fileID: 21300000, guid: 7029199539e44fc4f84910d2edf32c8a, type: 3}
   _originFonts: {fileID: 21300000, guid: 5b866db016706544cb345c908fcbdeb9, type: 3}
-  _mouseEnterSound: {fileID: 0}
+  _mouseEnterSound: {fileID: 8300000, guid: 21d2281f3c8eccb4b91feb9b2f989f22, type: 3}
 --- !u!1 &731901843047961388
 GameObject:
   m_ObjectHideFlags: 0

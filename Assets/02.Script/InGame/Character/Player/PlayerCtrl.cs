@@ -7,11 +7,12 @@ public class PlayerCtrl : MonoBehaviour
 {
     // SerializeField
     [Range(2.5f, 15.0f)] [SerializeField] private float _movSpeed; // 움직이는 속도값
-    [Range(30.0f, 60.0f)] [SerializeField] private float _jumpForce; // 점프력
+    /*[Range(40.0f, 60.0f)]*/ [SerializeField] private float _jumpForce; // 점프력
     [SerializeField] private GameObject _footPos;
     [Space(9.0f)] [SerializeField] private GameObject _researchColl; // 주위에 MapEvent 찾는 관련 콜리더
     [SerializeField] private Transform _groundCollObj; // 땋에 닿음판정 관련 콜리더 판정하는 게임오브젝트
     [SerializeField] private GameVFXPool _groundedVFXPool;
+    [Tooltip("조작 없이 낙하 시 해당 속도 미만이면 fall 모션 재생")][SerializeField] private float _fallEntrySpeed;
 
     [Header("=== Sound ===")]
     [SerializeField] private AudioClip _jumpSound;
@@ -45,7 +46,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         ManagePlayerInput();
         _animator.SetBool(_hashisGrounded, _grounded._isGrounded);
-        _animator.SetBool(_hashFall, _rbody2D.velocity.y < -0.05f);
+        _animator.SetBool(_hashFall, _rbody2D.velocity.y < _fallEntrySpeed);
 
         if (ProductionMgr._isPlayProduction)
         {
@@ -80,7 +81,6 @@ public class PlayerCtrl : MonoBehaviour
     public void EscapeJumpState()
     {
         _animator.SetBool(_hashisJumpInput, false);
-        _groundedVFXPool.DisplayVFX(_footPos.transform.position);
     }
 
     private void ManagePlayerInput()
@@ -101,26 +101,11 @@ public class PlayerCtrl : MonoBehaviour
     private void Move()
     {
         float scaleX = _h;
-        RaycastHit2D groundHit = Physics2D.Raycast(_footPos.transform.position, Vector2.down, 1.5f, 1 << LayerMask.NameToLayer("Ground"));
 
         transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         _movDir = (_h * Vector2.right).normalized;
-        if (groundHit.collider != null)
-        {
-            if (Vector2.Angle(transform.up, groundHit.normal) != 0.0f)
-            {
-                float angle;
-                Vector3 slopeDir;
-                Vector3 movDir;
-                
-                slopeDir = Vector3.ProjectOnPlane(new Vector2(_movDir.x, _movDir.y), groundHit.normal);
-                angle = Vector2.SignedAngle(_movDir, slopeDir);
-                movDir = Quaternion.Euler(0.0f, 0.0f, angle) * _movDir;
 
-                _movDir = movDir.normalized;
-            }
-        }
-
+        StickToGround();
         transform.position += _movDir * _movSpeed * Time.deltaTime;
     }
 
@@ -128,9 +113,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (_jumpSound != null)
         {
-            print("l");
             _audio.PlayOneShot(_jumpSound);
         }
+
+        _groundedVFXPool.DisplayVFX(_footPos.transform.position);
         _rbody2D.velocity = Vector2.zero;
         _rbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
@@ -146,5 +132,27 @@ public class PlayerCtrl : MonoBehaviour
 
         MapEvent mapEvent = coll.GetComponent<MapEvent>();
         mapEvent.Interaction(this);
+    }
+
+    // 플레이어의 움직이는 방향을 땅의 각도와 일치시킴
+    private void StickToGround()
+    {
+        RaycastHit2D groundHit = Physics2D.Raycast(_footPos.transform.position, Vector2.down, 1.5f, 1 << LayerMask.NameToLayer("Ground"));
+
+        if (groundHit.collider != null)
+        {
+            if (Vector2.Angle(transform.up, groundHit.normal) != 0.0f)
+            {
+                float angle;
+                Vector3 slopeDir;
+                Vector3 movDir;
+
+                slopeDir = Vector3.ProjectOnPlane(new Vector2(_movDir.x, _movDir.y), groundHit.normal);
+                angle = Vector2.SignedAngle(_movDir, slopeDir); // 한 점을 기준으로 다른 점과의 사이각을 + - 로 나타냄
+                movDir = Quaternion.Euler(0.0f, 0.0f, angle) * _movDir;
+
+                _movDir = movDir.normalized;
+            }
+        }
     }
 }

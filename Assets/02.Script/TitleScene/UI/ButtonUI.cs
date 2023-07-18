@@ -13,15 +13,15 @@ public class ButtonUI : UIInteractBase
     [SerializeField] private Sprite _originFonts;
 
     [Header("=== Sound ===")]
-    [SerializeField] private AudioClip _mouseEnterSound;
+    [SerializeField] private AudioClip _pointerEnterSound;
 
     private AudioSource _audio;
     private Image _thisImg;
 
     private void Awake()
     {
-        _thisImg = GetComponent<Image>();
         _audio = GetComponent<AudioSource>();
+        _thisImg = GetComponent<Image>();
     }
 
     public override void OnPointerEnter()
@@ -32,11 +32,8 @@ public class ButtonUI : UIInteractBase
         if (_selectMenu != null)
             _selectMenu.SetActive(true);
 
-        if (_mouseEnterSound != null)
-        {
-            print("sound");
-            _audio.PlayOneShot(_mouseEnterSound);
-        }
+        if (_pointerEnterSound != null)
+            _audio.PlayOneShot(_pointerEnterSound);
     }
 
     public override void OnPointerExit()
