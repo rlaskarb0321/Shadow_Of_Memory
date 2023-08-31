@@ -97,15 +97,15 @@ public class PlayerMemory : MonoBehaviour
         _isFragIdxGet[index - 1] = true; 
 
 
-        if (_collectMemoryCount == ConstData._COLLECTLEVEL2)
-        {
-            _animChange.ChangeAnimator(1);
-        }
+        //if (_collectMemoryCount == ConstData._COLLECTLEVEL2)
+        //{
+        //    _animChange.ChangeAnimator(1);
+        //}
 
-        if (_collectMemoryCount == ConstData._COLLECTLEVEL3)
-        {
-            _animChange.ChangeAnimator(2);
-        }
+        //if (_collectMemoryCount == ConstData._COLLECTLEVEL3)
+        //{
+        //    _animChange.ChangeAnimator(2);
+        //}
     }
 
     private void UpdateMemoryBoard(int index)

@@ -20,7 +20,6 @@ public class MovingPlatform : MonoBehaviour
     {
         if (_ground.position.Equals(_route[_idx].transform.position))
         {
-            print("correct");
             _idx++;
             _idx %= _route.Length;
         }
