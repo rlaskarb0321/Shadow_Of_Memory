@@ -15,9 +15,6 @@ public class Dialog : MonoBehaviour
     [Header("=== dialog ===")]
     [SerializeField] private Text _context;
     [SerializeField] private AudioClip _chatSelectChageSound;
-    #region 23.07.05 대화 코루틴 대체하기
-    //[SerializeField] private float _waitSeconds = 0.25f;
-    #endregion 23.07.05 대화 코루틴 대체하기
 
     [Header("=== Answer ===")]
     [SerializeField] private GameObject _content;
