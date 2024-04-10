@@ -15,44 +15,29 @@ public class Dialog : MonoBehaviour
     [Header("=== dialog ===")]
     [SerializeField] private Text _context;
     [SerializeField] private AudioClip _chatSelectChageSound;
-    #region 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
+    #region 23.07.05 ëŒ€í™” ì½”ë£¨í‹´ ëŒ€ì²´í•˜ê¸°
     //[SerializeField] private float _waitSeconds = 0.25f;
-    #endregion 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
+    #endregion 23.07.05 ëŒ€í™” ì½”ë£¨í‹´ ëŒ€ì²´í•˜ê¸°
 
     [Header("=== Answer ===")]
     [SerializeField] private GameObject _content;
     [SerializeField] private GameObject _answerPrefab;
 
     private string _fileName = "";
-    private Dictionary<string, string> _csvDict; // Å¸ÀÌÆ²À» Å°·Î °ª ¿µ¿ªÀ» ºĞ¸®ÇÑ dict
+    private Dictionary<string, string> _csvDict; // íƒ€ì´í‹€ì„ í‚¤ë¡œ ê°’ ì˜ì—­ì„ ë¶„ë¦¬í•œ dict
     private DialogCSVReader _dialogCSV;
-    private List<string> _header; // csvÆÄÀÏÀÇ 0¹øÂ° ¶óÀÎ
+    private List<string> _header; // csvíŒŒì¼ì˜ 0ë²ˆì§¸ ë¼ì¸
 
     private DialogEvent _dialogEvent;
-    private List<string> _lines; // Å¸ÀÌÆ²À» Å°°ªÀ¸·Î Á¢±ÙÇØ _csvDictÀÇ °ª ¿µ¿ªÀ» °¡Á®¿Í ÀúÀåÇÒ º¯¼ö
+    private List<string> _lines; // íƒ€ì´í‹€ì„ í‚¤ê°’ìœ¼ë¡œ ì ‘ê·¼í•´ _csvDictì˜ ê°’ ì˜ì—­ì„ ê°€ì ¸ì™€ ì €ì¥í•  ë³€ìˆ˜
     private int _index;
     private string _currTitle;
     private AudioSource _audio;
-
-    #region 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
-    //private List<string> _dictKeys; // Å¸ÀÌÆ² °ªÀ» ÀÇ¹Ì
-    //private WaitUntil _waitUntil;
-    //private WaitForSeconds _ws;
-    //private string _newTitle;
-    //private Coroutine _runCor = null;
-    #endregion 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
 
     enum Header { Title, Event, Speaker, Dialog, Jump };
 
     private void OnEnable()
     {
-        #region 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
-        //if (_runCor != null)
-        //{
-        //    StopCoroutine(ReadDialogTitle(_newTitle));
-        //    _runCor = StartCoroutine(ReadDialogTitle(_newTitle));
-        //}
-        #endregion 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
         ProductionMgr._isPlayProduction = true;
     }
 
@@ -65,10 +50,6 @@ public class Dialog : MonoBehaviour
     {
         _dialogCSV = new DialogCSVReader();
         _audio = GetComponent<AudioSource>();
-        #region 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
-        //_waitUntil = new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        //_ws = new WaitForSeconds(_waitSeconds);
-        #endregion 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
     }
 
     private void Update()
@@ -86,11 +67,11 @@ public class Dialog : MonoBehaviour
 
         switch (_currTitle)
         {
-            case "¼±ÅÃÁö":
+            case "ì„ íƒì§€":
                 ShowBifurDialog();
                 break;
 
-            case "³¡":
+            case "ë":
                 EndDialog();
                 break;
 
@@ -100,20 +81,12 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    // gameObject.SetActive(true)°¡ ½ÇÇàµÈ ÈÄ ¹Ù·Î ½ÇÇàµÇ´Â ÇÔ¼ö
-    // ´ëÈ­.csv ÆÄÀÏÀ» ÆÄÀÏÀÇ "Å¸ÀÌÆ²" Çì´õ°ªÀ» ±âÁØÀ¸·Î ³ª´« dict°ªÀ» ¹Ş¾Æ¿À°í, Çì´õ°ª ¸®½ºÆ® ¶ÇÇÑ ¹Ş¾Æ¿Â´Ù.
-    // ´ëÈ­ ½Ã½ºÅÛÀ» ½ÃÀÛÇÑ´Ù.
+    // gameObject.SetActive(true)ê°€ ì‹¤í–‰ëœ í›„ ë°”ë¡œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
+    // ëŒ€í™”.csv íŒŒì¼ì„ íŒŒì¼ì˜ "íƒ€ì´í‹€" í—¤ë”ê°’ì„ ê¸°ì¤€ìœ¼ë¡œ ë‚˜ëˆˆ dictê°’ì„ ë°›ì•„ì˜¤ê³ , í—¤ë”ê°’ ë¦¬ìŠ¤íŠ¸ ë˜í•œ ë°›ì•„ì˜¨ë‹¤.
+    // ëŒ€í™” ì‹œìŠ¤í…œì„ ì‹œì‘í•œë‹¤.
     public void SetDialogFile(string fileName, DialogEvent dialogEvent = null)
     {
-        //if (dialogEvent != null)
-        //{
-        //    // ´ëÈ­ ÀÌº¥Æ®¸¦ Ã³¸®ÇÒ °´Ã¼¸¦ Àü´Ş¹ŞÀ½
-        //    _dialogEvent = dialogEvent;
-        //}
-
         _dialogEvent = dialogEvent;
-        // _dialogEvent._isDialog = true;
-
         if (!_fileName.Equals(fileName))
         {
             _fileName = fileName;
@@ -121,74 +94,11 @@ public class Dialog : MonoBehaviour
             _header = _dialogCSV.ReturnHeader(fileName);
         }
 
-        JumpToTitle("½ÃÀÛ");
+        JumpToTitle("ì‹œì‘");
         ShowDialog();
-        #region 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
-        //_dictKeys = _csvDict.Keys.ToList();
-        //_runCor = StartCoroutine(ReadDialogTitle(_newTitle));
-        //_newTitle = _dictKeys[0];
-        #endregion 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
     }
 
-    #region 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
-    // Å¸ÀÌÆ²À» Å° ¿µ¿ª, ³ª¸ÓÁö¸¦ °ª ¿µ¿ªÀ¸·Î ºĞ¸®ÇÑ DictÀÇ Å¸ÀÌÆ²°ªÀ» ¸Å°³º¯¼ö·Î ¹Ş´Â´Ù.
-    // ÇØ´ç ¸Å°³º¯¼öÀÇ µ¥ÀÌÅÍµéÀ» ÆÄ½ÌÇÏ°í ui¿¡ Ç¥½Ã±îÁö ÇØÁØ´Ù.
-    // ¾ÆÁ÷, ÀÌº¥Æ®¿¡ µû¸¥ ºĞ±âÁ¡¿¡ °üÇÑ ³»¿ëÀº ÇÏÁö¾Ê¾ÒÀ½
-    // ¶ÇÇÑ title °ªÀÌ "³¡"ÀÌ¸é ³¡³»¾ßÇÔ..
-    //private IEnumerator ReadDialogTitle(string title)
-    //{
-    //    if (title.Equals("³¡"))
-    //    {
-    //        print("³¡");
-    //        yield break;
-    //    }
-
-    //    string context; // Å¸ÀÌÆ²À» Å°·Î ¹Ş¾Æ¿Â °ªÀ» ÀúÀåÇÒ º¯¼ö
-    //    List<string> lines;
-    //    int index;
-
-    //    context = _csvDict[title];
-    //    lines = context.Split("\r").ToList();
-    //    //lines.RemoveAt(lines.Count - 1);
-    //    index = 0;
-
-    //    while (index < lines.Count)
-    //    {
-    //        string[] line = lines[index].Split(',');
-    //        string dialogEvent = line[(int)Header.Event];
-    //        if (!dialogEvent.Equals(""))
-    //        {
-    //            ActivateEvent(dialogEvent);
-    //        }
-
-    //        _name.text = line[(int)Header.Speaker];
-    //        _context.text = line[(int)Header.Dialog];
-
-    //        // À¯ÀúÀÇ ½ºÆäÀÌ½º¹Ù ÀÔ·ÂÀ» ±â´Ù¸²
-    //        yield return _waitUntil;
-    //        _name.text = "";
-    //        _context.text = "";
-
-    //        string jump = line[(int)Header.Jump];
-    //        if (!jump.Equals(""))
-    //        {
-    //            StopCoroutine(ReadDialogTitle(_newTitle));
-    //            _runCor = StartCoroutine(ReadDialogTitle(jump));
-    //            yield break;
-    //        }
-
-    //        index++;
-    //        yield return _ws;
-    //    }
-    //}
-
-    //private void ActivateEvent(string eventName)
-    //{
-
-    //}
-    #endregion 23.07.05 ´ëÈ­ ÄÚ·çÆ¾ ´ëÃ¼ÇÏ±â
-
-    // ´ëÈ­¸¦ º¸¿©ÁÖ´Â ÇÔ¼ö
+    // ëŒ€í™”ë¥¼ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜
     private void ShowDialog()
     {
         if (!_dialogOption.activeSelf)
@@ -216,14 +126,14 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    // ´ëÈ­°¡ ³¡³¯¶§ ½ÇÇàµÇ´Â ÇÔ¼ö
+    // ëŒ€í™”ê°€ ëë‚ ë•Œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
     private void EndDialog()
     {
         // _dialogEvent._isDialog = false;
         _campaignUI.SetDialogOn(false, "", _dialogEvent);
     }
 
-    // ¼±ÅÃÁö Ç×¸ñ º¸¿©ÁÖ±â
+    // ì„ íƒì§€ í•­ëª© ë³´ì—¬ì£¼ê¸°
     private void ShowBifurDialog()
     {
         if (!_answerOption.activeSelf)
@@ -256,7 +166,7 @@ public class Dialog : MonoBehaviour
             if (temp.Equals(0))
                 answerBtn.Select();
 
-            answerBtn.onClick.RemoveAllListeners(); // ÀÌ°É ÇØ Áà¾ß ÀÌÀü ´ëÈ­.csvÀÇ ¼±ÅÃÁö Á¡ÇÁÁ¶°ÇÀ¸·Î Á¡ÇÁ¸¦ ÇÏÁö ¾Ê´Â´Ù
+            answerBtn.onClick.RemoveAllListeners(); // ì´ê±¸ í•´ ì¤˜ì•¼ ì´ì „ ëŒ€í™”.csvì˜ ì„ íƒì§€ ì í”„ì¡°ê±´ìœ¼ë¡œ ì í”„ë¥¼ í•˜ì§€ ì•ŠëŠ”ë‹¤
             answerBtn.onClick.AddListener(() => JumpToTitle(jump));
             answerBtn.onClick.AddListener(() => IsClickAnswer());
 
@@ -264,7 +174,7 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    // Å¸ÀÌÆ² °ª¿¡ ¸Â´Â ´ëÈ­ º»¹®À» °¡Á®¿È
+    // íƒ€ì´í‹€ ê°’ì— ë§ëŠ” ëŒ€í™” ë³¸ë¬¸ì„ ê°€ì ¸ì˜´
     private void JumpToTitle(string title)
     {
         _lines = _csvDict[title].TrimEnd('\r').Split("\r").ToList();
